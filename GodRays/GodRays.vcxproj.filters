@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{368b88b1-00b4-4059-bffa-1681f10888c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\GodRays">
+      <UniqueIdentifier>{a8b16304-a087-495a-80ed-179c97fa0108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Default">
+      <UniqueIdentifier>{939714dd-bf7d-497e-85ba-c263ef62415d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings.cfg" />
+    <None Include="Assets\Shaders\FlatColor.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GodRays\Composite.shader">
+      <Filter>Shaders\GodRays</Filter>
+    </None>
+    <None Include="Assets\Shaders\GodRays\Radial.shader">
+      <Filter>Shaders\GodRays</Filter>
+    </None>
+    <None Include="Assets\Shaders\GodRays\FullScreenQuad.vert">
+      <Filter>Shaders\GodRays</Filter>
+    </None>
+    <None Include="Assets\Shaders\Default\Font.shader">
+      <Filter>Shaders\Default</Filter>
+    </None>
+    <None Include="Assets\Shaders\Default\ParticleBillBoard.shader">
+      <Filter>Shaders\Default</Filter>
+    </None>
+    <None Include="Assets\Shaders\Default\Sprite.shader">
+      <Filter>Shaders\Default</Filter>
+    </None>
+    <None Include="Assets\Shaders\Default\Lambert.shader">
+      <Filter>Shaders\Default</Filter>
+    </None>
+  </ItemGroup>
+</Project>
