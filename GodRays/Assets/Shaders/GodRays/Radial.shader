@@ -11,7 +11,7 @@ Uniforms
 
 Vertex
 {
-	#include "./Assets/Shaders/GodRays/FullScreenQuad.vert"
+	#include "Shaders/GodRays/FullScreenQuad.vert"
 }
 
 Samplers

@@ -1,6 +1,6 @@
 Vertex
 {
-	#include "./Assets/Shaders/GodRays/FullScreenQuad.vert"
+	#include "Shaders/GodRays/FullScreenQuad.vert"
 }
 
 Samplers
@@ -24,7 +24,7 @@ Fragment
 
 		vec3 raysAvg = clamp(colorB + colorC, 0.0, 1.0);
 	
-		//Screen blend function
+		// Screen blend function.
 		outColor = 1.0 - (1.0 - colorA) * (1.0 - raysAvg);
 	}
 }
