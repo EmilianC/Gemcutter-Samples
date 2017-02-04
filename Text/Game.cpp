@@ -19,22 +19,16 @@ Game::Game(ConfigTable& _config)
 
 bool Game::Init()
 {
-	// Load all fonts in the assets directory
+	// Find all the font assets.
 	DirectoryData dir;
-	ParseDirectory("./Assets/Fonts/", dir);
-	for (auto file : dir.files)
+	ParseDirectory(RootAssetDirectory + "Fonts/", dir);
+	for (auto& file : dir.files)
 	{
-		if (file.find(".font") == std::string::npos)
-		{
-			// Not a font file.
-			continue;
-		}
+		// Filter for fonts.
+		if (file.find(".font") == std::string::npos) continue;
 
 		auto font = Load<Font>("Fonts/" + file);
-		if (font == nullptr)
-		{
-			return false;
-		}
+		if (!font) return false;
 
 		fonts.push_back(font);
 	}
@@ -59,17 +53,17 @@ bool Game::Init()
 	instructionText->scale = vec3(0.5f);
 	instructionText->position = vec3(15.0f, 15.0f, 0.0f);
 
-	// Setup Cameras
-	camera->Add<Camera>().SetPerspective(65.0f, Application.GetAspectRatio(), 1.0f, 10000.0f);
+	// Setup Cameras.
+	camera->Add<Camera>(65.0f, Application.GetAspectRatio(), 1.0f, 10000.0f);
 	camera->LookAt(vec3(0.0f, 7.0f, 55.0f), vec3(0.0f));
 
 	cameraUI->Add<Camera>().SetOrthograpic(Application.GetScreenViewport(), -1.0f, 1.0f);
 
-	// Setup up renderers
+	// Setup up renderers.
 	mainRenderPass.SetCamera(camera);
 	UIRenderPass.SetCamera(cameraUI);
 
-	// Setup background color to cornflower blue
+	// Setup background color to cornflower blue.
 	SetClearColor(0.35f, 0.7f, 0.9f, 0.0f);
 
 	return true;
@@ -107,7 +101,7 @@ void Game::Update()
 	helloWorldText->rotation.SetIdentity();
 	helloWorldText->RotateY(angle);
 
-	// Cycle fonts
+	// Cycle through the fonts.
 	if (Input.IsDown(Key::Right))
 	{
 		if (canChangeFont)
@@ -146,7 +140,6 @@ void Game::Update()
 
 	// Engine systems and components are updated here.
 	Application.UpdateEngine();
-
 }
 
 void Game::Draw()
