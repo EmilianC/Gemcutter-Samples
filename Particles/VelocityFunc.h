@@ -1,5 +1,5 @@
 #pragma once
-#include <Jewel3D/Entity/Components/ParticleEmitter.h>
+#include <Jewel3D/Rendering/ParticleEmitter.h>
 
 using namespace Jwl;
 
@@ -10,7 +10,7 @@ public:
 	VelocityFunc() = default;
 	VelocityFunc(vec3 direction, float velocityCap, float acceleration);
 
-	virtual void Update(ParticleBuffer &particles, ParticleEmitter &emitter, float deltaTime) final override;
+	virtual void Update(ParticleBuffer &particles, ParticleEmitter &emitter, float deltaTime) override;
 
 	vec3 Direction = vec3(0.0f, 1.0f, 0.0f);
 	float VelocityCap = 5.0f;

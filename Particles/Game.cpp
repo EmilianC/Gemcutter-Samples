@@ -4,15 +4,15 @@
 #include "WaveFunc.h"
 
 #include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Application/Event.h>
+#include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Input/Input.h>
+#include <Jewel3D/Rendering/Camera.h>
+#include <Jewel3D/Rendering/Material.h>
+#include <Jewel3D/Rendering/ParticleEmitter.h>
 #include <Jewel3D/Rendering/Rendering.h>
 #include <Jewel3D/Resource/UniformBuffer.h>
 #include <Jewel3D/Sound/SoundSystem.h>
-#include <Jewel3D/Entity/Components/Camera.h>
-#include <Jewel3D/Entity/Components/ParticleEmitter.h>
-#include <Jewel3D/Entity/Components/Material.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)

@@ -1,5 +1,5 @@
 #pragma once
-#include <Jewel3D/Entity/Components/ParticleEmitter.h>
+#include <Jewel3D/Rendering/ParticleEmitter.h>
 
 using namespace Jwl;
 
@@ -10,7 +10,7 @@ public:
 	WaveFunc() = default;
 	WaveFunc(float frequency, float intensity);
 
-	virtual void Update(ParticleBuffer &particles, ParticleEmitter &emitter, float deltaTime) final override;
+	virtual void Update(ParticleBuffer &particles, ParticleEmitter &emitter, float deltaTime) override;
 
 	float Frequency = 3.0f;
 	float Intensity = 1.0f;

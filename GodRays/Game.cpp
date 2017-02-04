@@ -1,17 +1,17 @@
 #include "Game.h"
 
 #include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Application/Logging.h>
-#include <Jewel3D/Rendering/Rendering.h>
+#include <Jewel3D/Entity/Name.h>
+#include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Math/Math.h>
-#include <Jewel3D/Utilities/Random.h>
-#include <Jewel3D/Entity/Components/Mesh.h>
-#include <Jewel3D/Entity/Components/Material.h>
-#include <Jewel3D/Entity/Components/Camera.h>
-#include <Jewel3D/Entity/Components/Name.h>
-#include <Jewel3D/Entity/Components/Light.h>
+#include <Jewel3D/Rendering/Camera.h>
+#include <Jewel3D/Rendering/Light.h>
+#include <Jewel3D/Rendering/Material.h>
+#include <Jewel3D/Rendering/Mesh.h>
+#include <Jewel3D/Rendering/Rendering.h>
 #include <Jewel3D/Resource/UniformBuffer.h>
+#include <Jewel3D/Utilities/Random.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)
@@ -85,32 +85,32 @@ bool Game::Init()
 	/* Allocate FrameBuffers */
 	MSAA_Level = config.GetInt("MSAA");
 
-	GBuffer.Init(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
-	GBuffer.CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
-	if (!GBuffer.Validate()) return false;
+	GBuffer->Init(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
+	GBuffer->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
+	if (!GBuffer->Validate()) return false;
 
-	godRaysBuffer1.Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer1.CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
-	if (!godRaysBuffer1.Validate()) return false;
+	godRaysBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
+	godRaysBuffer1->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
+	if (!godRaysBuffer1->Validate()) return false;
 
-	godRaysBuffer2.Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer2.CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
-	if (!godRaysBuffer2.Validate()) return false;
+	godRaysBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
+	godRaysBuffer2->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
+	if (!godRaysBuffer2->Validate()) return false;
 
-	workBuffer1.Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
-	workBuffer1.CreateAttachment(0, TextureFormat::RGB_16, TextureFilterMode::Linear);
-	if (!workBuffer1.Validate()) return false;
+	workBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
+	workBuffer1->CreateAttachment(0, TextureFormat::RGB_16, TextureFilterMode::Linear);
+	if (!workBuffer1->Validate()) return false;
 
-	workBuffer2.Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
-	workBuffer2.CreateAttachment(0, TextureFormat::RGB_16, TextureFilterMode::Linear);
-	if (!workBuffer2.Validate()) return false;
+	workBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
+	workBuffer2->CreateAttachment(0, TextureFormat::RGB_16, TextureFilterMode::Linear);
+	if (!workBuffer2->Validate()) return false;
 
 	// Create MSAA resolve buffers
 	if (MSAA_Level > 1)
 	{
-		if (!GBufferResolve.InitAsResolve(GBuffer, TextureFilterMode::Point)) return false;
-		if (!godRaysBuffer1Resolve.InitAsResolve(godRaysBuffer1, TextureFilterMode::Linear)) return false;
-		if (!godRaysBuffer2Resolve.InitAsResolve(godRaysBuffer2, TextureFilterMode::Linear)) return false;
+		if (!GBufferResolve->InitAsResolve(*GBuffer, TextureFilterMode::Point)) return false;
+		if (!godRaysBuffer1Resolve->InitAsResolve(*godRaysBuffer1, TextureFilterMode::Linear)) return false;
+		if (!godRaysBuffer2Resolve->InitAsResolve(*godRaysBuffer2, TextureFilterMode::Linear)) return false;
 	}
 
 	/* Setup Scene Graph */
@@ -139,16 +139,16 @@ bool Game::Init()
 
 	godRaysRadial1.SetShader(godRaysRadialBlur);
 	godRaysRadial1.SetTarget(workBuffer1);
-	godRaysRadial1.textures.Add((MSAA_Level > 1) ? godRaysBuffer1Resolve.GetColorTexture(0) : godRaysBuffer1.GetColorTexture(0), 0);
+	godRaysRadial1.textures.Add((MSAA_Level > 1) ? godRaysBuffer1Resolve->GetColorTexture(0) : godRaysBuffer1->GetColorTexture(0), 0);
 
 	godRaysRadial2.SetShader(godRaysRadialBlur);
 	godRaysRadial2.SetTarget(workBuffer2);
-	godRaysRadial2.textures.Add((MSAA_Level > 1) ? godRaysBuffer2Resolve.GetColorTexture(0) : godRaysBuffer2.GetColorTexture(0), 0);
+	godRaysRadial2.textures.Add((MSAA_Level > 1) ? godRaysBuffer2Resolve->GetColorTexture(0) : godRaysBuffer2->GetColorTexture(0), 0);
 
 	composite.SetShader(godRaysComposite);
-	composite.textures.Add((MSAA_Level > 1) ? GBufferResolve.GetColorTexture(0) : GBuffer.GetColorTexture(0), 0);
-	composite.textures.Add(workBuffer1.GetColorTexture(0), 1);
-	composite.textures.Add(workBuffer2.GetColorTexture(0), 2);
+	composite.textures.Add((MSAA_Level > 1) ? GBufferResolve->GetColorTexture(0) : GBuffer->GetColorTexture(0), 0);
+	composite.textures.Add(workBuffer1->GetColorTexture(0), 1);
+	composite.textures.Add(workBuffer2->GetColorTexture(0), 2);
 
 	return true;
 }
@@ -216,11 +216,11 @@ void Game::Update()
 void Game::Draw()
 {
 	ClearBackBufferDepth();
-	GBuffer.ClearDepth();
-	godRaysBuffer1.ClearDepth();
-	godRaysBuffer1.ClearColor(0, vec4(orb1Color * 0.1f, 0.0f));
-	godRaysBuffer2.ClearDepth();
-	godRaysBuffer2.ClearColor(0, vec4(orb2Color * 0.1f, 0.0f));
+	GBuffer->ClearDepth();
+	godRaysBuffer1->ClearDepth();
+	godRaysBuffer1->ClearColor(0, vec4(orb1Color * 0.1f, 0.0f));
+	godRaysBuffer2->ClearDepth();
+	godRaysBuffer2->ClearColor(0, vec4(orb2Color * 0.1f, 0.0f));
 
 	// Compute the screenSpace positions of each orb.
 	vec4 Orb1ScreenPos = camera->Get<Camera>().GetViewProjMatrix() * vec4(orb1->GetWorldTransform().GetTranslation(), 1.0f);
@@ -252,19 +252,19 @@ void Game::Draw()
 	// If we are using MSAA, we need to resolve away the extra pixel samples.
 	if (MSAA_Level > 1)
 	{
-		GBuffer.ResolveMultisampling(GBufferResolve);
-		godRaysBuffer1.ResolveMultisampling(godRaysBuffer1Resolve);
-		godRaysBuffer2.ResolveMultisampling(godRaysBuffer2Resolve);
+		GBuffer->ResolveMultisampling(*GBufferResolve);
+		godRaysBuffer1->ResolveMultisampling(*godRaysBuffer1Resolve);
+		godRaysBuffer2->ResolveMultisampling(*godRaysBuffer2Resolve);
 	}
 
 	// Blur out the light from orb1.
 	screenSpaceRadialPos.Set(vec2(Orb1ScreenPos.x * 0.5f + 0.5f, Orb1ScreenPos.y * 0.5f + 0.5f));
-	godRaysRadial1.Render();
+	godRaysRadial1.PostProcess();
 
 	// Blur out the light from orb2.
 	screenSpaceRadialPos.Set(vec2(Orb2ScreenPos.x * 0.5f + 0.5f, Orb2ScreenPos.y * 0.5f + 0.5f));
-	godRaysRadial2.Render();
+	godRaysRadial2.PostProcess();
 
 	// Construct the final image.
-	composite.Render();
+	composite.PostProcess();
 }

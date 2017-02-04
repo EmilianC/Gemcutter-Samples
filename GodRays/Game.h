@@ -1,10 +1,10 @@
 #pragma once
 #include <Jewel3D/Entity/Entity.h>
-#include <Jewel3D/Resource/ConfigTable.h>
-#include <Jewel3D/Resource/Shader.h>
+#include <Jewel3D/Math/Vector.h>
 #include <Jewel3D/Rendering/RenderPass.h>
 #include <Jewel3D/Rendering/RenderTarget.h>
-#include <Jewel3D/Math/Vector.h>
+#include <Jewel3D/Resource/ConfigTable.h>
+#include <Jewel3D/Resource/Shader.h>
 
 using namespace Jwl;
 
@@ -36,14 +36,14 @@ public:
 	Texture::Ptr skybox;
 
 	/* FrameBuffers */
-	RenderTarget GBuffer;
-	RenderTarget GBufferResolve;
-	RenderTarget godRaysBuffer1;
-	RenderTarget godRaysBuffer1Resolve;
-	RenderTarget godRaysBuffer2;
-	RenderTarget godRaysBuffer2Resolve;
-	RenderTarget workBuffer1;
-	RenderTarget workBuffer2;
+	RenderTarget::Ptr GBuffer = RenderTarget::MakeNew();
+	RenderTarget::Ptr GBufferResolve = RenderTarget::MakeNew();
+	RenderTarget::Ptr godRaysBuffer1 = RenderTarget::MakeNew();
+	RenderTarget::Ptr godRaysBuffer1Resolve = RenderTarget::MakeNew();
+	RenderTarget::Ptr godRaysBuffer2 = RenderTarget::MakeNew();
+	RenderTarget::Ptr godRaysBuffer2Resolve = RenderTarget::MakeNew();
+	RenderTarget::Ptr workBuffer1 = RenderTarget::MakeNew();
+	RenderTarget::Ptr workBuffer2 = RenderTarget::MakeNew();
 
 	/* Shaders */
 	Shader::Ptr godRaysRadialBlur;
