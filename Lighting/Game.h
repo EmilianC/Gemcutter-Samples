@@ -1,4 +1,6 @@
 #pragma once
+#include <Jewel3D/Application/Application.h>
+#include <Jewel3D/Application/Event.h>
 #include <Jewel3D/Entity/Entity.h>
 #include <Jewel3D/Rendering/RenderPass.h>
 #include <Jewel3D/Rendering/RenderTarget.h>
@@ -16,6 +18,9 @@ public:
 
 	void Update();
 	void Draw();
+
+	/* Events */
+	Listener<Resize> resize;
 
 	/* Rendering */
 	RenderPass mainRenderPass;

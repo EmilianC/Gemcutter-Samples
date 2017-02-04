@@ -168,9 +168,9 @@ void Game::Update()
 		{
 			orb1Color = vec3(RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f));
 			orb2Color = vec3(RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f));
+
 			orb1ColorHandle = orb1Color;
 			orb2ColorHandle = orb2Color;
-
 			orb1->Get<Light>().color = orb1Color;
 			orb2->Get<Light>().color = orb2Color;
 			
