@@ -43,15 +43,15 @@ bool Game::Init()
 	if (!shader) return false;
 
 	helloWorldText->Add<Material>(shader).SetBlendMode(BlendFunc::Linear);
-	helloWorldText->Add<Text>("Hello World!\n-ABC-\n-123-", fonts[currentFont]).centeredX = true;
+	helloWorldText->Add<Text>("Hello World!\n-ABC-\n-123-").centeredX = true;
 	rootEntity->AddChild(helloWorldText);
-	helloWorldText->scale = vec3(0.1f);
 
 	instructionText->Add<Material>(shader).SetBlendMode(BlendFunc::Linear);
-	instructionText->Add<Text>("Use the arrow keys to cycle through the different fonts.", fonts[0]);
+	instructionText->Add<Text>("Use the arrow keys to cycle\nthrough the different fonts.");
 	rootUiEntity->AddChild(instructionText);
-	instructionText->scale = vec3(0.5f);
-	instructionText->position = vec3(15.0f, 15.0f, 0.0f);
+	instructionText->position = vec3(20.0f, 55.0f, 0.0f);
+
+	UpdateFonts();
 
 	// Setup Cameras.
 	camera->Add<Camera>(65.0f, Application.GetAspectRatio(), 1.0f, 10000.0f);
@@ -82,20 +82,12 @@ void Game::Update()
 	if (direction)
 	{
 		angle -= deltaTime * 25.0f;
-
-		if (angle < -45.0f)
-		{
-			direction = !direction;
-		}
+		direction = angle > -45.0f;
 	}
 	else
 	{
 		angle += deltaTime * 25.0f;
-
-		if (angle > 45.0f)
-		{
-			direction = !direction;
-		}
+		direction = angle > 45.0f;
 	}
 
 	helloWorldText->rotation.SetIdentity();
@@ -113,7 +105,7 @@ void Game::Update()
 			}
 
 			canChangeFont = false;
-			helloWorldText->Get<Text>().SetFont(fonts[currentFont]);
+			UpdateFonts();
 		}
 	}
 	else if (Input.IsDown(Key::Left))
@@ -130,7 +122,7 @@ void Game::Update()
 			}
 
 			canChangeFont = false;
-			helloWorldText->Get<Text>().SetFont(fonts[currentFont]);
+			UpdateFonts();
 		}
 	}
 	else
@@ -148,4 +140,14 @@ void Game::Draw()
 
 	mainRenderPass.Render(*rootEntity);
 	UIRenderPass.Render(*rootUiEntity);
+}
+
+void Game::UpdateFonts()
+{
+	helloWorldText->Get<Text>().SetFont(fonts[currentFont]);
+	instructionText->Get<Text>().SetFont(fonts[currentFont]);
+
+	// Normalize the size of the text vs. the resolution of the font.
+	helloWorldText->scale = vec3(7.0f / static_cast<float>(fonts[currentFont]->GetFontWidth()));
+	instructionText->scale = vec3(33.0f / static_cast<float>(fonts[currentFont]->GetFontWidth()));
 }

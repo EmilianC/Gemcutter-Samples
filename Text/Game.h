@@ -17,6 +17,8 @@ public:
 	void Update();
 	void Draw();
 
+	void UpdateFonts();
+
 	/* Rendering */
 	RenderPass mainRenderPass;
 	RenderPass UIRenderPass;
