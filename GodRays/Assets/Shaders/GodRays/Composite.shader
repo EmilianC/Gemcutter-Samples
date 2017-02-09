@@ -1,8 +1,3 @@
-Vertex
-{
-	#include "Shaders/GodRays/FullScreenQuad.vert"
-}
-
 Samplers
 {
 	sampler2D sScene : 0;

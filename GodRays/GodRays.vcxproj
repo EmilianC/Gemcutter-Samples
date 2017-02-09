@@ -180,7 +180,6 @@ xcopy /D /Y /S "$(Jewel3D_PATH)\Deps\Xinput\bin\$(Configuration)\*.dll" "$(Proje
     <None Include="Assets\Shaders\Default\Sprite.shader" />
     <None Include="Assets\Shaders\FlatColor.shader" />
     <None Include="Assets\Shaders\GodRays\Composite.shader" />
-    <None Include="Assets\Shaders\GodRays\FullScreenQuad.vert" />
     <None Include="Assets\Shaders\GodRays\Radial.shader" />
     <None Include="Settings.cfg" />
   </ItemGroup>

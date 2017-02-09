@@ -9,11 +9,6 @@ Uniforms
 	}
 }
 
-Vertex
-{
-	#include "Shaders/GodRays/FullScreenQuad.vert"
-}
-
 Samplers
 {
 	sampler2D sTex : 0;

@@ -33,9 +33,6 @@
     <None Include="Assets\Shaders\GodRays\Radial.shader">
       <Filter>Shaders\GodRays</Filter>
     </None>
-    <None Include="Assets\Shaders\GodRays\FullScreenQuad.vert">
-      <Filter>Shaders\GodRays</Filter>
-    </None>
     <None Include="Assets\Shaders\Default\Font.shader">
       <Filter>Shaders\Default</Filter>
     </None>
