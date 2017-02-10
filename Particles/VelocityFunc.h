@@ -3,7 +3,7 @@
 
 using namespace Jwl;
 
-//- Custom particle functor to create unique velocity behaviour
+//- Custom particle functor to create unique velocity behaviour.
 class VelocityFunc : public ParticleFunctor, public Shareable<VelocityFunc>
 {
 public:

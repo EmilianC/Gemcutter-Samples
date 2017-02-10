@@ -3,7 +3,7 @@
 
 using namespace Jwl;
 
-//- Custom particle functor to oscillate particles back and forth as they move upwards
+//- Custom particle functor to oscillate particles back and forth as they move upwards.
 class WaveFunc : public ParticleFunctor, public Shareable<WaveFunc>
 {
 public:

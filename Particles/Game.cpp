@@ -17,6 +17,7 @@
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
+	keyPressed.callback = [this](auto& e) { onKeyPressed(e); };
 }
 
 bool Game::Init()
@@ -70,14 +71,14 @@ bool Game::Init()
 	sparkle->position.x = 8.0f;
 	fire->position.x = -8.0f;
 
-	// Setup Camera
+	// Setup Camera.
 	camera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 1000.0f);
 	camera->LookAt(vec3(0.0f, 15.0f, 15.0f), vec3(0.0f));
 
-	// Setup up renderer
+	// Setup up renderer.
 	mainRenderPass.SetCamera(camera);
 
-	// Setup background color to cornflower blue
+	// Setup background color to cornflower blue.
 	SetClearColor(0.35f, 0.7f, 0.9f, 0.0f);
 
 	return true;
@@ -91,23 +92,6 @@ void Game::Update()
 		return;
 	}
 
-	if (Input.IsDown(Key::Space))
-	{
-		if (canChangeState)
-		{
-			sparkle->Get<ParticleEmitter>().isPaused = particleState;
-			smoke->Get<ParticleEmitter>().isPaused = particleState;
-			fire->Get<ParticleEmitter>().isPaused = particleState;
-
-			particleState = !particleState;
-			canChangeState = false;
-		}
-	}
-	else
-	{
-		canChangeState = true;
-	}
-
 	rootEntity->RotateY(Application.GetDeltaTime() * 12.0f);
 
 	// Engine systems and components are updated here.
@@ -119,4 +103,18 @@ void Game::Draw()
 	ClearBackBuffer();
 
 	mainRenderPass.Render(*rootEntity);
+}
+
+void Game::onKeyPressed(const KeyPressed& e)
+{
+	if (e.key != Key::Space)
+		return;
+
+	auto& p1 = sparkle->Get<ParticleEmitter>();
+	auto& p2 = smoke->Get<ParticleEmitter>();
+	auto& p3 = fire->Get<ParticleEmitter>();
+
+	p1.isPaused = !p1.isPaused;
+	p2.isPaused = !p2.isPaused;
+	p3.isPaused = !p3.isPaused;
 }

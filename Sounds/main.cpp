@@ -108,7 +108,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 	}
 	Log("Initialized Window. ( OpenGL " + Application.GetOpenGLVersionString() + " )");
 
-	//Apply VSync mode.
+	// Apply VSync mode.
 	{
 		std::string vsyncMode = config.GetString("vsync");
 

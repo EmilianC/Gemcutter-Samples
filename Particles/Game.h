@@ -1,5 +1,7 @@
 #pragma once
+#include <Jewel3D/Application/Event.h>
 #include <Jewel3D/Entity/Entity.h>
+#include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/RenderPass.h>
 #include <Jewel3D/Resource/ConfigTable.h>
 #include <Jewel3D/Resource/Shader.h>
@@ -16,6 +18,11 @@ public:
 	void Update();
 	void Draw();
 
+	void onKeyPressed(const KeyPressed& e);
+
+	/* Events */
+	Listener<KeyPressed> keyPressed;
+
 	/* Rendering */
 	RenderPass mainRenderPass;
 	
@@ -28,7 +35,4 @@ public:
 
 	/* Assets */
 	ConfigTable& config;
-
-	bool particleState = true;
-	bool canChangeState = true;
 };
