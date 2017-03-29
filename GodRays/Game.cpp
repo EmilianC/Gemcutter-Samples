@@ -32,7 +32,7 @@ bool Game::Init()
 	auto flatColorShader = Load<Shader>("Shaders/FlatColor.shader");
 	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite || !flatColorShader) return false;
 
-	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->GetUniformHandle<vec2>("LightPositionOnScreen");
+	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->MakeHandle<vec2>("LightPositionOnScreen");
 
 	/* Load Models and Textures */
 	auto groundModel = Load<Model>("Models/ground.model");
@@ -75,8 +75,8 @@ bool Game::Init()
 
 	orb1->Get<Material>().CreateUniformBuffer(0);
 	orb2->Get<Material>().CreateUniformBuffer(0);
-	orb1ColorHandle = orb1->Get<Material>().buffers[0]->GetUniformHandle<vec3>("Color");
-	orb2ColorHandle = orb2->Get<Material>().buffers[0]->GetUniformHandle<vec3>("Color");
+	orb1ColorHandle = orb1->Get<Material>().buffers[0]->MakeHandle<vec3>("Color");
+	orb2ColorHandle = orb2->Get<Material>().buffers[0]->MakeHandle<vec3>("Color");
 	orb1ColorHandle = orb1Color;
 	orb2ColorHandle = orb2Color;
 	orb1->Get<Light>().color = orb1Color;

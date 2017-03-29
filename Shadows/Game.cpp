@@ -44,7 +44,7 @@ bool Game::Init()
 	shadowCamera->LookAt(vec3(2.0f, 1.0f, 0.5f), vec3(0.0f));
 
 	lambertShadow->buffers.Add(shadowCamera->Get<Light>().GetBuffer(), 0);
-	viewToShadow = lambertShadow->buffers[2]->GetUniformHandle<mat4>("ViewToShadow");
+	viewToShadow = lambertShadow->buffers[2]->MakeHandle<mat4>("ViewToShadow");
 
 	// Setup Camera.
 	mainCamera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 10000.0f);
