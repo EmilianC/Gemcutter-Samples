@@ -18,3 +18,4 @@ GodRays/obj/
 GodRays/bin/
 Log_Output.txt
 *.opendb
+*.VC.db
