@@ -27,8 +27,8 @@ bool Game::Init()
 	/* Load Shaders */
 	staticGeometryProgram = Load<Shader>("Shaders/Default/Lambert.shader");
 	flatColorProgram = Load<Shader>("Shaders/FlatColor.shader");
-	godRaysRadialBlur = Load<Shader>("Shaders/GodRays/Radial.shader");
-	godRaysComposite = Load<Shader>("Shaders/GodRays/Composite.shader");
+	godRaysRadialBlur = Load<Shader>("Shaders/Radial.shader");
+	godRaysComposite = Load<Shader>("Shaders/Composite.shader");
 	auto flatColorShader = Load<Shader>("Shaders/FlatColor.shader");
 	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite || !flatColorShader) return false;
 
@@ -52,12 +52,12 @@ bool Game::Init()
 
 	skybox = Texture::MakeNew();
 	if (!skybox->LoadCubeMap(
-		"./Assets/Textures/Skybox_PosX.png",
-		"./Assets/Textures/Skybox_NegX.png",
-		"./Assets/Textures/Skybox_PosY.png",
-		"./Assets/Textures/Skybox_NegY.png",
-		"./Assets/Textures/Skybox_PosZ.png",
-		"./Assets/Textures/Skybox_NegZ.png",
+		"../Assets/Textures/Skybox_PosX.png",
+		"../Assets/Textures/Skybox_NegX.png",
+		"../Assets/Textures/Skybox_PosY.png",
+		"../Assets/Textures/Skybox_NegY.png",
+		"../Assets/Textures/Skybox_PosZ.png",
+		"../Assets/Textures/Skybox_NegZ.png",
 		TextureFilterMode::Linear))
 	{
 		return false;

@@ -5,12 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{b8b34e2d-d924-4edf-aa4d-08c516d88362}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\Default">
-      <UniqueIdentifier>{ad45dfd3-b245-4dfe-81d6-37302102494f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -20,18 +14,6 @@
     <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\Default\Font.shader">
-      <Filter>Shaders\Default</Filter>
-    </None>
     <None Include="Settings.cfg" />
-    <None Include="Assets\Shaders\Default\ParticleBillBoard.shader">
-      <Filter>Shaders\Default</Filter>
-    </None>
-    <None Include="Assets\Shaders\Default\Sprite.shader">
-      <Filter>Shaders\Default</Filter>
-    </None>
-    <None Include="Assets\Shaders\Default\Lambert.shader">
-      <Filter>Shaders\Default</Filter>
-    </None>
   </ItemGroup>
 </Project>

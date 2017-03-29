@@ -21,6 +21,23 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Components", "Components\Co
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lighting", "Lighting\Lighting.vcxproj", "{AF0E3A87-67EE-478C-B39A-9009B7B935B0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{FCDE7C34-6C59-48DB-80A9-C5553164E09C}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Shaders\Composite.shader = Assets\Shaders\Composite.shader
+		Assets\Shaders\FlatColor.shader = Assets\Shaders\FlatColor.shader
+		Assets\Shaders\MultipleLights.shader = Assets\Shaders\MultipleLights.shader
+		Assets\Shaders\Radial.shader = Assets\Shaders\Radial.shader
+		Assets\Shaders\Simple.shader = Assets\Shaders\Simple.shader
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{1C6EAF72-87B5-4979-844B-923C2A82030F}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Shaders\Default\Font.shader = Assets\Shaders\Default\Font.shader
+		Assets\Shaders\Default\Lambert.shader = Assets\Shaders\Default\Lambert.shader
+		Assets\Shaders\Default\ParticleBillBoard.shader = Assets\Shaders\Default\ParticleBillBoard.shader
+		Assets\Shaders\Default\Sprite.shader = Assets\Shaders\Default\Sprite.shader
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -102,5 +119,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1C6EAF72-87B5-4979-844B-923C2A82030F} = {FCDE7C34-6C59-48DB-80A9-C5553164E09C}
 	EndGlobalSection
 EndGlobal

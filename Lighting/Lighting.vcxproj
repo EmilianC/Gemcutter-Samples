@@ -98,11 +98,6 @@
     <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\Default\Font.shader" />
-    <None Include="Assets\Shaders\Default\Lambert.shader" />
-    <None Include="Assets\Shaders\Default\ParticleBillBoard.shader" />
-    <None Include="Assets\Shaders\Default\Sprite.shader" />
-    <None Include="Assets\Shaders\MultipleLights.shader" />
     <None Include="Settings.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

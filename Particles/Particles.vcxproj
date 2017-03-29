@@ -179,10 +179,6 @@ xcopy /D /Y /S "$(Jewel3D_PATH)\Deps\Xinput\bin\$(Configuration)\*.dll" "$(Proje
     <ClInclude Include="WaveFunc.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\Default\Font.shader" />
-    <None Include="Assets\Shaders\Default\Lambert.shader" />
-    <None Include="Assets\Shaders\Default\ParticleBillBoard.shader" />
-    <None Include="Assets\Shaders\Default\Sprite.shader" />
     <None Include="Settings.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -178,7 +178,6 @@ xcopy /D /Y /S "$(Jewel3D_PATH)\Deps\Xinput\bin\$(Configuration)\*.dll" "$(Proje
     <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\Simple.shader" />
     <None Include="Settings.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

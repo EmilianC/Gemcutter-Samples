@@ -45,7 +45,7 @@ bool Game::Init()
 
 	// Setup Camera.
 	camera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 1000.0f);
-	camera->LookAt(vec3(0.0f, 15.0f, 15.0f), vec3(0.0f));
+	camera->LookAt(vec3(0.0f, 12.0f, 12.0f), vec3(0.0f));
 
 	// Setup up renderer.
 	mainRenderPass.SetCamera(camera);
@@ -59,7 +59,9 @@ bool Game::Init()
 	rootEntity->AddChild(monkey);
 	orbParent->AddChild(orb);
 	orb->position.x = 5.0f;
+	orb->scale *= 5.0f;
 	monkey->RotateY(180.0f);
+	monkey->RotateX(90.0f);
 
 	// Prepare sounds.
 	monkey->Add<SoundListener>();
@@ -91,7 +93,7 @@ void Game::Update()
 		orb->position.x -= deltaTime * 5.0f;
 	}
 
-	orb->position.x = Clamp(orb->position.x, 2.33f, 20.0f);
+	orb->position.x = Clamp(orb->position.x, 2.33f, 16.0f);
 
 	// Engine systems and components are updated here.
 	Application.UpdateEngine();

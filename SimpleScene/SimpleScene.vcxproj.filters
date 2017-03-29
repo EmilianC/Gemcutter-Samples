@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{462a33a1-3c75-4b08-8406-b908646091af}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -18,8 +15,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Settings.cfg" />
-    <None Include="Assets\Shaders\Simple.shader">
-      <Filter>Shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>

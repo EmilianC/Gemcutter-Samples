@@ -5,12 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{b8b34e2d-d924-4edf-aa4d-08c516d88362}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\Default">
-      <UniqueIdentifier>{322007e4-1129-4d05-97ac-407efd3d313e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -21,14 +15,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Settings.cfg" />
-    <None Include="Assets\Shaders\Default\Sprite.shader">
-      <Filter>Shaders\Default</Filter>
-    </None>
-    <None Include="Assets\Shaders\Default\Font.shader">
-      <Filter>Shaders\Default</Filter>
-    </None>
-    <None Include="Assets\Shaders\Default\ParticleBillBoard.shader">
-      <Filter>Shaders\Default</Filter>
-    </None>
   </ItemGroup>
 </Project>

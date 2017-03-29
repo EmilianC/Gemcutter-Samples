@@ -1,11 +1,11 @@
 Attributes
 {
-	vec4 a_vert			: 0;
-	vec2 a_size			: 1;
-	vec3 a_color		: 2;
-	float a_alpha		: 3;
-	float a_rotation	: 4;
-	float a_ageRatio	: 5;
+	vec4 a_vert		 : 0;
+	vec2 a_size		 : 1;
+	vec3 a_color	 : 2;
+	float a_alpha	 : 3;
+	float a_rotation : 4;
+	float a_ageRatio : 5;
 }
 
 Uniforms
@@ -67,10 +67,10 @@ Vertex
 
 Geometry
 {
-	//input type
+	// Input type.
 	layout(points) in;
 
-	//output type
+	// Output type.
 	layout(triangle_strip, max_vertices = 4) out;
 
 	#if defined(JWL_PARTICLE_SIZE)
@@ -109,7 +109,7 @@ Geometry
 		vec3 position = gl_in[0].gl_Position.xyz;
 		vec4 outPosition = vec4(0.0, 0.0, position.z, 1.0);
 
-		/* resolve particle parameters */
+		/* Resolve Particle Parameters */
 		vec2 Size;
 		#if defined(JWL_PARTICLE_SIZE)
 			Size = size[0];
@@ -130,7 +130,7 @@ Geometry
 			Color.a = mix(Properties.StartAlpha, Properties.EndAlpha, ageRatio[0]);
 		#endif
 
-		//create rotation matrix
+		// Create rotation matrix.
 		#if defined(JWL_PARTICLE_ROTATION)
 			float cosR = cos(rotation[0]);
 			float sinR = sin(rotation[0]);
