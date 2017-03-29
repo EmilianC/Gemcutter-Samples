@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{FCDE
 	ProjectSection(SolutionItems) = preProject
 		Assets\Shaders\Composite.shader = Assets\Shaders\Composite.shader
 		Assets\Shaders\FlatColor.shader = Assets\Shaders\FlatColor.shader
+		Assets\Shaders\LambertShadow.shader = Assets\Shaders\LambertShadow.shader
 		Assets\Shaders\MultipleLights.shader = Assets\Shaders\MultipleLights.shader
 		Assets\Shaders\Radial.shader = Assets\Shaders\Radial.shader
 		Assets\Shaders\Simple.shader = Assets\Shaders\Simple.shader
@@ -37,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{1C6E
 		Assets\Shaders\Default\ParticleBillBoard.shader = Assets\Shaders\Default\ParticleBillBoard.shader
 		Assets\Shaders\Default\Sprite.shader = Assets\Shaders\Default\Sprite.shader
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shadows", "Shadows\Shadows.vcxproj", "{00E58974-5DD7-43E5-BE01-86E33B4BEA43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,6 +119,14 @@ Global
 		{AF0E3A87-67EE-478C-B39A-9009B7B935B0}.Release|Win32.ActiveCfg = Release|Win32
 		{AF0E3A87-67EE-478C-B39A-9009B7B935B0}.Release|Win32.Build.0 = Release|Win32
 		{AF0E3A87-67EE-478C-B39A-9009B7B935B0}.Release|x64.ActiveCfg = Release|Win32
+		{00E58974-5DD7-43E5-BE01-86E33B4BEA43}.Debug|Win32.ActiveCfg = Debug|Win32
+		{00E58974-5DD7-43E5-BE01-86E33B4BEA43}.Debug|Win32.Build.0 = Debug|Win32
+		{00E58974-5DD7-43E5-BE01-86E33B4BEA43}.Debug|x64.ActiveCfg = Debug|x64
+		{00E58974-5DD7-43E5-BE01-86E33B4BEA43}.Debug|x64.Build.0 = Debug|x64
+		{00E58974-5DD7-43E5-BE01-86E33B4BEA43}.Release|Win32.ActiveCfg = Release|Win32
+		{00E58974-5DD7-43E5-BE01-86E33B4BEA43}.Release|Win32.Build.0 = Release|Win32
+		{00E58974-5DD7-43E5-BE01-86E33B4BEA43}.Release|x64.ActiveCfg = Release|x64
+		{00E58974-5DD7-43E5-BE01-86E33B4BEA43}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
