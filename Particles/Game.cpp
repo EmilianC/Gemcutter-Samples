@@ -17,7 +17,16 @@
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
-	keyPressed.callback = [this](auto& e) { onKeyPressed(e); };
+	keyPressed.callback = [](auto& e)
+	{
+		if (e.key != Key::Space)
+			return;
+
+		for (auto& emitter : All<ParticleEmitter>())
+		{
+			emitter.isPaused = !emitter.isPaused;
+		}
+	};
 }
 
 bool Game::Init()
@@ -29,39 +38,39 @@ bool Game::Init()
 	auto fireTexture = Load<Texture>("Textures/Block.png", TextureFilterMode::Point);
 	if (!shader || !sparkleTexture || !smokeTexture || !fireTexture) return false;
 
-	sparkle->Add<ParticleEmitter>();
-	smoke->Add<ParticleEmitter>();
-	fire->Add<ParticleEmitter>();
+	auto& sparkleEmitter = sparkle->Add<ParticleEmitter>();
+	auto& smokeEmitter = smoke->Add<ParticleEmitter>();
+	auto& fireEmitter = fire->Add<ParticleEmitter>();
 
-	sparkle->Add<Material>(shader, sparkleTexture);
-	smoke->Add<Material>(shader, smokeTexture);
-	fire->Add<Material>(shader, fireTexture);
+	auto& sparkleMaterial = sparkle->Add<Material>(shader, sparkleTexture);
+	auto& smokeMaterial = smoke->Add<Material>(shader, smokeTexture);
+	auto& fireMaterial = fire->Add<Material>(shader, fireTexture);
 
 	/* Initialize Sparkle Effect */
-	sparkle->Get<ParticleEmitter>().spawnPerSecond = 2.0f;
-	sparkle->Get<Material>().SetBlendMode(BlendFunc::Additive);
-	sparkle->Get<Material>().SetDepthMode(DepthFunc::TestOnly);
-	sparkle->Get<ParticleEmitter>().SetLocalSpace(true);
-	sparkle->Get<ParticleEmitter>().Warmup(1.5f);
+	sparkleMaterial.SetBlendMode(BlendFunc::Additive);
+	sparkleMaterial.SetDepthMode(DepthFunc::TestOnly);
+	sparkleEmitter.spawnPerSecond = 2.0f;
+	sparkleEmitter.SetLocalSpace(true);
+	sparkleEmitter.Warmup(1.5f);
 
 	/* Initialize Smoke Effect */
-	smoke->Get<Material>().SetBlendMode(BlendFunc::Additive);
-	smoke->Get<Material>().SetDepthMode(DepthFunc::TestOnly);
-	smoke->Get<ParticleEmitter>().velocity.Set(0.0f, 0.25f);
-	smoke->Get<ParticleEmitter>().functors.Add(RotationFunc::MakeNew(0.0f));
-	smoke->Get<ParticleEmitter>().SetSizeStartEnd(vec2(0.0f, 0.0f), vec2(2.0f, 2.0f));
-	smoke->Get<ParticleEmitter>().SetColorStartEnd(vec3(0.2f, 0.2f, 0.2f));
-	smoke->Get<ParticleEmitter>().Warmup(1.5f);
+	smokeMaterial.SetBlendMode(BlendFunc::Additive);
+	smokeMaterial.SetDepthMode(DepthFunc::TestOnly);
+	smokeEmitter.velocity.Set(0.0f, 0.25f);
+	smokeEmitter.functors.Add(RotationFunc::MakeNew(0.0f));
+	smokeEmitter.SetSizeStartEnd(vec2(0.0f, 0.0f), vec2(2.0f, 2.0f));
+	smokeEmitter.SetColorStartEnd(vec3(0.2f, 0.2f, 0.2f));
+	smokeEmitter.Warmup(1.5f);
 
 	/* Initialize Fire Effect */
-	fire->Get<Material>().SetBlendMode(BlendFunc::Linear);
-	fire->Get<Material>().SetDepthMode(DepthFunc::TestOnly);
-	fire->Get<ParticleEmitter>().functors.Add(VelocityFunc::MakeNew());
-	fire->Get<ParticleEmitter>().functors.Add(WaveFunc::MakeNew());
-	fire->Get<ParticleEmitter>().SetSizeStartEnd(vec2(1.5f, 1.5f), vec2(0.0f, 0.0f));
-	fire->Get<ParticleEmitter>().SetColorStartEnd(vec3(1.0f, 0.5f, 0.25f), vec3(0.5f, 0.5f, 0.33f));
-	fire->Get<ParticleEmitter>().SetLocalSpace(true);
-	fire->Get<ParticleEmitter>().Warmup(1.5f);
+	fireMaterial.SetBlendMode(BlendFunc::Linear);
+	fireMaterial.SetDepthMode(DepthFunc::TestOnly);
+	fireEmitter.functors.Add(VelocityFunc::MakeNew());
+	fireEmitter.functors.Add(WaveFunc::MakeNew());
+	fireEmitter.SetSizeStartEnd(vec2(1.5f, 1.5f), vec2(0.0f, 0.0f));
+	fireEmitter.SetColorStartEnd(vec3(1.0f, 0.5f, 0.25f), vec3(0.5f, 0.5f, 0.33f));
+	fireEmitter.SetLocalSpace(true);
+	fireEmitter.Warmup(1.5f);
 
 	/* Setup Scene */
 	rootEntity->AddChild(sparkle);
@@ -103,18 +112,4 @@ void Game::Draw()
 	ClearBackBuffer();
 
 	mainRenderPass.Render(*rootEntity);
-}
-
-void Game::onKeyPressed(const KeyPressed& e)
-{
-	if (e.key != Key::Space)
-		return;
-
-	auto& p1 = sparkle->Get<ParticleEmitter>();
-	auto& p2 = smoke->Get<ParticleEmitter>();
-	auto& p3 = fire->Get<ParticleEmitter>();
-
-	p1.isPaused = !p1.isPaused;
-	p2.isPaused = !p2.isPaused;
-	p3.isPaused = !p3.isPaused;
 }

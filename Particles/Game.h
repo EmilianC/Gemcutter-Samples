@@ -18,8 +18,6 @@ public:
 	void Update();
 	void Draw();
 
-	void onKeyPressed(const KeyPressed& e);
-
 	/* Events */
 	Listener<KeyPressed> keyPressed;
 
