@@ -26,7 +26,7 @@ public:
 	Entity::Ptr camera = Entity::MakeNew();
 	Entity::Ptr rootNode = Entity::MakeNew();
 	Flock flock;
-	static constexpr unsigned NumBirds = 175;
+	static constexpr unsigned NumBirds = 165;
 
 	/* Assets */
 	ConfigTable& config;

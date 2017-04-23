@@ -20,14 +20,14 @@ void Flock::RandomlyPlaceBoids()
 
 	for (auto& boid : All<Boid>())
 	{
-		// Randomize velocity
+		// Randomize velocity.
 		boid.Velocity.x = RandomRangef(-1.0f, 1.0f);
 		boid.Velocity.y = RandomRangef(-1.0f, 1.0f);
 		boid.Velocity.z = RandomRangef(-1.0f, 1.0f);
 		boid.Velocity.Normalize();
 		boid.Velocity *= RandomRangef(0.0f, MaxVelocity);
 
-		// Randomize position
+		// Randomize position.
 		boid.owner.position.x = RandomRangef(MIN_X_BOUND, MAX_X_BOUND);
 		boid.owner.position.y = RandomRangef(MIN_Y_BOUND, MAX_Y_BOUND);
 		boid.owner.position.z = RandomRangef(MIN_Z_BOUND, MAX_Z_BOUND);
@@ -40,20 +40,25 @@ void Flock::Update(float deltaTime)
 	vec3 averageVelocity;
 	vec3 alignmentForce;
 
-	unsigned numBoids = 0;
-
 	/* Find average position and velocity */
+	unsigned numBoids = 0;
 	for (auto& boid : All<Boid>())
 	{
 		averagePosition += boid.owner.position;
 		averageVelocity += boid.Velocity;
 		numBoids++;
 	}
-	// Normalize
+
+	if (numBoids == 0)
+	{
+		return;
+	}
+
+	// Normalize.
 	averagePosition /= static_cast<float>(numBoids);
 	averageVelocity /= static_cast<float>(numBoids);
 
-	// This keeps boids moving in the same general direction
+	// This keeps boids moving in the same general direction.
 	alignmentForce = averageVelocity * InertiaFactor;
 
 	/* Update flock */
@@ -63,19 +68,18 @@ void Flock::Update(float deltaTime)
 		vec3 pullForce;
 		vec3 proximityForce;
 		vec3 localCenter;
-		// The number of boids considered local to this one
-		int localCount = 0;
 
 		/* Calculate local center */
+		unsigned localCount = 0;
 		for (auto& other : All<Boid>())
 		{
-			// Skip comparison of boid with itself
+			// Skip comparison of boid with itself.
 			if (&boid == &other)
 			{
 				continue;
 			}
 
-			// If the other node if within local range, it contributes to the local center
+			// If the other node if within local range, it contributes to the local center.
 			if ((boid.owner.position - other.owner.position).LengthSquared() < ProximityRange)
 			{
 				localCenter += other.owner.position;
@@ -83,23 +87,18 @@ void Flock::Update(float deltaTime)
 			}
 		}
 
-		// Normalize and avoid divide by zero error
-		if (localCount != 0.0f)
-		{
-			localCenter /= (float)localCount;
-		}
-
 		/* Compute forces */
-		pullForce = (averagePosition - boid.owner.position) * PullFactor;
-
-		// Avoid divide by zero error
-		if (localCount != 0.0f)
+		// Normalize and avoid divide by zero error.
+		if (localCount != 0)
 		{
+			localCenter /= static_cast<float>(localCount);
 			proximityForce = (boid.owner.position - localCenter) * ProximityFactor;
 		}
 
+		pullForce = (averagePosition - boid.owner.position) * PullFactor;
+
 		acceleration = alignmentForce + pullForce + proximityForce;
-		// Clamp position to bounds
+		// Clamp position to bounds.
 		if (boid.owner.position.x < MIN_X_BOUND + EdgeBuffer)
 		{
 			acceleration.x += EdgeForce;
@@ -129,7 +128,7 @@ void Flock::Update(float deltaTime)
 
 		/* Step */
 		boid.Velocity += acceleration * deltaTime;
-		// Clamp velocity
+		// Clamp velocity.
 		if (boid.Velocity.Length() > MaxVelocity)
 		{
 			boid.Velocity.Normalize();
