@@ -1,5 +1,18 @@
 @echo off
 
+title Packing Assets
+echo ^>^>^>^>^>^> Packing Assets ^<^<^<^<^<^<
+pushd Workspace
+call AssetManager.exe.lnk --update --pack
+if errorlevel 1 (
+   title Assets Failure
+   echo ^>^>^>^>^>^> Assets Failure ^<^<^<^<^<^<
+   popd
+   pause
+   goto :eof
+)
+popd
+
 call :BuildConfiguration Debug || goto :eof
 call :BuildConfiguration Release || goto :eof
 
