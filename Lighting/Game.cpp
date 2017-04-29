@@ -28,20 +28,21 @@ Game::Game(ConfigTable& _config)
 bool Game::Init()
 {
 	// Load game assets.
-	auto model = Load<Model>("Models/Ground.model");
+	auto groundModel = Load<Model>("Models/Ground.model");
+	auto monkeyModel = Load<Model>("Models/Monkey.model");
 	auto checkerTexture = Load<Texture>("Textures/RoomChecker.png");
+	auto monkeyTexture = Load<Texture>("Textures/Monkey.png");
 	auto bulbTexture = Load<Texture>("Textures/LightBulb.png");
 	auto spriteShader = Load<Shader>("Shaders/Default/Sprite.shader");
 	auto lightingShader = Load<Shader>("Shaders/MultipleLights.shader");
-	if (!model || !checkerTexture || !bulbTexture || !spriteShader || !lightingShader) return false;
+	if (!groundModel || !monkeyModel || !checkerTexture || !monkeyTexture || !bulbTexture || !spriteShader || !lightingShader)
+		return false;
 
-	ground->Add<Mesh>(model);
+	ground->Add<Mesh>(groundModel);
 	ground->Add<Material>(lightingShader, checkerTexture);
 
-	model = Load<Model>("Models/Teapot.model");
-
-	teapot->Add<Mesh>(model);
-	teapot->Add<Material>(lightingShader, checkerTexture);
+	monkey->Add<Mesh>(monkeyModel);
+	monkey->Add<Material>(lightingShader, monkeyTexture);
 
 	// Setup Lighting.
 	light1->Add<Material>(spriteShader, bulbTexture).SetBlendMode(BlendFunc::Linear);
@@ -72,7 +73,7 @@ bool Game::Init()
 	rootLight->AddChild(light2);
 	rootLight->AddChild(light3);
 	rootEntity->AddChild(ground);
-	rootEntity->AddChild(teapot);
+	rootEntity->AddChild(monkey);
 	rootEntity->AddChild(rootLight);
 
 	light1->position = vec3(4.5f, 3.0f, -1.0f);
@@ -81,8 +82,8 @@ bool Game::Init()
 
 	ground->position.z -= 2.0f;
 	ground->scale = vec3(1.33f);
-
-	teapot->scale = vec3(4.0f);
+	monkey->position.y += 2.0f;
+	monkey->scale = vec3(2.0f);
 
 	// Set up renderer.
 	mainRenderPass.SetCamera(camera);
@@ -107,8 +108,8 @@ void Game::Update()
 	elapsed += deltaTime;
 	light3->Get<Light>().angle = abs(sin(elapsed)) * 40.0f + 10.0f;
 
-	// Keep the spotlight focused on the teapot.
-	light3->LookAt(*teapot);
+	// Keep the spotlight focused on the monkey.
+	light3->LookAt(*monkey);
 	
 	// Engine systems and components are updated here.
 	Application.UpdateEngine();

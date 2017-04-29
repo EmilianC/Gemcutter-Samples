@@ -29,7 +29,7 @@ public:
 	Entity::Ptr camera = Entity::MakeNew();
 	Entity::Ptr rootEntity = Entity::MakeNew();
 	Entity::Ptr ground = Entity::MakeNew();
-	Entity::Ptr teapot = Entity::MakeNew();
+	Entity::Ptr monkey = Entity::MakeNew();
 	Entity::Ptr rootLight = Entity::MakeNew();
 	Entity::Ptr light1 = Entity::MakeNew();
 	Entity::Ptr light2;
