@@ -44,6 +44,11 @@ Uniforms
 		float AttenuationQuadratic;
 		float Angle;
 	}
+
+	static Ambient : 3
+	{
+		vec3 Color = (0.1, 0.1, 0.1);
+	}
 }
 
 Vertex
@@ -75,7 +80,8 @@ Fragment
 	{
 		vec3 normal = normalize(norm);
 
-		vec3 lighting = COMPUTE_POINT_LIGHT(Light1, normal, pos);
+		vec3 lighting = Ambient.Color;
+		lighting += COMPUTE_POINT_LIGHT(Light1, normal, pos);
 		lighting += COMPUTE_POINT_LIGHT(Light2, normal, pos);
 		lighting += COMPUTE_SPOT_LIGHT(Light3, normal, pos);
 

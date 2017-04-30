@@ -23,20 +23,20 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lighting", "Lighting\Lighti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{FCDE7C34-6C59-48DB-80A9-C5553164E09C}"
 	ProjectSection(SolutionItems) = preProject
-		Assets\Shaders\Composite.shader = Assets\Shaders\Composite.shader
-		Assets\Shaders\FlatColor.shader = Assets\Shaders\FlatColor.shader
-		Assets\Shaders\LambertShadow.shader = Assets\Shaders\LambertShadow.shader
-		Assets\Shaders\MultipleLights.shader = Assets\Shaders\MultipleLights.shader
-		Assets\Shaders\Radial.shader = Assets\Shaders\Radial.shader
-		Assets\Shaders\Simple.shader = Assets\Shaders\Simple.shader
+		Workspace\Shaders\Composite.shader = Workspace\Shaders\Composite.shader
+		Workspace\Shaders\FlatColor.shader = Workspace\Shaders\FlatColor.shader
+		Workspace\Shaders\LambertShadow.shader = Workspace\Shaders\LambertShadow.shader
+		Workspace\Shaders\MultipleLights.shader = Workspace\Shaders\MultipleLights.shader
+		Workspace\Shaders\Radial.shader = Workspace\Shaders\Radial.shader
+		Workspace\Shaders\Simple.shader = Workspace\Shaders\Simple.shader
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{1C6EAF72-87B5-4979-844B-923C2A82030F}"
 	ProjectSection(SolutionItems) = preProject
-		Assets\Shaders\Default\Font.shader = Assets\Shaders\Default\Font.shader
-		Assets\Shaders\Default\Lambert.shader = Assets\Shaders\Default\Lambert.shader
-		Assets\Shaders\Default\ParticleBillBoard.shader = Assets\Shaders\Default\ParticleBillBoard.shader
-		Assets\Shaders\Default\Sprite.shader = Assets\Shaders\Default\Sprite.shader
+		Workspace\Shaders\Default\Font.shader = Workspace\Shaders\Default\Font.shader
+		Workspace\Shaders\Default\Lambert.shader = Workspace\Shaders\Default\Lambert.shader
+		Workspace\Shaders\Default\ParticleBillBoard.shader = Workspace\Shaders\Default\ParticleBillBoard.shader
+		Workspace\Shaders\Default\Sprite.shader = Workspace\Shaders\Default\Sprite.shader
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shadows", "Shadows\Shadows.vcxproj", "{00E58974-5DD7-43E5-BE01-86E33B4BEA43}"
