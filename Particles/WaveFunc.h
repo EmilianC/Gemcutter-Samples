@@ -15,11 +15,3 @@ public:
 	float Frequency = 3.0f;
 	float Intensity = 1.0f;
 };
-
-REFLECT_SHAREABLE(WaveFunc)
-REFLECT(WaveFunc) < ParticleFunctor >,
-	MEMBERS <
-		REF_MEMBER(Frequency)<>,
-		REF_MEMBER(Intensity)<>
-	>
-REF_END;

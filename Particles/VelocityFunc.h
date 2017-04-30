@@ -16,12 +16,3 @@ public:
 	float VelocityCap = 5.0f;
 	float Acceleration = 2.0f;
 };
-
-REFLECT_SHAREABLE(VelocityFunc)
-REFLECT(VelocityFunc) < ParticleFunctor >,
-	MEMBERS <
-		REF_MEMBER(Direction)<>,
-		REF_MEMBER(VelocityCap)<>,
-		REF_MEMBER(Acceleration)<>
-	>
-REF_END;

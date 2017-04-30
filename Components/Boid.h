@@ -11,9 +11,3 @@ public:
 
 	vec3 Velocity;
 };
-
-REFLECT(Boid) < Component >,
-	MEMBERS <
-		REF_MEMBER(Velocity)<>
-	>
-REF_END;
