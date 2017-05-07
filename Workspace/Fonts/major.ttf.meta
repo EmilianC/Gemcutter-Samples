@@ -1,3 +1,4 @@
 height=64
-version=1
+texture_filter=bilinear
+version=2
 width=64
