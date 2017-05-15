@@ -1,0 +1,6 @@
+anisotropic_level=2.0000
+cubemap=false
+filter=trilinear
+version=1
+wrap_x=clamp
+wrap_y=clamp

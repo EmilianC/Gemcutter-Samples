@@ -30,9 +30,9 @@ bool Game::Init()
 	// Load game assets.
 	auto groundModel = Load<Model>("Models/Ground.model");
 	auto monkeyModel = Load<Model>("Models/Monkey.model");
-	auto checkerTexture = Load<Texture>("Textures/RoomChecker.png");
-	auto monkeyTexture = Load<Texture>("Textures/Monkey.png");
-	auto bulbTexture = Load<Texture>("Textures/LightBulb.png");
+	auto checkerTexture = Load<Texture>("Textures/RoomChecker.texture");
+	auto monkeyTexture = Load<Texture>("Textures/Monkey.texture");
+	auto bulbTexture = Load<Texture>("Textures/LightBulb.texture");
 	auto spriteShader = Load<Shader>("Shaders/Default/Sprite.shader");
 	auto lightingShader = Load<Shader>("Shaders/MultipleLights.shader");
 	if (!groundModel || !monkeyModel || !checkerTexture || !monkeyTexture || !bulbTexture || !spriteShader || !lightingShader)

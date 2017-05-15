@@ -1,0 +1,6 @@
+anisotropic_level=1.000000
+cubemap=true
+filter=linear
+version=1
+wrap_x=clamp
+wrap_y=clamp

@@ -16,7 +16,7 @@ bool Game::Init()
 	// Load all the assets we need.
 	auto model = Load<Model>("Models/Helicopter.model");
 	auto shader = Load<Shader>("Shaders/Simple.shader");
-	auto texture = Load<Texture>("Textures/Helicopter.png");
+	auto texture = Load<Texture>("Textures/Helicopter.texture");
 
 	// Add a Mesh component with our loaded model.
 	object->Add<Mesh>(model);

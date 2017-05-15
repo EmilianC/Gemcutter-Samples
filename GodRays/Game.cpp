@@ -2,8 +2,6 @@
 
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Application/Logging.h>
-#include <Jewel3D/Entity/Name.h>
-#include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Light.h>
@@ -16,6 +14,20 @@
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
+	// Toggle colors with the spacebar.
+	keyPressed.callback = [this](auto& e)
+	{
+		if (e.key != Key::Space)
+			return;
+
+		orb1Color = vec3(RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f));
+		orb2Color = vec3(RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f));
+
+		orb1ColorHandle = orb1Color;
+		orb2ColorHandle = orb2Color;
+		orb1->Get<Light>().color = orb1Color;
+		orb2->Get<Light>().color = orb2Color;
+	};
 }
 
 bool Game::Init()
@@ -30,17 +42,20 @@ bool Game::Init()
 	godRaysRadialBlur = Load<Shader>("Shaders/Radial.shader");
 	godRaysComposite = Load<Shader>("Shaders/Composite.shader");
 	auto flatColorShader = Load<Shader>("Shaders/FlatColor.shader");
-	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite || !flatColorShader) return false;
+	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite || !flatColorShader)
+		return false;
 
 	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->MakeHandle<vec2>("LightPositionOnScreen");
 
 	/* Load Models and Textures */
+	auto skybox = Load<Texture>("Textures/Skybox.texture");
 	auto groundModel = Load<Model>("Models/ground.model");
-	auto groundTexture = Load<Texture>("Textures/ground.png");
+	auto groundTexture = Load<Texture>("Textures/ground.texture");
 	auto shackModel = Load<Model>("Models/shack.model");
-	auto shackTexture = Load<Texture>("Textures/shack.png");
+	auto shackTexture = Load<Texture>("Textures/shack.texture");
 	auto orbModel = Load<Model>("Models/Orb.model");
-	if (!groundModel || !groundTexture || !shackModel || !shackTexture || !orbModel) return false;
+	if (!skybox || !groundModel || !groundTexture || !shackModel || !shackTexture || !orbModel)
+		return false;
 
 	ground->Add<Mesh>(groundModel);
 	shack->Add<Mesh>(shackModel);
@@ -49,19 +64,6 @@ bool Game::Init()
 	ground->Add<Material>(staticGeometryProgram, groundTexture);
 	shack->Add<Material>(staticGeometryProgram, shackTexture);
 	orb1->Add<Material>(flatColorShader);
-
-	skybox = Texture::MakeNew();
-	if (!skybox->LoadCubeMap(
-		"../Assets/Textures/Skybox_PosX.png",
-		"../Assets/Textures/Skybox_NegX.png",
-		"../Assets/Textures/Skybox_PosY.png",
-		"../Assets/Textures/Skybox_NegY.png",
-		"../Assets/Textures/Skybox_PosZ.png",
-		"../Assets/Textures/Skybox_NegZ.png",
-		TextureFilterMode::Linear))
-	{
-		return false;
-	}
 
 	orb1->Add<Light>();
 	orb2 = orb1->Duplicate();
@@ -159,27 +161,6 @@ void Game::Update()
 	{
 		Application.Exit();
 		return;
-	}
-
-	// Toggle colors.
-	if (Input.IsDown(Key::Space))
-	{
-		if (canChangeColor)
-		{
-			orb1Color = vec3(RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f));
-			orb2Color = vec3(RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f));
-
-			orb1ColorHandle = orb1Color;
-			orb2ColorHandle = orb2Color;
-			orb1->Get<Light>().color = orb1Color;
-			orb2->Get<Light>().color = orb2Color;
-			
-			canChangeColor = false;
-		}
-	}
-	else
-	{
-		canChangeColor = true;
 	}
 
 	float deltaTime = Application.GetDeltaTime();

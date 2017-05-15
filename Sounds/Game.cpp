@@ -29,7 +29,7 @@ bool Game::Init()
 
 	// Load Orb.
 	auto model = Load<Model>("Models/Orb.model");
-	auto texture = Load<Texture>("Textures/Orb.png");
+	auto texture = Load<Texture>("Textures/Orb.texture");
 	auto sound = Load<Sound>("Sounds/Happy_Rock.wav");
 	if (!model || !texture || !sound) return false;
 
@@ -39,7 +39,7 @@ bool Game::Init()
 
 	// Load Monkey.
 	model = Load<Model>("Models/Monkey.model");
-	texture = Load<Texture>("Textures/Monkey.png");
+	texture = Load<Texture>("Textures/Monkey.texture");
 	monkey->Add<Mesh>(model);
 	monkey->Add<Material>(texture);
 

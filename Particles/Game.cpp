@@ -33,9 +33,9 @@ bool Game::Init()
 {
 	/* Load Assets */
 	auto shader = Load<Shader>("Shaders/Default/ParticleBillBoard.shader");
-	auto sparkleTexture = Load<Texture>("Textures/sparkle.png");
-	auto smokeTexture = Load<Texture>("Textures/smoke.png");
-	auto fireTexture = Load<Texture>("Textures/Block.png", TextureFilterMode::Point);
+	auto sparkleTexture = Load<Texture>("Textures/sparkle.texture");
+	auto smokeTexture = Load<Texture>("Textures/smoke.texture");
+	auto fireTexture = Load<Texture>("Textures/Block.texture");
 	if (!shader || !sparkleTexture || !smokeTexture || !fireTexture) return false;
 
 	auto& sparkleEmitter = sparkle->Add<ParticleEmitter>();

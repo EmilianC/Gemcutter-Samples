@@ -1,6 +1,7 @@
 #pragma once
 #include <Jewel3D/Entity/Entity.h>
 #include <Jewel3D/Math/Vector.h>
+#include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/RenderPass.h>
 #include <Jewel3D/Rendering/RenderTarget.h>
 #include <Jewel3D/Resource/ConfigTable.h>
@@ -17,6 +18,9 @@ public:
 
 	void Update();
 	void Draw();
+
+	/* Events */
+	Listener<KeyPressed> keyPressed;
 
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
@@ -63,7 +67,6 @@ public:
 	UniformHandle<vec3> orb2ColorHandle;
 
 	unsigned MSAA_Level = 1;
-	bool canChangeColor = true;
 	vec3 orb1Color = vec3(0.16f, 0.16f, 0.21f);
 	vec3 orb2Color = vec3(0.01f, 0.2f, 0.02f);
 	vec3 lightDirection = vec3(-1.0f, -1.0f, -1.0f).GetNormalized();

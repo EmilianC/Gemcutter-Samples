@@ -17,7 +17,7 @@ bool Game::Init()
 {
 	// Prepare ground object.
 	auto model = Load<Model>("Models/Ground.model");
-	auto texture = Load<Texture>("Textures/Ground.png");
+	auto texture = Load<Texture>("Textures/Ground.texture");
 	lambertShadow = Load<Shader>("Shaders/LambertShadow.shader");
 	if (!model || !texture || !lambertShadow) return false;
 	
@@ -27,7 +27,7 @@ bool Game::Init()
 
 	// Prepare shack object.
 	model = Load<Model>("Models/Shack.model");
-	texture = Load<Texture>("Textures/Shack.png");
+	texture = Load<Texture>("Textures/Shack.texture");
 	if (!model || !texture) return false;
 
 	shack->Add<Material>(lambertShadow, texture);

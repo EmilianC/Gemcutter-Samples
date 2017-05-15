@@ -18,7 +18,7 @@ bool Game::Init()
 {
 	// Load game assets.
 	auto model = Load<Model>("Models/Bird.model");
-	auto texture = Load<Texture>("Textures/Boid.tga");
+	auto texture = Load<Texture>("Textures/Boid.texture");
 	if (!model || !texture) return false;
 	auto shader = Shader::MakeNew();
 	if (!shader->LoadPassThrough()) return false;

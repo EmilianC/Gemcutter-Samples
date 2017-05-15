@@ -2,4 +2,8 @@
 <ArrayOfEntryData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <EntryData extension="ttf" encoder="%JEWEL3D_PATH%\Tools\FontEncoder\bin\ReleaseWithExceptions_Win32\FontEncoder.dll" />
   <EntryData extension="obj" encoder="%JEWEL3D_PATH%\Tools\MeshEncoder\bin\ReleaseWithExceptions_Win32\MeshEncoder.dll" />
+  <EntryData extension="png" encoder="%JEWEL3D_PATH%\Tools\TextureEncoder\bin\ReleaseWithExceptions_Win32\TextureEncoder.dll" />
+  <EntryData extension="jpg" encoder="%JEWEL3D_PATH%\Tools\TextureEncoder\bin\ReleaseWithExceptions_Win32\TextureEncoder.dll" />
+  <EntryData extension="tga" encoder="%JEWEL3D_PATH%\Tools\TextureEncoder\bin\ReleaseWithExceptions_Win32\TextureEncoder.dll" />
+  <EntryData extension="bmp" encoder="%JEWEL3D_PATH%\Tools\TextureEncoder\bin\ReleaseWithExceptions_Win32\TextureEncoder.dll" />
 </ArrayOfEntryData>
