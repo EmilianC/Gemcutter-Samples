@@ -37,7 +37,6 @@ public:
 
 	/* Assets */
 	ConfigTable& config;
-	Texture::Ptr skybox;
 
 	/* FrameBuffers */
 	RenderTarget::Ptr GBuffer = RenderTarget::MakeNew();
