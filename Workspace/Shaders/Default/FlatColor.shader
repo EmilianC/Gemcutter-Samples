@@ -7,7 +7,7 @@ Uniforms
 {
 	template static Material : 0
 	{
-		vec3 Color = (0.0, 0.0, 0.0);
+		vec4 Color = (0.0, 0.0, 0.0, 1.0);
 	}
 }
 
@@ -21,7 +21,7 @@ Vertex
 
 Fragment
 {
-	out vec3 outColor;
+	out vec4 outColor;
 
 	void main()
 	{

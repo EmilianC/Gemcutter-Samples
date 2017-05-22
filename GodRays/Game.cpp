@@ -38,11 +38,10 @@ bool Game::Init()
 
 	/* Load Shaders */
 	staticGeometryProgram = Load<Shader>("Shaders/Default/Lambert.shader");
-	flatColorProgram = Load<Shader>("Shaders/FlatColor.shader");
+	flatColorProgram = Load<Shader>("Shaders/Default/FlatColor.shader");
 	godRaysRadialBlur = Load<Shader>("Shaders/Radial.shader");
 	godRaysComposite = Load<Shader>("Shaders/Composite.shader");
-	auto flatColorShader = Load<Shader>("Shaders/FlatColor.shader");
-	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite || !flatColorShader)
+	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite)
 		return false;
 
 	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->MakeHandle<vec2>("LightPositionOnScreen");
@@ -63,7 +62,7 @@ bool Game::Init()
 
 	ground->Add<Material>(staticGeometryProgram, groundTexture);
 	shack->Add<Material>(staticGeometryProgram, shackTexture);
-	orb1->Add<Material>(flatColorShader);
+	orb1->Add<Material>(flatColorProgram);
 
 	orb1->Add<Light>();
 	orb2 = orb1->Duplicate();

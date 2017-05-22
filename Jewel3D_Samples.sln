@@ -24,7 +24,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{FCDE7C34-6C59-48DB-80A9-C5553164E09C}"
 	ProjectSection(SolutionItems) = preProject
 		Workspace\Shaders\Composite.shader = Workspace\Shaders\Composite.shader
-		Workspace\Shaders\FlatColor.shader = Workspace\Shaders\FlatColor.shader
 		Workspace\Shaders\LambertShadow.shader = Workspace\Shaders\LambertShadow.shader
 		Workspace\Shaders\MultipleLights.shader = Workspace\Shaders\MultipleLights.shader
 		Workspace\Shaders\Radial.shader = Workspace\Shaders\Radial.shader
@@ -33,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{FCDE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{1C6EAF72-87B5-4979-844B-923C2A82030F}"
 	ProjectSection(SolutionItems) = preProject
+		Workspace\Shaders\Default\FlatColor.shader = Workspace\Shaders\Default\FlatColor.shader
 		Workspace\Shaders\Default\Font.shader = Workspace\Shaders\Default\Font.shader
 		Workspace\Shaders\Default\Lambert.shader = Workspace\Shaders\Default\Lambert.shader
 		Workspace\Shaders\Default\ParticleBillBoard.shader = Workspace\Shaders\Default\ParticleBillBoard.shader
