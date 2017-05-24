@@ -11,6 +11,7 @@
 #include <Jewel3D/Rendering/Text.h>
 #include <Jewel3D/Resource/Shader.h>
 #include <Jewel3D/Sound/SoundSystem.h>
+#include <Jewel3D/Utilities/String.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)
@@ -25,10 +26,12 @@ bool Game::Init()
 	for (auto& file : dir.files)
 	{
 		// Filter for fonts.
-		if (file.find(".font") == std::string::npos) continue;
+		if (!CompareLowercase(ExtractFileExtension(file), ".font"))
+			continue;
 
 		auto font = Load<Font>("Fonts/" + file);
-		if (!font) return false;
+		if (!font)
+			return false;
 
 		fonts.push_back(font);
 	}
@@ -40,7 +43,8 @@ bool Game::Init()
 	}
 
 	auto shader = Load<Shader>("Shaders/Default/Font.shader");
-	if (!shader) return false;
+	if (!shader)
+		return false;
 
 	helloWorldText->Add<Material>(shader).SetBlendMode(BlendFunc::Linear);
 	helloWorldText->Add<Text>("Hello World!\n-ABC-\n-123-").centeredX = true;

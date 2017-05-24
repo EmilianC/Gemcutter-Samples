@@ -38,7 +38,6 @@ void Flock::Update(float deltaTime)
 {
 	vec3 averagePosition;
 	vec3 averageVelocity;
-	vec3 alignmentForce;
 
 	/* Find average position and velocity */
 	unsigned numBoids = 0;
@@ -50,22 +49,18 @@ void Flock::Update(float deltaTime)
 	}
 
 	if (numBoids == 0)
-	{
 		return;
-	}
 
 	// Normalize.
 	averagePosition /= static_cast<float>(numBoids);
 	averageVelocity /= static_cast<float>(numBoids);
 
 	// This keeps boids moving in the same general direction.
-	alignmentForce = averageVelocity * InertiaFactor;
+	vec3 alignmentForce = averageVelocity * InertiaFactor;
 
 	/* Update flock */
 	for (auto& boid : All<Boid>())
 	{
-		vec3 acceleration;
-		vec3 pullForce;
 		vec3 proximityForce;
 		vec3 localCenter;
 
@@ -75,9 +70,7 @@ void Flock::Update(float deltaTime)
 		{
 			// Skip comparison of boid with itself.
 			if (&boid == &other)
-			{
 				continue;
-			}
 
 			// If the other node if within local range, it contributes to the local center.
 			if ((boid.owner.position - other.owner.position).LengthSquared() < ProximityRange)
@@ -95,10 +88,8 @@ void Flock::Update(float deltaTime)
 			proximityForce = (boid.owner.position - localCenter) * ProximityFactor;
 		}
 
-		pullForce = (averagePosition - boid.owner.position) * PullFactor;
-
-		acceleration = alignmentForce + pullForce + proximityForce;
-		// Clamp position to bounds.
+		// Force away from and boundaries.
+		vec3 acceleration = alignmentForce + proximityForce + (averagePosition - boid.owner.position) * PullFactor;
 		if (boid.owner.position.x < MIN_X_BOUND + EdgeBuffer)
 		{
 			acceleration.x += EdgeForce;
@@ -128,25 +119,13 @@ void Flock::Update(float deltaTime)
 
 		/* Step */
 		boid.Velocity += acceleration * deltaTime;
-		// Clamp velocity.
-		if (boid.Velocity.Length() > MaxVelocity)
-		{
-			boid.Velocity.Normalize();
-			boid.Velocity *= MaxVelocity;
-		}
-
+		boid.Velocity.ClampLength(MaxVelocity);
 		boid.owner.position += boid.Velocity * deltaTime;
 
 		/* Orient boid with velocity */
-		vec3 right, up, forward;
-
-		forward = boid.Velocity;
-		forward.Normalize();
-
-		up = vec3(0.0f, 0.0f, 1.0f);
-
-		right = Cross(forward, up);
-		right.Normalize();
+		vec3 up = vec3(0.0f, 0.0f, 1.0f);
+		vec3 forward = boid.Velocity.GetNormalized();
+		vec3 right = Cross(forward, up);
 
 		boid.owner.rotation = mat3(right, up, -forward);
 	}

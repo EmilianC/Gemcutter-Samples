@@ -36,7 +36,8 @@ bool Game::Init()
 	auto sparkleTexture = Load<Texture>("Textures/sparkle.texture");
 	auto smokeTexture = Load<Texture>("Textures/smoke.texture");
 	auto fireTexture = Load<Texture>("Textures/Block.texture");
-	if (!shader || !sparkleTexture || !smokeTexture || !fireTexture) return false;
+	if (!shader || !sparkleTexture || !smokeTexture || !fireTexture)
+		return false;
 
 	auto& sparkleEmitter = sparkle->Add<ParticleEmitter>();
 	auto& smokeEmitter = smoke->Add<ParticleEmitter>();

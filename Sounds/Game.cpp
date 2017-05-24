@@ -25,13 +25,15 @@ bool Game::Init()
 {
 	// Setup Basic shader.
 	passThroughProgram = Shader::MakeNew();
-	if (!passThroughProgram->LoadPassThrough()) return false;
+	if (!passThroughProgram->LoadPassThrough())
+		return false;
 
 	// Load Orb.
 	auto model = Load<Model>("Models/Orb.model");
 	auto texture = Load<Texture>("Textures/Orb.texture");
 	auto sound = Load<Sound>("Sounds/Happy_Rock.wav");
-	if (!model || !texture || !sound) return false;
+	if (!model || !texture || !sound)
+		return false;
 
 	orb->Add<Mesh>(model);
 	orb->Add<Material>(texture);

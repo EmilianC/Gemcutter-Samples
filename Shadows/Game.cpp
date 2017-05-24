@@ -19,7 +19,8 @@ bool Game::Init()
 	auto model = Load<Model>("Models/Ground.model");
 	auto texture = Load<Texture>("Textures/Ground.texture");
 	lambertShadow = Load<Shader>("Shaders/LambertShadow.shader");
-	if (!model || !texture || !lambertShadow) return false;
+	if (!model || !texture || !lambertShadow)
+		return false;
 	
 	ground->Add<Material>(lambertShadow, texture);
 	ground->Add<Mesh>(model);
@@ -28,7 +29,8 @@ bool Game::Init()
 	// Prepare shack object.
 	model = Load<Model>("Models/Shack.model");
 	texture = Load<Texture>("Textures/Shack.texture");
-	if (!model || !texture) return false;
+	if (!model || !texture)
+		return false;
 
 	shack->Add<Material>(lambertShadow, texture);
 	shack->Add<Mesh>(model);
@@ -53,10 +55,12 @@ bool Game::Init()
 
 	// Setup up renderer.
 	shadowMap->Init(2048, 2048, 0, true);
-	if (!shadowMap->Validate()) return false;
+	if (!shadowMap->Validate())
+		return false;
 
 	auto shadowPassShader = Shader::MakeNew();
-	if (!shadowPassShader->LoadPassThrough()) return false;
+	if (!shadowPassShader->LoadPassThrough())
+		return false;
 
 	shadowRenderPass.SetCamera(shadowCamera);
 	shadowRenderPass.SetShader(shadowPassShader);

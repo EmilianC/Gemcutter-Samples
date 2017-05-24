@@ -20,7 +20,8 @@ bool Game::Init()
 	auto dogeTexture = Load<Texture>("Textures/Doge.texture");
 	auto faceTexture = Load<Texture>("Textures/Face.texture");
 	auto shader = Load<Shader>("Shaders/Default/Sprite.shader");
-	if (!dragonTexture || !dogeTexture || !faceTexture || !shader) return false;
+	if (!dragonTexture || !dogeTexture || !faceTexture || !shader)
+		return false;
 
 	auto dragon = rootEntity->CreateChild();
 	auto doge = rootEntity->CreateChild();

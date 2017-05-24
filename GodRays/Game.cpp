@@ -88,23 +88,28 @@ bool Game::Init()
 
 	GBuffer->Init(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
 	GBuffer->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
-	if (!GBuffer->Validate()) return false;
+	if (!GBuffer->Validate())
+		return false;
 
 	godRaysBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
 	godRaysBuffer1->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
-	if (!godRaysBuffer1->Validate()) return false;
+	if (!godRaysBuffer1->Validate())
+		return false;
 
 	godRaysBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
 	godRaysBuffer2->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
-	if (!godRaysBuffer2->Validate()) return false;
+	if (!godRaysBuffer2->Validate())
+		return false;
 
 	workBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
 	workBuffer1->CreateAttachment(0, TextureFormat::RGB_16, TextureFilterMode::Linear);
-	if (!workBuffer1->Validate()) return false;
+	if (!workBuffer1->Validate())
+		return false;
 
 	workBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
 	workBuffer2->CreateAttachment(0, TextureFormat::RGB_16, TextureFilterMode::Linear);
-	if (!workBuffer2->Validate()) return false;
+	if (!workBuffer2->Validate())
+		return false;
 
 	// Create MSAA resolve buffers
 	if (MSAA_Level > 1)
