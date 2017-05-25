@@ -20,17 +20,11 @@ void Flock::RandomlyPlaceBoids()
 
 	for (auto& boid : All<Boid>())
 	{
-		// Randomize velocity.
-		boid.Velocity.x = RandomRangef(-1.0f, 1.0f);
-		boid.Velocity.y = RandomRangef(-1.0f, 1.0f);
-		boid.Velocity.z = RandomRangef(-1.0f, 1.0f);
-		boid.Velocity.Normalize();
-		boid.Velocity *= RandomRangef(0.0f, MaxVelocity);
-
-		// Randomize position.
+		// Randomize position and velocity.
 		boid.owner.position.x = RandomRangef(MIN_X_BOUND, MAX_X_BOUND);
 		boid.owner.position.y = RandomRangef(MIN_Y_BOUND, MAX_Y_BOUND);
 		boid.owner.position.z = RandomRangef(MIN_Z_BOUND, MAX_Z_BOUND);
+		boid.Velocity = RandomDirection() * RandomRangef(0.0f, MaxVelocity);
 	}
 }
 
@@ -90,29 +84,29 @@ void Flock::Update(float deltaTime)
 
 		// Force away from and boundaries.
 		vec3 acceleration = alignmentForce + proximityForce + (averagePosition - boid.owner.position) * PullFactor;
-		if (boid.owner.position.x < MIN_X_BOUND + EdgeBuffer)
+		if (boid.owner.position.x < MIN_X_BOUND)
 		{
 			acceleration.x += EdgeForce;
 		}
-		else if (boid.owner.position.x > MAX_X_BOUND - EdgeBuffer)
+		else if (boid.owner.position.x > MAX_X_BOUND)
 		{
 			acceleration.x -= EdgeForce;
 		}
 
-		if (boid.owner.position.y < MIN_Y_BOUND + EdgeBuffer)
+		if (boid.owner.position.y < MIN_Y_BOUND)
 		{
 			acceleration.y += EdgeForce;
 		}
-		else if (boid.owner.position.y > MAX_Y_BOUND - EdgeBuffer)
+		else if (boid.owner.position.y > MAX_Y_BOUND)
 		{
 			acceleration.y -= EdgeForce;
 		}
 
-		if (boid.owner.position.z < MIN_Z_BOUND + EdgeBuffer)
+		if (boid.owner.position.z < MIN_Z_BOUND)
 		{
 			acceleration.z += EdgeForce;
 		}
-		else if (boid.owner.position.z > MAX_Z_BOUND - EdgeBuffer)
+		else if (boid.owner.position.z > MAX_Z_BOUND)
 		{
 			acceleration.z -= EdgeForce;
 		}

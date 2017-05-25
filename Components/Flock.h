@@ -15,14 +15,13 @@ public:
 	void Update(float deltaTime);
 
 	//- Simulation parameters
-	vec2 XBounds{ -150, 150 };
-	vec2 YBounds{ -150, 150 };
-	vec2 ZBounds{ -150, 150 };
+	vec2 XBounds{ -110, 110 };
+	vec2 YBounds{ -110, 110 };
+	vec2 ZBounds{ -110, 110 };
 	float PullFactor = 0.33f;
 	float InertiaFactor = 0.3f;
 	float ProximityFactor = 5.0f;
 	float ProximityRange = 900.0f; //Squared value
 	float MaxVelocity = 75.0f;
-	float EdgeBuffer = 40.0f;
 	float EdgeForce = 100.0f;
 };
