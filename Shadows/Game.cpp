@@ -16,9 +16,9 @@ Game::Game(ConfigTable &config)
 bool Game::Init()
 {
 	// Prepare ground object.
-	auto model = Load<Model>("Models/Ground.model");
-	auto texture = Load<Texture>("Textures/Ground.texture");
-	lambertShadow = Load<Shader>("Shaders/LambertShadow.shader");
+	auto model = Load<Model>("Models/Ground");
+	auto texture = Load<Texture>("Textures/Ground");
+	lambertShadow = Load<Shader>("Shaders/LambertShadow");
 	if (!model || !texture || !lambertShadow)
 		return false;
 	
@@ -27,8 +27,8 @@ bool Game::Init()
 	ground->scale = vec3(1.15f, 1.15f, 1.15f);
 
 	// Prepare shack object.
-	model = Load<Model>("Models/Shack.model");
-	texture = Load<Texture>("Textures/Shack.texture");
+	model = Load<Model>("Models/Shack");
+	texture = Load<Texture>("Textures/Shack");
 	if (!model || !texture)
 		return false;
 
@@ -58,12 +58,8 @@ bool Game::Init()
 	if (!shadowMap->Validate())
 		return false;
 
-	auto shadowPassShader = Shader::MakeNew();
-	if (!shadowPassShader->LoadPassThrough())
-		return false;
-
 	shadowRenderPass.SetCamera(shadowCamera);
-	shadowRenderPass.SetShader(shadowPassShader);
+	shadowRenderPass.SetShader(Shader::MakeNewPassThrough());
 	shadowRenderPass.SetTarget(shadowMap);
 
 	mainRenderPass.textures.Add(shadowMap->GetDepthTexture(), 1);

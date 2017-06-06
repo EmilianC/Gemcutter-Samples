@@ -5,7 +5,6 @@
 #include <Jewel3D/Rendering/RenderPass.h>
 #include <Jewel3D/Resource/ConfigTable.h>
 #include <Jewel3D/Resource/Shader.h>
-#include <array>
 
 using namespace Jwl;
 

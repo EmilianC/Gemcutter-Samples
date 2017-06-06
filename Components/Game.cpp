@@ -17,18 +17,16 @@ Game::Game(ConfigTable& _config)
 bool Game::Init()
 {
 	// Load game assets.
-	auto model = Load<Model>("Models/Bird.model");
-	auto texture = Load<Texture>("Textures/Boid.texture");
+	auto model = Load<Model>("Models/Bird");
+	auto texture = Load<Texture>("Textures/Boid");
 	if (!model || !texture) return false;
-	auto shader = Shader::MakeNew();
-	if (!shader->LoadPassThrough()) return false;
 
 	// Create all the boids.
 	for (unsigned i = 0; i < NumBirds; i++)
 	{
 		auto boid = rootNode->CreateChild();
 		boid->Add<Mesh>(model);
-		boid->Add<Material>(shader, texture);
+		boid->Add<Material>(Shader::MakeNewPassThrough(), texture);
 		boid->Add<Boid>();
 	}
 

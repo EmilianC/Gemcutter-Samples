@@ -28,13 +28,13 @@ Game::Game(ConfigTable& _config)
 bool Game::Init()
 {
 	// Load game assets.
-	auto groundModel = Load<Model>("Models/Ground.model");
-	auto monkeyModel = Load<Model>("Models/Monkey.model");
-	auto checkerTexture = Load<Texture>("Textures/RoomChecker.texture");
-	auto monkeyTexture = Load<Texture>("Textures/Monkey.texture");
-	auto bulbTexture = Load<Texture>("Textures/LightBulb.texture");
-	auto spriteShader = Load<Shader>("Shaders/Default/Sprite.shader");
-	auto lightingShader = Load<Shader>("Shaders/MultipleLights.shader");
+	auto groundModel = Load<Model>("Models/Ground");
+	auto monkeyModel = Load<Model>("Models/Monkey");
+	auto checkerTexture = Load<Texture>("Textures/RoomChecker");
+	auto monkeyTexture = Load<Texture>("Textures/Monkey");
+	auto bulbTexture = Load<Texture>("Textures/LightBulb");
+	auto spriteShader = Load<Shader>("Shaders/Default/Sprite");
+	auto lightingShader = Load<Shader>("Shaders/MultipleLights");
 	if (!groundModel || !monkeyModel || !checkerTexture || !monkeyTexture || !bulbTexture || !spriteShader || !lightingShader)
 		return false;
 

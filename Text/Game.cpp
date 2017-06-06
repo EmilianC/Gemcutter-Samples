@@ -42,7 +42,7 @@ bool Game::Init()
 		return false;
 	}
 
-	auto shader = Load<Shader>("Shaders/Default/Font.shader");
+	auto shader = Load<Shader>("Shaders/Default/Font");
 	if (!shader)
 		return false;
 

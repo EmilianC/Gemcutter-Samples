@@ -37,22 +37,22 @@ bool Game::Init()
 	camera->position = vec3(0.0f, 1.0f, 8.0f);
 
 	/* Load Shaders */
-	staticGeometryProgram = Load<Shader>("Shaders/Default/Lambert.shader");
-	flatColorProgram = Load<Shader>("Shaders/Default/FlatColor.shader");
-	godRaysRadialBlur = Load<Shader>("Shaders/Radial.shader");
-	godRaysComposite = Load<Shader>("Shaders/Composite.shader");
+	staticGeometryProgram = Load<Shader>("Shaders/Default/Lambert");
+	flatColorProgram = Load<Shader>("Shaders/Default/FlatColor");
+	godRaysRadialBlur = Load<Shader>("Shaders/Radial");
+	godRaysComposite = Load<Shader>("Shaders/Composite");
 	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite)
 		return false;
 
 	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->MakeHandle<vec2>("LightPositionOnScreen");
 
 	/* Load Models and Textures */
-	auto skybox = Load<Texture>("Textures/Skybox.texture");
-	auto groundModel = Load<Model>("Models/ground.model");
-	auto groundTexture = Load<Texture>("Textures/ground.texture");
-	auto shackModel = Load<Model>("Models/shack.model");
-	auto shackTexture = Load<Texture>("Textures/shack.texture");
-	auto orbModel = Load<Model>("Models/Orb.model");
+	auto skybox = Load<Texture>("Textures/Skybox");
+	auto groundModel = Load<Model>("Models/ground");
+	auto groundTexture = Load<Texture>("Textures/ground");
+	auto shackModel = Load<Model>("Models/shack");
+	auto shackTexture = Load<Texture>("Textures/shack");
+	auto orbModel = Load<Model>("Models/Orb");
 	if (!skybox || !groundModel || !groundTexture || !shackModel || !shackTexture || !orbModel)
 		return false;
 

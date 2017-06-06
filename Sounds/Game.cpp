@@ -23,15 +23,10 @@ Game::Game(ConfigTable& _config)
 
 bool Game::Init()
 {
-	// Setup Basic shader.
-	passThroughProgram = Shader::MakeNew();
-	if (!passThroughProgram->LoadPassThrough())
-		return false;
-
 	// Load Orb.
-	auto model = Load<Model>("Models/Orb.model");
-	auto texture = Load<Texture>("Textures/Orb.texture");
-	auto sound = Load<Sound>("Sounds/Happy_Rock.wav");
+	auto model = Load<Model>("Models/Orb");
+	auto texture = Load<Texture>("Textures/Orb");
+	auto sound = Load<Sound>("Sounds/Happy_Rock");
 	if (!model || !texture || !sound)
 		return false;
 
@@ -40,8 +35,8 @@ bool Game::Init()
 	orb->Add<SoundSource>(sound);
 
 	// Load Monkey.
-	model = Load<Model>("Models/Monkey.model");
-	texture = Load<Texture>("Textures/Monkey.texture");
+	model = Load<Model>("Models/Monkey");
+	texture = Load<Texture>("Textures/Monkey");
 	monkey->Add<Mesh>(model);
 	monkey->Add<Material>(texture);
 
@@ -51,7 +46,7 @@ bool Game::Init()
 
 	// Setup up renderer.
 	mainRenderPass.SetCamera(camera);
-	mainRenderPass.SetShader(passThroughProgram);
+	mainRenderPass.SetShader(Shader::MakeNewPassThrough());
 
 	// Setup background color to cornflower blue.
 	SetClearColor(0.35f, 0.7f, 0.9f, 0.0f);

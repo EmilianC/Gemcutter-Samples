@@ -16,10 +16,10 @@ Game::Game(ConfigTable& _config)
 bool Game::Init()
 {
 	// Load Assets.
-	auto dragonTexture = Load<Texture>("Textures/Dragon.texture");
-	auto dogeTexture = Load<Texture>("Textures/Doge.texture");
-	auto faceTexture = Load<Texture>("Textures/Face.texture");
-	auto shader = Load<Shader>("Shaders/Default/Sprite.shader");
+	auto dragonTexture = Load<Texture>("Textures/Dragon");
+	auto dogeTexture = Load<Texture>("Textures/Doge");
+	auto faceTexture = Load<Texture>("Textures/Face");
+	auto shader = Load<Shader>("Shaders/Default/Sprite");
 	if (!dragonTexture || !dogeTexture || !faceTexture || !shader)
 		return false;
 

@@ -28,6 +28,4 @@ public:
 
 	/* Assets */
 	ConfigTable& config;
-
-	Shader::Ptr passThroughProgram;
 };

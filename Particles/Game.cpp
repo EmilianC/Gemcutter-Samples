@@ -32,10 +32,10 @@ Game::Game(ConfigTable& _config)
 bool Game::Init()
 {
 	/* Load Assets */
-	auto shader = Load<Shader>("Shaders/Default/ParticleBillBoard.shader");
-	auto sparkleTexture = Load<Texture>("Textures/sparkle.texture");
-	auto smokeTexture = Load<Texture>("Textures/smoke.texture");
-	auto fireTexture = Load<Texture>("Textures/Block.texture");
+	auto shader = Load<Shader>("Shaders/Default/ParticleBillBoard");
+	auto sparkleTexture = Load<Texture>("Textures/sparkle");
+	auto smokeTexture = Load<Texture>("Textures/smoke");
+	auto fireTexture = Load<Texture>("Textures/Block");
 	if (!shader || !sparkleTexture || !smokeTexture || !fireTexture)
 		return false;
 
