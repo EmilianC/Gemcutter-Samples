@@ -50,6 +50,7 @@ bool Game::Init()
 	/* Initialize Sparkle Effect */
 	sparkleMaterial.SetBlendMode(BlendFunc::Additive);
 	sparkleMaterial.SetDepthMode(DepthFunc::TestOnly);
+	sparkleEmitter.radius.Set(0.0f, 5.0f);
 	sparkleEmitter.spawnPerSecond = 2.0f;
 	sparkleEmitter.SetLocalSpace(true);
 	sparkleEmitter.Warmup(1.5f);
@@ -57,10 +58,11 @@ bool Game::Init()
 	/* Initialize Smoke Effect */
 	smokeMaterial.SetBlendMode(BlendFunc::Additive);
 	smokeMaterial.SetDepthMode(DepthFunc::TestOnly);
+	smokeEmitter.radius.Set(0.0f, 2.0f);
 	smokeEmitter.velocity.Set(0.0f, 0.25f);
 	smokeEmitter.functors.Add(RotationFunc::MakeNew(0.0f));
 	smokeEmitter.SetSizeStartEnd(vec2(0.0f, 0.0f), vec2(2.0f, 2.0f));
-	smokeEmitter.SetColorStartEnd(vec3(0.2f, 0.2f, 0.2f));
+	smokeEmitter.SetColorStartEnd(vec3(0.15f, 0.15f, 0.15f));
 	smokeEmitter.Warmup(1.5f);
 
 	/* Initialize Fire Effect */
@@ -68,6 +70,7 @@ bool Game::Init()
 	fireMaterial.SetDepthMode(DepthFunc::TestOnly);
 	fireEmitter.functors.Add(VelocityFunc::MakeNew());
 	fireEmitter.functors.Add(WaveFunc::MakeNew());
+	fireEmitter.radius.Set(0.0f, 5.0f);
 	fireEmitter.SetSizeStartEnd(vec2(1.5f, 1.5f), vec2(0.0f, 0.0f));
 	fireEmitter.SetColorStartEnd(vec3(1.0f, 0.5f, 0.25f), vec3(0.5f, 0.5f, 0.33f));
 	fireEmitter.SetLocalSpace(true);

@@ -20,8 +20,8 @@ Game::Game(ConfigTable& _config)
 		if (e.key != Key::Space)
 			return;
 
-		orb1Color = vec3(RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f));
-		orb2Color = vec3(RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f), RandomRangef(0.05f, 0.25f));
+		orb1Color = vec3(RandomRange(0.05f, 0.25f), RandomRange(0.05f, 0.25f), RandomRange(0.05f, 0.25f));
+		orb2Color = vec3(RandomRange(0.05f, 0.25f), RandomRange(0.05f, 0.25f), RandomRange(0.05f, 0.25f));
 
 		orb1ColorHandle = orb1Color;
 		orb2ColorHandle = orb2Color;

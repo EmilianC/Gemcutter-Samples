@@ -1,5 +1,5 @@
 #pragma once
-#include <Jewel3D/Math\Vector.h>
+#include <Jewel3D/Utilities/Random.h>
 
 using namespace Jwl;
 
@@ -15,9 +15,9 @@ public:
 	void Update(float deltaTime);
 
 	//- Simulation parameters
-	vec2 XBounds{ -110, 110 };
-	vec2 YBounds{ -110, 110 };
-	vec2 ZBounds{ -110, 110 };
+	Range XBounds{ -110, 110 };
+	Range YBounds{ -110, 110 };
+	Range ZBounds{ -110, 110 };
 	float PullFactor = 0.33f;
 	float InertiaFactor = 0.3f;
 	float ProximityFactor = 5.0f;
