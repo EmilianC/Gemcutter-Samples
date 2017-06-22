@@ -2,7 +2,7 @@
 
 title Packing Assets
 pushd Workspace
-call AssetManager.exe.lnk --update --pack
+call AssetManager.exe.lnk --pack
 if errorlevel 1 (
    title Assets Failure
    popd
