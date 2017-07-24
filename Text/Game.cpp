@@ -148,8 +148,8 @@ void Game::Draw()
 
 void Game::UpdateFonts()
 {
-	helloWorldText->Get<Text>().SetFont(fonts[currentFont]);
-	instructionText->Get<Text>().SetFont(fonts[currentFont]);
+	helloWorldText->Get<Text>().font = fonts[currentFont];
+	instructionText->Get<Text>().font = fonts[currentFont];
 
 	// Normalize the size of the text vs. the resolution of the font.
 	helloWorldText->scale = vec3(7.0f / static_cast<float>(fonts[currentFont]->GetFontWidth()));
