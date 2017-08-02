@@ -208,8 +208,9 @@ void Game::Draw()
 	godRaysBuffer2->ClearColor(0, vec4(orb2Color * 0.1f, 0.0f));
 
 	// Compute the screenSpace positions of each orb.
-	vec4 Orb1ScreenPos = camera->Get<Camera>().GetViewProjMatrix() * vec4(orb1->GetWorldTransform().GetTranslation(), 1.0f);
-	vec4 Orb2ScreenPos = camera->Get<Camera>().GetViewProjMatrix() * vec4(orb2->GetWorldTransform().GetTranslation(), 1.0f);
+	mat4 mvp = camera->Get<Camera>().GetViewProjMatrix();
+	vec4 Orb1ScreenPos = mvp * vec4(orb1->GetWorldTransform().GetTranslation(), 1.0f);
+	vec4 Orb2ScreenPos = mvp * vec4(orb2->GetWorldTransform().GetTranslation(), 1.0f);
 	Orb1ScreenPos /= Orb1ScreenPos.w;
 	Orb2ScreenPos /= Orb2ScreenPos.w;
 

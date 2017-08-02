@@ -49,14 +49,14 @@ bool Game::Init()
 	light1->Add<Sprite>().SetCenteredX(true);
 	light1->Get<Sprite>().SetCenteredY(true);
 	light1->Get<Sprite>().SetBillBoarded(true);
-	light1->Add<Light>(vec3(0.0f, 0.70f, 0.70f));
+	light1->Add<Light>(vec3(0.2f, 7.0f, 7.0f));
 	
 	// Duplicate a couple more lights.
 	light2 = light1->Duplicate();
-	light2->Get<Light>().color = vec3(0.55f, 0.4f, 0.15f);
+	light2->Get<Light>().color = vec3(5.5f, 4.0f, 1.5f);
 
 	light3 = light1->Duplicate();
-	light3->Get<Light>().color = vec3(0.75f, 0.7f, 0.7f);
+	light3->Get<Light>().color = vec3(7.5f, 7.0f, 7.0f);
 	light3->Get<Light>().type = Light::Type::Spot;
 
 	// Attach lights to the matching shader buffers.

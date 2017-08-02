@@ -9,6 +9,7 @@ Uniforms
 		float AttenuationLinear;
 		float AttenuationQuadratic;
 		float Angle;
+		uint Type;
 	}
 
 	template static Ambient : 1
@@ -70,7 +71,7 @@ Fragment
 		vec3 normal = normalize(norm);
 
 		vec3 lighting = Ambient.Color;
-		lighting += COMPUTE_DIRECTIONAL_LIGHT(Light, normal);
+		lighting += compute_light(Light, normal, pos);
 		
 		// If the normal is facing the light, we need to check for shadows.
 		float NdotL = dot(normal, -Light.Direction);

@@ -21,6 +21,7 @@ Uniforms
 		float AttenuationLinear;
 		float AttenuationQuadratic;
 		float Angle;
+		uint Type;
 	}
 
 	Light2 : 1
@@ -32,6 +33,7 @@ Uniforms
 		float AttenuationLinear;
 		float AttenuationQuadratic;
 		float Angle;
+		uint Type;
 	}
 
 	Light3 : 2
@@ -43,6 +45,7 @@ Uniforms
 		float AttenuationLinear;
 		float AttenuationQuadratic;
 		float Angle;
+		uint Type;
 	}
 
 	static Ambient : 3
@@ -81,9 +84,9 @@ Fragment
 		vec3 normal = normalize(norm);
 
 		vec3 lighting = Ambient.Color;
-		lighting += COMPUTE_POINT_LIGHT(Light1, normal, pos);
-		lighting += COMPUTE_POINT_LIGHT(Light2, normal, pos);
-		lighting += COMPUTE_SPOT_LIGHT(Light3, normal, pos);
+		lighting += compute_light(Light1, normal, pos);
+		lighting += compute_light(Light2, normal, pos);
+		lighting += compute_light(Light3, normal, pos);
 
 		outColor = texture(sTex, texcoord).rgb * lighting;
 	}
