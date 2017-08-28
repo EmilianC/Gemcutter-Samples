@@ -3,7 +3,6 @@
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Application/FileSystem.h>
 #include <Jewel3D/Application/Logging.h>
-#include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Material.h>
@@ -16,6 +15,34 @@
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
+	onKeyPressed = [this](auto& e)
+	{
+		switch (e.key)
+		{
+		case Key::Right:
+			currentFont++;
+			if (currentFont == fonts.size())
+			{
+				currentFont = 0;
+			}
+
+			UpdateFonts();
+			break;
+
+		case Key::Left:
+			if (currentFont == 0)
+			{
+				currentFont = fonts.size() - 1;
+			}
+			else
+			{
+				currentFont--;
+			}
+
+			UpdateFonts();
+			break;
+		}
+	};
 }
 
 bool Game::Init()
@@ -96,43 +123,6 @@ void Game::Update()
 
 	helloWorldText->rotation.SetIdentity();
 	helloWorldText->RotateY(angle);
-
-	// Cycle through the fonts.
-	if (Input.IsDown(Key::Right))
-	{
-		if (canChangeFont)
-		{
-			currentFont++;
-			if (currentFont == fonts.size())
-			{
-				currentFont = 0;
-			}
-
-			canChangeFont = false;
-			UpdateFonts();
-		}
-	}
-	else if (Input.IsDown(Key::Left))
-	{
-		if (canChangeFont)
-		{
-			if (currentFont == 0)
-			{
-				currentFont = fonts.size() - 1;
-			}
-			else
-			{
-				currentFont--;
-			}
-
-			canChangeFont = false;
-			UpdateFonts();
-		}
-	}
-	else
-	{
-		canChangeFont = true;
-	}
 
 	// Engine systems and components are updated here.
 	Application.UpdateEngine();

@@ -20,7 +20,7 @@ public:
 	void Draw();
 
 	/* Events */
-	Listener<Resize> resize;
+	Listener<Resize> onResized;
 
 	/* Rendering */
 	RenderPass mainRenderPass;

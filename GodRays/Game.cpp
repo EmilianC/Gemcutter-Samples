@@ -1,6 +1,5 @@
 #include "Game.h"
 
-#include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
@@ -15,18 +14,42 @@ Game::Game(ConfigTable& _config)
 	: config(_config)
 {
 	// Toggle colors with the spacebar.
-	keyPressed.callback = [this](auto& e)
+	onKeyPressed = [this](auto& e)
 	{
-		if (e.key != Key::Space)
-			return;
+		switch (e.key)
+		{
+		case Key::Space:
+			orb1Color = RandomColor() * 0.25f;
+			orb2Color = RandomColor() * 0.25f;
 
-		orb1Color = vec3(RandomRange(0.05f, 0.25f), RandomRange(0.05f, 0.25f), RandomRange(0.05f, 0.25f));
-		orb2Color = vec3(RandomRange(0.05f, 0.25f), RandomRange(0.05f, 0.25f), RandomRange(0.05f, 0.25f));
+			orb1ColorHandle = orb1Color;
+			orb2ColorHandle = orb2Color;
+			orb1->Get<Light>().color = orb1Color;
+			orb2->Get<Light>().color = orb2Color;
+			break;
+		}
+	};
 
-		orb1ColorHandle = orb1Color;
-		orb2ColorHandle = orb2Color;
-		orb1->Get<Light>().color = orb1Color;
-		orb2->Get<Light>().color = orb2Color;
+	onResized = [this](auto& e)
+	{
+		camera->Get<Camera>().SetAspectRatio(e.GetAspectRatio());
+
+		GBuffer->Resize(e.width, e.height);
+
+		const unsigned halfWidth = e.width / 2;
+		const unsigned halfHeight = e.height / 2;
+
+		godRaysBuffer1->Resize(halfWidth, halfHeight);
+		godRaysBuffer2->Resize(halfWidth, halfHeight);
+		workBuffer1->Resize(halfWidth, halfHeight);
+		workBuffer2->Resize(halfWidth, halfHeight);
+
+		if (MSAA_Level > 1)
+		{
+			GBufferResolve->Resize(e.width, e.height);
+			godRaysBuffer1Resolve->Resize(halfWidth, halfHeight);
+			godRaysBuffer2Resolve->Resize(halfWidth, halfHeight);
+		}
 	};
 }
 
@@ -87,36 +110,40 @@ bool Game::Init()
 	MSAA_Level = config.GetInt("MSAA");
 
 	GBuffer->Init(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
-	GBuffer->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
+	GBuffer->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Point);
 	if (!GBuffer->Validate())
 		return false;
 
 	godRaysBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer1->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
+	godRaysBuffer1->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Point);
 	if (!godRaysBuffer1->Validate())
 		return false;
 
 	godRaysBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer2->CreateAttachment(0, TextureFormat::RGB_8, TextureFilterMode::Point);
+	godRaysBuffer2->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Point);
 	if (!godRaysBuffer2->Validate())
 		return false;
 
 	workBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
-	workBuffer1->CreateAttachment(0, TextureFormat::RGB_16, TextureFilterMode::Linear);
+	workBuffer1->CreateAttachment(0, TextureFormat::RGB_16, TextureFilter::Linear);
 	if (!workBuffer1->Validate())
 		return false;
 
 	workBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
-	workBuffer2->CreateAttachment(0, TextureFormat::RGB_16, TextureFilterMode::Linear);
+	workBuffer2->CreateAttachment(0, TextureFormat::RGB_16, TextureFilter::Linear);
 	if (!workBuffer2->Validate())
 		return false;
 
 	// Create MSAA resolve buffers
 	if (MSAA_Level > 1)
 	{
-		if (!GBufferResolve->InitAsResolve(*GBuffer, TextureFilterMode::Point)) return false;
-		if (!godRaysBuffer1Resolve->InitAsResolve(*godRaysBuffer1, TextureFilterMode::Linear)) return false;
-		if (!godRaysBuffer2Resolve->InitAsResolve(*godRaysBuffer2, TextureFilterMode::Linear)) return false;
+		GBufferResolve = RenderTarget::MakeNew();
+		godRaysBuffer1Resolve = RenderTarget::MakeNew();
+		godRaysBuffer2Resolve = RenderTarget::MakeNew();
+
+		if (!GBufferResolve->InitAsResolve(*GBuffer, TextureFilter::Point)) return false;
+		if (!godRaysBuffer1Resolve->InitAsResolve(*godRaysBuffer1, TextureFilter::Linear)) return false;
+		if (!godRaysBuffer2Resolve->InitAsResolve(*godRaysBuffer2, TextureFilter::Linear)) return false;
 	}
 
 	/* Setup Scene Graph */

@@ -1,5 +1,6 @@
 #pragma once
 #include <Jewel3D/Entity/Entity.h>
+#include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/RenderPass.h>
 #include <Jewel3D/Resource/ConfigTable.h>
 #include <Jewel3D/Resource/Font.h>
@@ -19,6 +20,9 @@ public:
 
 	void UpdateFonts();
 
+	/* Events */
+	Listener<KeyPressed> onKeyPressed;
+
 	/* Rendering */
 	RenderPass mainRenderPass;
 	RenderPass UIRenderPass;
@@ -37,7 +41,6 @@ public:
 
 	std::vector<Font::Ptr> fonts;
 	unsigned currentFont = 0;
-	bool canChangeFont = true;
 	bool direction = false;
 	float angle = 0.0f;
 };

@@ -17,7 +17,7 @@
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
-	keyPressed.callback = [](auto& e)
+	onKeyPressed = [](auto& e)
 	{
 		if (e.key != Key::Space)
 			return;

@@ -19,9 +19,9 @@ Game::Game(ConfigTable& _config)
 	: config(_config)
 {
 	// Keep aspect ratio in sync with the window's dimensions.
-	resize.callback = [this](auto&)
+	onResized = [this](auto& e)
 	{
-		camera->Get<Camera>().SetAspectRatio(Application.GetAspectRatio());
+		camera->Get<Camera>().SetAspectRatio(e.GetAspectRatio());
 	};
 }
 

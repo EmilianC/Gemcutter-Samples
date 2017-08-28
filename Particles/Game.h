@@ -19,7 +19,7 @@ public:
 	void Draw();
 
 	/* Events */
-	Listener<KeyPressed> keyPressed;
+	Listener<KeyPressed> onKeyPressed;
 
 	/* Rendering */
 	RenderPass mainRenderPass;

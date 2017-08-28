@@ -1,4 +1,5 @@
 #pragma once
+#include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Entity/Entity.h>
 #include <Jewel3D/Math/Vector.h>
 #include <Jewel3D/Input/Input.h>
@@ -20,7 +21,8 @@ public:
 	void Draw();
 
 	/* Events */
-	Listener<KeyPressed> keyPressed;
+	Listener<KeyPressed> onKeyPressed;
+	Listener<Resize> onResized;
 
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
@@ -40,11 +42,11 @@ public:
 
 	/* FrameBuffers */
 	RenderTarget::Ptr GBuffer = RenderTarget::MakeNew();
-	RenderTarget::Ptr GBufferResolve = RenderTarget::MakeNew();
+	RenderTarget::Ptr GBufferResolve;
 	RenderTarget::Ptr godRaysBuffer1 = RenderTarget::MakeNew();
-	RenderTarget::Ptr godRaysBuffer1Resolve = RenderTarget::MakeNew();
+	RenderTarget::Ptr godRaysBuffer1Resolve;
 	RenderTarget::Ptr godRaysBuffer2 = RenderTarget::MakeNew();
-	RenderTarget::Ptr godRaysBuffer2Resolve = RenderTarget::MakeNew();
+	RenderTarget::Ptr godRaysBuffer2Resolve;
 	RenderTarget::Ptr workBuffer1 = RenderTarget::MakeNew();
 	RenderTarget::Ptr workBuffer2 = RenderTarget::MakeNew();
 
