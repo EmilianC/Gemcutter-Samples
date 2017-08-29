@@ -41,14 +41,14 @@ public:
 	ConfigTable& config;
 
 	/* FrameBuffers */
-	RenderTarget::Ptr GBuffer = RenderTarget::MakeNew();
+	RenderTarget::Ptr GBuffer;
 	RenderTarget::Ptr GBufferResolve;
-	RenderTarget::Ptr godRaysBuffer1 = RenderTarget::MakeNew();
+	RenderTarget::Ptr godRaysBuffer1;
 	RenderTarget::Ptr godRaysBuffer1Resolve;
-	RenderTarget::Ptr godRaysBuffer2 = RenderTarget::MakeNew();
+	RenderTarget::Ptr godRaysBuffer2;
 	RenderTarget::Ptr godRaysBuffer2Resolve;
-	RenderTarget::Ptr workBuffer1 = RenderTarget::MakeNew();
-	RenderTarget::Ptr workBuffer2 = RenderTarget::MakeNew();
+	RenderTarget::Ptr workBuffer1;
+	RenderTarget::Ptr workBuffer2;
 
 	/* Shaders */
 	Shader::Ptr godRaysRadialBlur;

@@ -54,7 +54,7 @@ bool Game::Init()
 	mainCamera->RotateX(-20.0f);
 
 	// Setup up renderer.
-	shadowMap->Init(2048, 2048, 0, true);
+	shadowMap = RenderTarget::MakeNew(2048, 2048, 0, true);
 	if (!shadowMap->Validate())
 		return false;
 

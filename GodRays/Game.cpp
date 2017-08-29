@@ -109,41 +109,37 @@ bool Game::Init()
 	/* Allocate FrameBuffers */
 	MSAA_Level = config.GetInt("MSAA");
 
-	GBuffer->Init(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
-	GBuffer->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Point);
+	GBuffer = RenderTarget::MakeNew(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
+	GBuffer->InitTexture(0, TextureFormat::RGB_8, TextureFilter::Point);
 	if (!GBuffer->Validate())
 		return false;
 
-	godRaysBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer1->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Linear);
+	godRaysBuffer1 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
+	godRaysBuffer1->InitTexture(0, TextureFormat::RGB_8, TextureFilter::Linear);
 	if (!godRaysBuffer1->Validate())
 		return false;
 
-	godRaysBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer2->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Linear);
+	godRaysBuffer2 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
+	godRaysBuffer2->InitTexture(0, TextureFormat::RGB_8, TextureFilter::Linear);
 	if (!godRaysBuffer2->Validate())
 		return false;
 
-	workBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
-	workBuffer1->CreateAttachment(0, TextureFormat::RGB_16, TextureFilter::Linear);
+	workBuffer1 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
+	workBuffer1->InitTexture(0, TextureFormat::RGB_16, TextureFilter::Linear);
 	if (!workBuffer1->Validate())
 		return false;
 
-	workBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
-	workBuffer2->CreateAttachment(0, TextureFormat::RGB_16, TextureFilter::Linear);
+	workBuffer2 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
+	workBuffer2->InitTexture(0, TextureFormat::RGB_16, TextureFilter::Linear);
 	if (!workBuffer2->Validate())
 		return false;
 
-	// Create MSAA resolve buffers
+	// Create MSAA resolve buffers.
 	if (MSAA_Level > 1)
 	{
-		GBufferResolve = RenderTarget::MakeNew();
-		godRaysBuffer1Resolve = RenderTarget::MakeNew();
-		godRaysBuffer2Resolve = RenderTarget::MakeNew();
-
-		if (!GBufferResolve->InitAsResolve(*GBuffer)) return false;
-		if (!godRaysBuffer1Resolve->InitAsResolve(*godRaysBuffer1)) return false;
-		if (!godRaysBuffer2Resolve->InitAsResolve(*godRaysBuffer2)) return false;
+		GBufferResolve = GBuffer->MakeResolve();
+		godRaysBuffer1Resolve = godRaysBuffer1->MakeResolve();
+		godRaysBuffer2Resolve = godRaysBuffer2->MakeResolve();
 	}
 
 	/* Setup Scene Graph */
@@ -265,9 +261,9 @@ void Game::Draw()
 	// If we are using MSAA, we need to resolve away the extra pixel samples.
 	if (MSAA_Level > 1)
 	{
-		GBuffer->ResolveMultisampling(*GBufferResolve);
-		godRaysBuffer1->ResolveMultisampling(*godRaysBuffer1Resolve);
-		godRaysBuffer2->ResolveMultisampling(*godRaysBuffer2Resolve);
+		GBuffer->ResolveMultisamplingColor(*GBufferResolve);
+		godRaysBuffer1->ResolveMultisamplingColor(*godRaysBuffer1Resolve);
+		godRaysBuffer2->ResolveMultisamplingColor(*godRaysBuffer2Resolve);
 	}
 
 	// Blur out the light from orb1.
