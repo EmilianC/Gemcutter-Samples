@@ -115,12 +115,12 @@ bool Game::Init()
 		return false;
 
 	godRaysBuffer1->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer1->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Point);
+	godRaysBuffer1->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Linear);
 	if (!godRaysBuffer1->Validate())
 		return false;
 
 	godRaysBuffer2->Init(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer2->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Point);
+	godRaysBuffer2->CreateAttachment(0, TextureFormat::RGB_8, TextureFilter::Linear);
 	if (!godRaysBuffer2->Validate())
 		return false;
 
@@ -141,9 +141,9 @@ bool Game::Init()
 		godRaysBuffer1Resolve = RenderTarget::MakeNew();
 		godRaysBuffer2Resolve = RenderTarget::MakeNew();
 
-		if (!GBufferResolve->InitAsResolve(*GBuffer, TextureFilter::Point)) return false;
-		if (!godRaysBuffer1Resolve->InitAsResolve(*godRaysBuffer1, TextureFilter::Linear)) return false;
-		if (!godRaysBuffer2Resolve->InitAsResolve(*godRaysBuffer2, TextureFilter::Linear)) return false;
+		if (!GBufferResolve->InitAsResolve(*GBuffer)) return false;
+		if (!godRaysBuffer1Resolve->InitAsResolve(*godRaysBuffer1)) return false;
+		if (!godRaysBuffer2Resolve->InitAsResolve(*godRaysBuffer2)) return false;
 	}
 
 	/* Setup Scene Graph */
