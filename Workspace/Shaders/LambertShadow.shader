@@ -41,7 +41,7 @@ Vertex
 	void main()
 	{
 		texcoord = a_uv;
-		norm = mat3(Jwl_ModelView) * a_normal;
+		norm = mat3(Jwl_View) * mat3(Jwl_NormalToWorld) * a_normal;
 
 		pos = (Jwl_ModelView * a_vert).xyz;
 		
