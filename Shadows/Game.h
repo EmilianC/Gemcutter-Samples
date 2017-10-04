@@ -22,7 +22,7 @@ public:
 
 	/* Shaders */
 	Shader::Ptr lambertShadow = Shader::MakeNew();
-	UniformHandle<mat4> viewToShadow;
+	UniformHandle<mat4> worldToShadow;
 	
 	/* Scene */
 	Entity::Ptr shadowCamera = Entity::MakeNew();

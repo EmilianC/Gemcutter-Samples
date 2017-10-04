@@ -193,25 +193,13 @@ void Game::Update()
 	float deltaTime = Application.GetDeltaTime();
 
 	// Camera controls.
-	if (Input.IsDown(Key::Right))
-	{
-		angleY += deltaTime * 20.0f;
-	}
-	else if (Input.IsDown(Key::Left))
-	{
-		angleY -= deltaTime * 20.0f;
-	}
+	if (Input.IsDown(Key::Up))		angleX -= deltaTime * 20.0f;
+	if (Input.IsDown(Key::Down))	angleX += deltaTime * 20.0f;
+	if (Input.IsDown(Key::Left))	angleY -= deltaTime * 20.0f;
+	if (Input.IsDown(Key::Right))	angleY += deltaTime * 20.0f;
+	angleX = Clamp(angleX, -80.0f, 0.0f);
 
-	if (Input.IsDown(Key::Down))
-	{
-		angleX += deltaTime * 20.0f;
-	}
-	else if (Input.IsDown(Key::Up))
-	{
-		angleX -= deltaTime * 20.0f;
-	}
-
-	cameraParent->rotation.SetIdentity();
+	cameraParent->rotation = quat::Identity;
 	cameraParent->RotateX(angleX);
 	cameraParent->RotateY(angleY);
 

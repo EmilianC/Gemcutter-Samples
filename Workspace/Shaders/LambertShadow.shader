@@ -18,7 +18,7 @@ Uniforms
 	
 	template static ShadowParams : 2
 	{
-		mat4 ViewToShadow;
+		mat4 WorldToShadow;
 		float Intensity = 0.35;
 		float Bias = 0.0005;
 	}
@@ -41,12 +41,12 @@ Vertex
 	void main()
 	{
 		texcoord = a_uv;
-		norm = mat3(Jwl_View) * mat3(Jwl_NormalToWorld) * a_normal;
+		norm = mat3(Jwl_NormalToWorld) * a_normal;
 
-		pos = (Jwl_ModelView * a_vert).xyz;
+		pos = (Jwl_Model * a_vert).xyz;
 		
-		shadowCoord = ShadowParams.ViewToShadow * vec4(pos, 1.0f);
-		gl_Position = Jwl_Proj * vec4(pos, 1.0f);
+		shadowCoord = ShadowParams.WorldToShadow * vec4(pos, 1.0f);
+		gl_Position = Jwl_ViewProj * vec4(pos, 1.0f);
 	}
 }
 

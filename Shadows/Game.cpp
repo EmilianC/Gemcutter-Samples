@@ -46,7 +46,7 @@ bool Game::Init()
 	shadowCamera->LookAt(vec3(2.0f, 1.0f, 0.5f), vec3(0.0f));
 
 	lambertShadow->buffers.Add(shadowCamera->Get<Light>().GetBuffer(), 0);
-	viewToShadow = lambertShadow->buffers[2]->MakeHandle<mat4>("ViewToShadow");
+	worldToShadow = lambertShadow->buffers[2]->MakeHandle<mat4>("WorldToShadow");
 
 	// Setup Camera.
 	mainCamera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 10000.0f);
@@ -81,12 +81,12 @@ void Game::Update()
 
 	rootNode->RotateY(Application.GetDeltaTime() * -12.0f);
 
-	// Keep shadow direction and ViewSpace to shadowMap matrix up to date.
-	viewToShadow = 
+	// Keep shadow direction and world-space to shadowMap matrix up to date.
+	worldToShadow = 
 		mat4(0.5, 0.0, 0.0, 0.5,
 			0.0, 0.5, 0.0, 0.5,
 			0.0, 0.0, 0.5, 0.5,
-			0.0, 0.0, 0.0, 1.0) * shadowCamera->Get<Camera>().GetViewProjMatrix() * mainCamera->GetWorldTransform();
+			0.0, 0.0, 0.0, 1.0) * shadowCamera->Get<Camera>().GetViewProjMatrix();
 
 	// Engine systems and components are updated here.
 	Application.UpdateEngine();

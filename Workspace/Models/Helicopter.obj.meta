@@ -1,4 +1,5 @@
 normals=on
 scale=1
+tangents=off
 uvs=on
-version=1
+version=2

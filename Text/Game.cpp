@@ -41,6 +41,10 @@ Game::Game(ConfigTable& _config)
 
 			UpdateFonts();
 			break;
+
+		case Key::Escape:
+			Application.Exit();
+			return;
 		}
 	};
 }
@@ -102,12 +106,6 @@ bool Game::Init()
 
 void Game::Update()
 {
-	if (Input.IsDown(Key::Escape))
-	{
-		Application.Exit();
-		return;
-	}
-
 	float deltaTime = Application.GetDeltaTime();
 
 	if (direction)
