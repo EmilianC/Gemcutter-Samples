@@ -70,7 +70,7 @@ bool Game::Init()
 	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->MakeHandle<vec2>("LightPositionOnScreen");
 
 	/* Load Models and Textures */
-	auto skybox = Load<Texture>("Textures/Skybox");
+	auto skybox = Load<Texture>("Textures/Skyboxes/GrimmNight");
 	auto groundModel = Load<Model>("Models/ground");
 	auto groundTexture = Load<Texture>("Textures/ground");
 	auto shackModel = Load<Model>("Models/shack");
@@ -110,17 +110,17 @@ bool Game::Init()
 	MSAA_Level = config.GetInt("MSAA");
 
 	GBuffer = RenderTarget::MakeNew(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
-	GBuffer->InitTexture(0, TextureFormat::RGB_8, TextureFilter::Point);
+	GBuffer->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Point);
 	if (!GBuffer->Validate())
 		return false;
 
 	godRaysBuffer1 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer1->InitTexture(0, TextureFormat::RGB_8, TextureFilter::Linear);
+	godRaysBuffer1->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Linear);
 	if (!godRaysBuffer1->Validate())
 		return false;
 
 	godRaysBuffer2 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
-	godRaysBuffer2->InitTexture(0, TextureFormat::RGB_8, TextureFilter::Linear);
+	godRaysBuffer2->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Linear);
 	if (!godRaysBuffer2->Validate())
 		return false;
 
@@ -152,7 +152,7 @@ bool Game::Init()
 
 	orb1->position = vec3(0.0f, 0.5f, 0.0f);
 	orb2->position = vec3(4.0f, 1.25f, 0.0f);
-	ground->scale = vec3(0.18f);
+	ground->scale = vec3(2.25f);
 	shack->scale = vec3(0.33f);
 
 	/* Setup Render Passes */

@@ -4,8 +4,8 @@ Uniforms
 	{
 		vec2 LightPositionOnScreen;
 		float Exposure = 0.0039f;
-		float Decay = 1.0f;
-		float Weight = 7.0f;
+		float Decay = 0.999f;
+		float Weight = 6.0f;
 	}
 }
 

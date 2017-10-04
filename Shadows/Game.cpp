@@ -24,7 +24,7 @@ bool Game::Init()
 	
 	ground->Add<Material>(lambertShadow, texture);
 	ground->Add<Mesh>(model);
-	ground->scale = vec3(1.15f, 1.15f, 1.15f);
+	ground->scale = vec3(15.0f);
 
 	// Prepare shack object.
 	model = Load<Model>("Models/Shack");
@@ -34,7 +34,7 @@ bool Game::Init()
 
 	shack->Add<Material>(lambertShadow, texture);
 	shack->Add<Mesh>(model);
-	shack->scale = vec3(1.33f, 1.33f, 1.33f);
+	shack->scale = vec3(1.33f);
 
 	// Setup Scene.
 	rootNode->AddChild(ground);

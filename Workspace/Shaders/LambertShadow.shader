@@ -19,7 +19,7 @@ Uniforms
 	template static ShadowParams : 2
 	{
 		mat4 WorldToShadow;
-		float Intensity = 0.35;
+		float Intensity = 0.25;
 		float Bias = 0.0005;
 	}
 }
@@ -86,5 +86,9 @@ Fragment
 		}
 		
 		outColor = texture(sTex, texcoord).rgb * lighting;
+
+		// Since we render directly into the backbuffer, 
+		// there will not be an implicit linear->sRGB conversion.
+		outColor = linear_to_sRGB(outColor);
 	}
 }

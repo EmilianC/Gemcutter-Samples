@@ -21,5 +21,9 @@ Fragment
 	
 		// Screen blend function.
 		outColor = 1.0 - (1.0 - colorA) * (1.0 - raysAvg);
+
+		// Since we render directly into the backbuffer, 
+		// there will not be an implicit linear->sRGB conversion.
+		outColor = linear_to_sRGB(outColor);
 	}
 }
