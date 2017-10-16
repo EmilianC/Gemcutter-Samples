@@ -92,8 +92,10 @@ void Game::UpdateSkybox()
 
 void Game::UpdateSettings()
 {
-	for (auto& mat : All<Material>())
+	for (Entity& ent : With<Material, Mesh>())
 	{
+		auto& mat = ent.Get<Material>();
+
 		mat.variantDefinitions.Switch("USE_NORMAL_MAP", useNormalMap);
 		mat.variantDefinitions.Switch("USE_HEIGHT_MAP", useHeightMap);
 		mat.variantDefinitions.Switch("USE_ENVIRONMENT_MAP", useEnvironmentMap);
