@@ -81,7 +81,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 
 	if (!Application.CreateGameWindow("Jewel3D Sample - Sounds", config.GetInt("openGL_Major"), config.GetInt("openGL_Minor")))
 	{
-		MoveConsoleWindowToForeground();
+		FocusConsoleWindow();
 		ErrorBox("Failed to create window. See \"Log_Output.txt\" for details.");
 		return EXIT_FAILURE;
 	}
@@ -115,7 +115,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 	Game *game = new Game(config);
 	if (!game->Init())
 	{
-		MoveConsoleWindowToForeground();
+		FocusConsoleWindow();
 		ErrorBox("Failed to initialize Game. See \"Log_Output.txt\" for details.");
 
 		delete game;
