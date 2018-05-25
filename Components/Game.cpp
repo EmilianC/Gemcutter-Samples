@@ -2,7 +2,6 @@
 #include "Boid.h"
 
 #include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Material.h>

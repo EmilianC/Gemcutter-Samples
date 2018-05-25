@@ -33,6 +33,4 @@ public:
 
 	/* Assets */
 	ConfigTable &config;
-
-private:
 };

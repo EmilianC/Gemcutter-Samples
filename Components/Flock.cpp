@@ -1,7 +1,6 @@
 #include "Flock.h"
 #include "Boid.h"
 
-#include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Entity/Entity.h>
 #include <Jewel3D/Utilities/Random.h>
 
@@ -20,7 +19,7 @@ void Flock::RandomlyPlaceBoids()
 void Flock::Update(float deltaTime)
 {
 	auto& boids = GetComponentIndex<Boid>();
-	if (boids.size() == 0)
+	if (boids.empty())
 		return;
 
 	vec3 averagePosition;

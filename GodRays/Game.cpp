@@ -1,6 +1,5 @@
 #include "Game.h"
 
-#include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Light.h>

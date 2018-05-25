@@ -3,13 +3,11 @@
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Application/FileSystem.h>
 #include <Jewel3D/Application/Logging.h>
-#include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Rendering.h>
 #include <Jewel3D/Rendering/Text.h>
 #include <Jewel3D/Resource/Shader.h>
-#include <Jewel3D/Sound/SoundSystem.h>
 #include <Jewel3D/Utilities/String.h>
 
 Game::Game(ConfigTable& _config)
@@ -67,7 +65,7 @@ bool Game::Init()
 		fonts.push_back(font);
 	}
 
-	if (fonts.size() == 0)
+	if (fonts.empty())
 	{
 		Error("Could not find any fonts.");
 		return false;

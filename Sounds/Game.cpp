@@ -1,7 +1,6 @@
 #include "Game.h"
 
 #include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
@@ -14,7 +13,6 @@
 #include <Jewel3D/Resource/Texture.h>
 #include <Jewel3D/Sound/SoundListener.h>
 #include <Jewel3D/Sound/SoundSource.h>
-#include <Jewel3D/Sound/SoundSystem.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)

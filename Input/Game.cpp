@@ -1,11 +1,9 @@
 #include "Game.h"
 
 #include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Rendering.h>
-#include <Jewel3D/Sound/SoundSystem.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)
@@ -14,13 +12,13 @@ Game::Game(ConfigTable& _config)
 
 bool Game::Init()
 {
-	// Setup Camera
+	// Setup Camera.
 	camera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 1000.0f);
 
-	// Setup up renderer
+	// Setup up renderer.
 	mainRenderPass.SetCamera(camera);
 
-	// Setup background color to cornflower blue
+	// Setup background color to cornflower blue.
 	SetClearColor(0.35f, 0.7f, 0.9f, 0.0f);
 
 	return true;
@@ -34,7 +32,7 @@ void Game::Update()
 		return;
 	}
 	
-	// Toggle fullscreen
+	// Toggle fullscreen.
 	if (Input.IsDown(Key::F))
 	{
 		if (canFullScreen)
@@ -48,7 +46,7 @@ void Game::Update()
 		canFullScreen = true;
 	}
 
-	// Toggle window border
+	// Toggle window border.
 	if (Input.IsDown(Key::B))
 	{
 		if (canChangeBorder)
@@ -62,7 +60,7 @@ void Game::Update()
 		canChangeBorder = true;
 	}
 
-	// Toggle window resize
+	// Toggle window resize.
 	if (Input.IsDown(Key::R))
 	{
 		if (canResize)
@@ -76,7 +74,7 @@ void Game::Update()
 		canResize = true;
 	}
 
-	// Set resolution
+	// Set resolution.
 	if (Input.IsDown(Key::KeyBoard1))
 	{
 		if (canChangeResolution)
