@@ -5,6 +5,7 @@
 #include <Jewel3D/Rendering/Light.h>
 #include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
+#include <Jewel3D/Resource/Model.h>
 #include <Jewel3D/Rendering/Rendering.h>
 #include <Jewel3D/Resource/UniformBuffer.h>
 #include <Jewel3D/Utilities/Random.h>

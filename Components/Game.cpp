@@ -7,6 +7,7 @@
 #include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
 #include <Jewel3D/Rendering/Rendering.h>
+#include <Jewel3D/Resource/Model.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)
