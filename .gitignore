@@ -23,3 +23,4 @@ Log_Output.txt
 *.opendb
 *.VC.db
 .vs/Jewel3D_Samples/
+.vscode/
