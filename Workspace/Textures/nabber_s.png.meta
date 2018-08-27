@@ -1,6 +1,6 @@
-anisotropic_level=2.000000
+anisotropic_level=1.000000
 cubemap=false
-filter=bilinear
+filter=point
 s_rgb=false
 version=2
 wrap_x=clamp

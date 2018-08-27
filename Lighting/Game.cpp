@@ -172,15 +172,13 @@ bool Game::Init()
 
 	// Create the UI text.
 	text->Add<Text>(font);
-	text->Add<Material>(textShader).SetBlendMode(BlendFunc::Linear);
+	text->Add<Material>(textShader, nullptr, BlendFunc::Linear);
 	text->position.y = 180.0f;
 	text->scale = vec3(0.3f);
 
 	// Setup Lighting.
-	light->Add<Material>(spriteShader, bulbTexture).SetBlendMode(BlendFunc::Linear);
-	light->Add<Sprite>().SetCenteredX(true);
-	light->Get<Sprite>().SetCenteredY(true);
-	light->Get<Sprite>().SetBillBoarded(true);
+	light->Add<Material>(spriteShader, bulbTexture, BlendFunc::Linear);
+	light->Add<Sprite>(Alignment::Center, true);
 	light->Add<Light>(vec3(25.0f, 23.0f, 21.0f));
 	light->position = vec3(-4.0f, 2.0f, -3.0f);
 	light->scale = vec3(0.5f);
