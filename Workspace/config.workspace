@@ -5,27 +5,27 @@
   <encoders>
     <EncoderLink>
       <extension>ttf</extension>
-      <encoder>%JEWEL3D_PATH%\Tools\FontEncoder\bin\ReleaseWithExceptions_Win32\FontEncoder.dll</encoder>
+      <encoder>%JEWEL3D_PATH%\Tools\FontEncoder\bin\Release_Win32\FontEncoder.dll</encoder>
     </EncoderLink>
     <EncoderLink>
       <extension>obj</extension>
-      <encoder>%JEWEL3D_PATH%\Tools\MeshEncoder\bin\ReleaseWithExceptions_Win32\MeshEncoder.dll</encoder>
+      <encoder>%JEWEL3D_PATH%\Tools\MeshEncoder\bin\Release_Win32\MeshEncoder.dll</encoder>
     </EncoderLink>
     <EncoderLink>
       <extension>png</extension>
-      <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\ReleaseWithExceptions_Win32\TextureEncoder.dll</encoder>
+      <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\Release_Win32\TextureEncoder.dll</encoder>
     </EncoderLink>
     <EncoderLink>
       <extension>jpg</extension>
-      <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\ReleaseWithExceptions_Win32\TextureEncoder.dll</encoder>
+      <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\Release_Win32\TextureEncoder.dll</encoder>
     </EncoderLink>
     <EncoderLink>
       <extension>tga</extension>
-      <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\ReleaseWithExceptions_Win32\TextureEncoder.dll</encoder>
+      <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\Release_Win32\TextureEncoder.dll</encoder>
     </EncoderLink>
     <EncoderLink>
       <extension>bmp</extension>
-      <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\ReleaseWithExceptions_Win32\TextureEncoder.dll</encoder>
+      <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\Release_Win32\TextureEncoder.dll</encoder>
     </EncoderLink>
   </encoders>
 </WorkspaceConfig>
