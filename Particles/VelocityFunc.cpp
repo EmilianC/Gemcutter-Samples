@@ -11,7 +11,7 @@ void VelocityFunc::Update(ParticleBuffer& particles, ParticleEmitter &emitter, f
 {
 	for (unsigned i = 0; i < emitter.GetNumAliveParticles(); i++)
 	{
-		if (particles.velocities[i].LengthSquared() > VelocityCap)
+		if (LengthSquared(particles.velocities[i]) > VelocityCap)
 		{
 			particles.velocities[i] = vec3::Zero;
 		}

@@ -54,7 +54,7 @@ void Flock::Update(float deltaTime)
 			auto& other = *static_cast<Boid*>(boids[j]);
 
 			// If the other node if within local range, it contributes to the local center.
-			if ((boid.owner.position - other.owner.position).LengthSquared() < ProximityRange)
+			if (LengthSquared(boid.owner.position - other.owner.position) < ProximityRange)
 			{
 				localCenter += other.owner.position;
 				localCount++;
@@ -100,12 +100,17 @@ void Flock::Update(float deltaTime)
 
 		/* Step */
 		boid.Velocity += acceleration * deltaTime;
-		boid.Velocity.ClampLength(MaxVelocity);
+		const float speed = Length(boid.Velocity);
+		if (speed > MaxVelocity)
+		{
+			boid.Velocity *= MaxVelocity / speed;
+		}
+
 		boid.owner.position += boid.Velocity * deltaTime;
 
 		/* Orient boid with velocity */
 		vec3 up = vec3(0.0f, 0.0f, 1.0f);
-		vec3 forward = boid.Velocity.GetNormalized();
+		vec3 forward = Normalize(boid.Velocity);
 		vec3 right = Cross(forward, up);
 
 		boid.owner.rotation = mat3(right, up, -forward);

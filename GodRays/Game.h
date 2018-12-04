@@ -70,5 +70,5 @@ public:
 	unsigned MSAA_Level = 1;
 	vec3 orb1Color = vec3(0.16f, 0.16f, 0.21f);
 	vec3 orb2Color = vec3(0.01f, 0.2f, 0.02f);
-	vec3 lightDirection = vec3(-1.0f, -1.0f, -1.0f).GetNormalized();
+	vec3 lightDirection = Normalize(vec3(-1.0f, -1.0f, -1.0f));
 };
