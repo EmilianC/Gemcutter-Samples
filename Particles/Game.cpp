@@ -36,25 +36,18 @@ bool Game::Init()
 	if (!shader || !sparkleTexture || !smokeTexture || !fireTexture)
 		return false;
 
+	/* Initialize Effects */
+	sparkle->Add<Material>(shader, sparkleTexture, BlendFunc::Additive, DepthFunc::TestOnly);
+	smoke->Add<Material>(shader, smokeTexture, BlendFunc::Additive, DepthFunc::TestOnly);
+	fire->Add<Material>(shader, fireTexture, BlendFunc::Linear, DepthFunc::TestOnly);
+
 	auto& sparkleEmitter = sparkle->Add<ParticleEmitter>();
-	auto& smokeEmitter = smoke->Add<ParticleEmitter>();
-	auto& fireEmitter = fire->Add<ParticleEmitter>();
-
-	auto& sparkleMaterial = sparkle->Add<Material>(shader, sparkleTexture);
-	auto& smokeMaterial = smoke->Add<Material>(shader, smokeTexture);
-	auto& fireMaterial = fire->Add<Material>(shader, fireTexture);
-
-	/* Initialize Sparkle Effect */
-	sparkleMaterial.SetBlendMode(BlendFunc::Additive);
-	sparkleMaterial.SetDepthMode(DepthFunc::TestOnly);
 	sparkleEmitter.radius.Set(0.0f, 5.0f);
 	sparkleEmitter.spawnPerSecond = 2.0f;
 	sparkleEmitter.SetLocalSpace(true);
 	sparkleEmitter.Warmup(1.5f);
 
-	/* Initialize Smoke Effect */
-	smokeMaterial.SetBlendMode(BlendFunc::Additive);
-	smokeMaterial.SetDepthMode(DepthFunc::TestOnly);
+	auto& smokeEmitter = smoke->Add<ParticleEmitter>();
 	smokeEmitter.radius.Set(0.0f, 2.0f);
 	smokeEmitter.velocity.Set(0.0f, 0.25f);
 	smokeEmitter.functors.Add(RotationFunc::MakeNew(0.0f));
@@ -62,9 +55,7 @@ bool Game::Init()
 	smokeEmitter.SetColorStartEnd(vec3(0.15f, 0.15f, 0.15f));
 	smokeEmitter.Warmup(1.5f);
 
-	/* Initialize Fire Effect */
-	fireMaterial.SetBlendMode(BlendFunc::Linear);
-	fireMaterial.SetDepthMode(DepthFunc::TestOnly);
+	auto& fireEmitter = fire->Add<ParticleEmitter>();
 	fireEmitter.functors.Add(VelocityFunc::MakeNew());
 	fireEmitter.functors.Add(WaveFunc::MakeNew());
 	fireEmitter.radius.Set(0.0f, 5.0f);
