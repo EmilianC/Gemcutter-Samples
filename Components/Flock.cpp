@@ -109,9 +109,10 @@ void Flock::Update(float deltaTime)
 		boid.owner.position += boid.Velocity * deltaTime;
 
 		/* Orient boid with velocity */
-		vec3 up = vec3(0.0f, 0.0f, 1.0f);
+		vec3 up = vec3(0.0f, 1.0f, 0.0f);
 		vec3 forward = Normalize(boid.Velocity);
-		vec3 right = Cross(forward, up);
+		vec3 right = Normalize(Cross(forward, up));
+		up = Cross(right, forward);
 
 		boid.owner.rotation = mat3(right, up, -forward);
 	}
