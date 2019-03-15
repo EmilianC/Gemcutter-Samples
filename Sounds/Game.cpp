@@ -55,7 +55,6 @@ bool Game::Init()
 	orbParent->AddChild(orb);
 	orb->position.x = 5.0f;
 	orb->scale *= 5.0f;
-	monkey->RotateY(180.0f);
 	monkey->RotateX(90.0f);
 
 	// Prepare sounds.
