@@ -19,6 +19,7 @@ Input/obj/
 Input/bin/
 GodRays/obj/
 GodRays/bin/
+Workspace/Files.cache
 Log_Output.txt
 *.opendb
 *.VC.db
