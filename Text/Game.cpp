@@ -90,7 +90,7 @@ bool Game::Init()
 	camera->Add<Camera>(65.0f, Application.GetAspectRatio(), 1.0f, 10000.0f);
 	camera->LookAt(vec3(0.0f, 7.0f, 55.0f), vec3(0.0f));
 
-	cameraUI->Add<Camera>().SetOrthograpic(Application.GetScreenViewport(), -1.0f, 1.0f);
+	cameraUI->Add<Camera>().SetOrthographic(Application.GetScreenViewport(), -1.0f, 1.0f);
 
 	// Setup up renderers.
 	mainRenderPass.SetCamera(camera);

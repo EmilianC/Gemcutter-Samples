@@ -190,7 +190,7 @@ bool Game::Init()
 	camera->Add<Camera>(66.0f, Application.GetAspectRatio(), 0.1f, 100.0f);
 	camera->LookAt(vec3(0.0f, 6.0f, 6.0f), vec3(0.0f, 1.0f, 0.0f));
 
-	cameraUI->Add<Camera>().SetOrthograpic(Application.GetScreenViewport(), -1.0f, 1.0f);
+	cameraUI->Add<Camera>().SetOrthographic(Application.GetScreenViewport(), -1.0f, 1.0f);
 
 	// Setup scene.
 	rootEntity->AddChild(ball);
