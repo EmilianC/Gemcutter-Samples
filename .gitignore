@@ -23,5 +23,7 @@ Workspace/Files.cache
 Log_Output.txt
 *.opendb
 *.VC.db
+*.pdb
+*.user
 .vs/Jewel3D_Samples/
 .vscode/
