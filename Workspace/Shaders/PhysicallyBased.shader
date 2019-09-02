@@ -1,9 +1,9 @@
 Attributes
 {
-	vec4 a_vert		: 0;
-	vec2 a_uv		: 1;
-	vec3 a_normal	: 2;
-	vec4 a_tangent	: 3;
+	vec4 a_vert    : 0;
+	vec2 a_uv      : 1;
+	vec3 a_normal  : 2;
+	vec4 a_tangent : 3;
 }
 
 Uniforms
@@ -24,9 +24,9 @@ Samplers
 {
 	samplerCube sEnvironment : 0;
 	samplerCube sIrradiance  : 1;
-	sampler2D sAlbedo		 : 2;
-	sampler2D sDetails		 : 3;
-	sampler2D sNormals		 : 4;
+	sampler2D sAlbedo        : 2;
+	sampler2D sDetails       : 3;
+	sampler2D sNormals       : 4;
 }
 
 Vertex
@@ -40,7 +40,7 @@ Vertex
 	{
 		texcoord = a_uv;
 
-		norm = mat3(Jwl_NormalToWorld) * a_normal;
+		norm = Jwl_NormalToWorld * a_normal;
 		pos = (Jwl_Model * a_vert).xyz;
 
 #ifdef USE_NORMAL_MAP
@@ -152,7 +152,7 @@ Fragment
 			vec3 F = Fresnel(max(dot(H, V), 0.0), F0, roughness);
 
 			// Resolve BRDF.
-			vec3 specular = 
+			vec3 specular =
 				(NDF * GeomV * GeomL * F) /
 				(4.0 * NdotV * NdotL + 0.001);
 

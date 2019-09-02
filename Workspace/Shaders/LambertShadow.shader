@@ -15,7 +15,7 @@ Uniforms
 	{
 		vec3 Color = (0.1, 0.1, 0.1);
 	}
-	
+
 	template static ShadowParams : 2
 	{
 		mat4 WorldToShadow;
@@ -26,9 +26,9 @@ Uniforms
 
 Attributes
 {
-	vec4 a_vert		: 0;
-	vec2 a_uv		: 1;
-	vec3 a_normal	: 2;
+	vec4 a_vert   : 0;
+	vec2 a_uv     : 1;
+	vec3 a_normal : 2;
 }
 
 Vertex
@@ -41,10 +41,10 @@ Vertex
 	void main()
 	{
 		texcoord = a_uv;
-		norm = mat3(Jwl_NormalToWorld) * a_normal;
+		norm = Jwl_NormalToWorld * a_normal;
 
 		pos = (Jwl_Model * a_vert).xyz;
-		
+
 		shadowCoord = ShadowParams.WorldToShadow * vec4(pos, 1.0f);
 		gl_Position = Jwl_ViewProj * vec4(pos, 1.0f);
 	}
@@ -52,7 +52,7 @@ Vertex
 
 Samplers
 {
-	sampler2D sTex 		 : 0;
+	sampler2D sTex       : 0;
 	sampler2D sShadowMap : 1;
 }
 
@@ -71,7 +71,7 @@ Fragment
 
 		vec3 lighting = Ambient.Color;
 		lighting += compute_light(Light, normal, pos);
-		
+
 		// If the normal is facing the light, we need to check for shadows.
 		float NdotL = dot(normal, -Light.Direction);
 		if (NdotL > 0.0 &&
@@ -84,10 +84,10 @@ Fragment
 		{
 			lighting *= ShadowParams.Intensity;
 		}
-		
+
 		outColor = texture(sTex, texcoord).rgb * lighting;
 
-		// Since we render directly into the backbuffer, 
+		// Since we render directly into the backbuffer,
 		// there will not be an implicit linear->sRGB conversion.
 		outColor = linear_to_sRGB(outColor);
 	}
