@@ -26,7 +26,7 @@ bool Game::Init()
 	{
 		auto boid = rootNode->CreateChild();
 		boid->Add<Mesh>(model);
-		boid->Add<Material>(Shader::MakeNewPassThrough(), texture);
+		boid->Add<Material>(texture);
 		boid->Add<Boid>();
 	}
 
@@ -52,7 +52,7 @@ void Game::Update()
 		Application.Exit();
 		return;
 	}
-	
+
 	flock.Update(Application.GetDeltaTime());
 
 	// Engine systems and components are updated here.
