@@ -109,30 +109,31 @@ bool Game::Init()
 	/* Allocate FrameBuffers */
 	MSAA_Level = config.GetInt("MSAA");
 
-	GBuffer = RenderTarget::MakeNew(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
-	GBuffer->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Point);
-	if (!GBuffer->Validate())
-		return false;
+	const int width  = Application.GetScreenWidth();
+	const int height = Application.GetScreenHeight();
+	const int halfWidth  = width / 2;
+	const int halfHeight = height / 2;
 
-	godRaysBuffer1 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
+	GBuffer        = RenderTarget::MakeNew(width,     height,     1, true, MSAA_Level);
+	godRaysBuffer1 = RenderTarget::MakeNew(halfWidth, halfHeight, 1, true, MSAA_Level);
+	godRaysBuffer2 = RenderTarget::MakeNew(halfWidth, halfHeight, 1, true, MSAA_Level);
+	workBuffer1    = RenderTarget::MakeNew(halfWidth, halfHeight, 1, false);
+	workBuffer2    = RenderTarget::MakeNew(halfWidth, halfHeight, 1, false);
+
+	GBuffer->       InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Point);
 	godRaysBuffer1->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Linear);
-	if (!godRaysBuffer1->Validate())
-		return false;
-
-	godRaysBuffer2 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, true, MSAA_Level);
 	godRaysBuffer2->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Linear);
-	if (!godRaysBuffer2->Validate())
+	workBuffer1->   InitTexture(0, TextureFormat::RGB_16, TextureFilter::Linear);
+	workBuffer2->   InitTexture(0, TextureFormat::RGB_16, TextureFilter::Linear);
+	
+	if (!GBuffer->Validate() ||
+		!godRaysBuffer1->Validate() ||
+		!godRaysBuffer2->Validate() ||
+		!workBuffer1->Validate() ||
+		!workBuffer2->Validate())
+	{
 		return false;
-
-	workBuffer1 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
-	workBuffer1->InitTexture(0, TextureFormat::RGB_16, TextureFilter::Linear);
-	if (!workBuffer1->Validate())
-		return false;
-
-	workBuffer2 = RenderTarget::MakeNew(Application.GetScreenWidth() / 2, Application.GetScreenHeight() / 2, 1, false);
-	workBuffer2->InitTexture(0, TextureFormat::RGB_16, TextureFilter::Linear);
-	if (!workBuffer2->Validate())
-		return false;
+	}
 
 	// Create MSAA resolve buffers.
 	if (MSAA_Level > 1)
@@ -240,7 +241,7 @@ void Game::Draw()
 	orb1ColorHandle = orb1Color;
 	orb2ColorHandle = vec3::Zero;
 	godRaysCall1.Render(*rootEntity);
-	
+
 	// Render the scene again with just orb2 as its true color.
 	orb1ColorHandle = vec3::Zero;
 	orb2ColorHandle = orb2Color;

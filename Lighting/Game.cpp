@@ -98,7 +98,7 @@ void Game::UpdateSettings()
 		mat.variantDefinitions.Switch("USE_HEIGHT_MAP", useHeightMap);
 		mat.variantDefinitions.Switch("USE_ENVIRONMENT_MAP", useEnvironmentMap);
 		mat.variantDefinitions.Switch("USE_ADVANCED_LIGHTING", useAdvancedLighting);
-	};
+	}
 
 	text->Get<Text>().text = FormatString(
 		"Normal Map (1)\n%s\nHeight Map (2)\n%s\nEnvironment Lighting (3)\n%s\nAdvanced Lighting (4)\n%s\nChange Skybox (S)",
