@@ -30,8 +30,8 @@ public:
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
 	Entity::Ptr cameraUI = Entity::MakeNew();
-	Entity::Ptr rootEntity = Entity::MakeNew();
-	Entity::Ptr rootUiEntity = Entity::MakeNew();
+	Entity::Ptr rootEntity = Entity::MakeNewRoot();
+	Entity::Ptr rootUiEntity = Entity::MakeNewRoot();
 
 	Entity::Ptr helloWorldText = Entity::MakeNew();
 	Entity::Ptr instructionText = Entity::MakeNew();

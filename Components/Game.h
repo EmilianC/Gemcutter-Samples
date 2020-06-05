@@ -22,7 +22,7 @@ public:
 	
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
-	Entity::Ptr rootNode = Entity::MakeNew();
+	Entity::Ptr rootNode = Entity::MakeNewRoot();
 	Flock flock;
 	static constexpr unsigned NumBirds = 180;
 

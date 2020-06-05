@@ -1,13 +1,14 @@
 #include "Game.h"
 
 #include <Jewel3D/Application/Application.h>
+#include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
+#include <Jewel3D/Math/Matrix.h>
 #include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Light.h>
+#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
 #include <Jewel3D/Resource/Model.h>
-#include <Jewel3D/Math/Matrix.h>
 
 Game::Game(ConfigTable &config)
 	: config(config)
@@ -22,7 +23,7 @@ bool Game::Init()
 	lambertShadow = Load<Shader>("Shaders/LambertShadow");
 	if (!model || !texture || !lambertShadow)
 		return false;
-	
+
 	ground->Add<Material>(lambertShadow, texture);
 	ground->Add<Mesh>(model);
 	ground->scale = vec3(15.0f);
@@ -38,8 +39,8 @@ bool Game::Init()
 	shack->scale = vec3(1.33f);
 
 	// Setup Scene.
-	rootNode->AddChild(ground);
-	rootNode->AddChild(shack);
+	rootNode->Get<Hierarchy>().AddChild(ground);
+	rootNode->Get<Hierarchy>().AddChild(shack);
 
 	// Setup Light.
 	shadowCamera->Add<Camera>(-20.0f, 20.0f, 20.0f, -20.0f, -100.0f, 100.0f);
@@ -83,7 +84,7 @@ void Game::Update()
 	rootNode->RotateY(Application.GetDeltaTime() * -12.0f);
 
 	// Keep shadow direction and world-space to shadowMap matrix up to date.
-	worldToShadow = 
+	worldToShadow =
 		mat4(0.5, 0.0, 0.0, 0.5,
 			0.0, 0.5, 0.0, 0.5,
 			0.0, 0.0, 0.5, 0.5,

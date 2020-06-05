@@ -3,13 +3,13 @@
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Application/Event.h>
 #include <Jewel3D/Application/FileSystem.h>
+#include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Light.h>
 #include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
-#include <Jewel3D/Resource/Model.h>
 #include <Jewel3D/Rendering/ParticleEmitter.h>
 #include <Jewel3D/Rendering/Rendering.h>
 #include <Jewel3D/Rendering/Sprite.h>
@@ -119,7 +119,7 @@ void Game::CreateGround()
 	{
 		for (int z = -2; z <= 2; ++z)
 		{
-			auto ent = rootEntity->CreateChild();
+			auto ent = rootEntity->Get<Hierarchy>().CreateChild();
 
 			ent->Add<Mesh>(model);
 			auto& mat = ent->Add<Material>(lightingShader);
@@ -193,9 +193,9 @@ bool Game::Init()
 	cameraUI->Add<Camera>().SetOrthographic(Application.GetScreenViewport(), -1.0f, 1.0f);
 
 	// Setup scene.
-	rootEntity->AddChild(ball);
-	rootLight->AddChild(light);
-	cameraParent->AddChild(camera);
+	rootEntity->Get<Hierarchy>().AddChild(ball);
+	rootLight->Get<Hierarchy>().AddChild(light);
+	cameraParent->Get<Hierarchy>().AddChild(camera);
 
 	// Set up renderer.
 	MSAA_Level = config.GetInt("MSAA");

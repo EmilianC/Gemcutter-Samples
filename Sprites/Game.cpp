@@ -2,6 +2,7 @@
 
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Application/Logging.h>
+#include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Material.h>
@@ -37,10 +38,10 @@ bool Game::Init()
 	if (!nabber_n || !nabber_e || !nabber_s || !nabber_w || !shader)
 		return false;
 
-	auto sprite1 = rootEntity->CreateChild();
-	auto sprite2 = rootEntity->CreateChild();
-	auto sprite3 = rootEntity->CreateChild();
-	auto sprite4 = rootEntity->CreateChild();
+	auto sprite1 = rootEntity->Get<Hierarchy>().CreateChild();
+	auto sprite2 = rootEntity->Get<Hierarchy>().CreateChild();
+	auto sprite3 = rootEntity->Get<Hierarchy>().CreateChild();
+	auto sprite4 = rootEntity->Get<Hierarchy>().CreateChild();
 
 	sprite1->Add<Material>(shader, nabber_s, BlendFunc::CutOut);
 	sprite1->Add<Sprite>(Alignment::Center);
@@ -83,7 +84,7 @@ void Game::Update()
 		Application.Exit();
 		return;
 	}
-	
+
 	rootEntity->RotateY(Application.GetDeltaTime() * 35.0f);
 
 	// Engine systems and components are updated here.

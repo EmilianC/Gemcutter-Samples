@@ -17,10 +17,10 @@ public:
 
 	/* Rendering */
 	RenderPass mainRenderPass;
-	
+
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
-	Entity::Ptr rootEntity = Entity::MakeNew();
+	Entity::Ptr rootEntity = Entity::MakeNewRoot();
 
 	/* Assets */
 	ConfigTable& config;

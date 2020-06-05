@@ -22,13 +22,13 @@ public:
 
 	/* Rendering */
 	RenderPass mainRenderPass;
-	
+
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
 	Entity::Ptr smoke = Entity::MakeNew();
 	Entity::Ptr fire = Entity::MakeNew();
 	Entity::Ptr sparkle = Entity::MakeNew();
-	Entity::Ptr rootEntity = Entity::MakeNew();
+	Entity::Ptr rootEntity = Entity::MakeNewRoot();
 
 	/* Assets */
 	ConfigTable& config;

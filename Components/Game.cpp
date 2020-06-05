@@ -2,6 +2,7 @@
 #include "Boid.h"
 
 #include <Jewel3D/Application/Application.h>
+#include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Material.h>
@@ -24,7 +25,7 @@ bool Game::Init()
 	// Create all the boids.
 	for (unsigned i = 0; i < NumBirds; i++)
 	{
-		auto boid = rootNode->CreateChild();
+		auto boid = rootNode->Get<Hierarchy>().CreateChild();
 		boid->Add<Mesh>(model);
 		boid->Add<Material>(texture);
 		boid->Add<Boid>();

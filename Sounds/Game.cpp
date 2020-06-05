@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include <Jewel3D/Application/Application.h>
+#include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
@@ -50,9 +51,9 @@ bool Game::Init()
 	SetClearColor(0.35f, 0.7f, 0.9f, 0.0f);
 
 	// Setup Scene.
-	rootEntity->AddChild(orbParent);
-	rootEntity->AddChild(monkey);
-	orbParent->AddChild(orb);
+	rootEntity->Get<Hierarchy>().AddChild(orbParent);
+	rootEntity->Get<Hierarchy>().AddChild(monkey);
+	orbParent->Get<Hierarchy>().AddChild(orb);
 	orb->position.x = 5.0f;
 	orb->scale *= 5.0f;
 	monkey->RotateX(90.0f);

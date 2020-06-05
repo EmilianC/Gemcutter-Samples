@@ -17,12 +17,12 @@ public:
 
 	/* Rendering */
 	RenderPass mainRenderPass;
-	
+
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
-	Entity::Ptr rootEntity = Entity::MakeNew();
+	Entity::Ptr rootEntity = Entity::MakeNewRoot();
 	Entity::Ptr monkey = Entity::MakeNew();
-	Entity::Ptr orbParent = Entity::MakeNew();
+	Entity::Ptr orbParent = Entity::MakeNewRoot();
 	Entity::Ptr orb = Entity::MakeNew();
 
 	/* Assets */

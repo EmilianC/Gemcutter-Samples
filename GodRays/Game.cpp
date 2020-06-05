@@ -1,12 +1,13 @@
 #include "Game.h"
 
+#include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Light.h>
 #include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
-#include <Jewel3D/Resource/Model.h>
 #include <Jewel3D/Rendering/Rendering.h>
+#include <Jewel3D/Resource/Model.h>
 #include <Jewel3D/Resource/UniformBuffer.h>
 #include <Jewel3D/Utilities/Random.h>
 
@@ -125,7 +126,7 @@ bool Game::Init()
 	godRaysBuffer2->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Linear);
 	workBuffer1->   InitTexture(0, TextureFormat::RGB_16, TextureFilter::Linear);
 	workBuffer2->   InitTexture(0, TextureFormat::RGB_16, TextureFilter::Linear);
-	
+
 	if (!GBuffer->Validate() ||
 		!godRaysBuffer1->Validate() ||
 		!godRaysBuffer2->Validate() ||
@@ -144,12 +145,12 @@ bool Game::Init()
 	}
 
 	/* Setup Scene Graph */
-	rootEntity->AddChild(ground);
-	rootEntity->AddChild(shack);
-	rootEntity->AddChild(orbParent);
-	cameraParent->AddChild(camera);
-	orbParent->AddChild(orb1);
-	orbParent->AddChild(orb2);
+	rootEntity->Get<Hierarchy>().AddChild(ground);
+	rootEntity->Get<Hierarchy>().AddChild(shack);
+	rootEntity->Get<Hierarchy>().AddChild(orbParent);
+	cameraParent->Get<Hierarchy>().AddChild(camera);
+	orbParent->Get<Hierarchy>().AddChild(orb1);
+	orbParent->Get<Hierarchy>().AddChild(orb2);
 
 	orb1->position = vec3(0.0f, 0.5f, 0.0f);
 	orb2->position = vec3(4.0f, 1.25f, 0.0f);

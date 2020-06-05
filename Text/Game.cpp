@@ -3,6 +3,7 @@
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Application/FileSystem.h>
 #include <Jewel3D/Application/Logging.h>
+#include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Rendering.h>
@@ -77,11 +78,11 @@ bool Game::Init()
 
 	helloWorldText->Add<Material>(shader).SetBlendMode(BlendFunc::Linear);
 	helloWorldText->Add<Text>("Hello World!\n-ABC-\n-123-").centeredX = true;
-	rootEntity->AddChild(helloWorldText);
+	rootEntity->Get<Hierarchy>().AddChild(helloWorldText);
 
 	instructionText->Add<Material>(shader).SetBlendMode(BlendFunc::Linear);
 	instructionText->Add<Text>("Use the arrow keys to cycle\nthrough the different fonts.");
-	rootUiEntity->AddChild(instructionText);
+	rootUiEntity->Get<Hierarchy>().AddChild(instructionText);
 	instructionText->position = vec3(20.0f, 55.0f, 0.0f);
 
 	UpdateFonts();

@@ -35,13 +35,13 @@ public:
 	RenderPass UIRenderPass;
 	RenderTarget::Ptr frameBuffer;
 	RenderTarget::Ptr frameBufferResolve;
-	
+
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
-	Entity::Ptr cameraParent = Entity::MakeNew();
+	Entity::Ptr cameraParent = Entity::MakeNewRoot();
 	Entity::Ptr cameraUI = Entity::MakeNew();
-	Entity::Ptr rootEntity = Entity::MakeNew();
-	Entity::Ptr rootLight = Entity::MakeNew();
+	Entity::Ptr rootEntity = Entity::MakeNewRoot();
+	Entity::Ptr rootLight = Entity::MakeNewRoot();
 	Entity::Ptr ball = Entity::MakeNew();
 	Entity::Ptr light = Entity::MakeNew();
 	Entity::Ptr text = Entity::MakeNew();

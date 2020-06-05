@@ -23,11 +23,11 @@ public:
 	/* Shaders */
 	Shader::Ptr lambertShadow = Shader::MakeNew();
 	UniformHandle<mat4> worldToShadow;
-	
+
 	/* Scene */
 	Entity::Ptr shadowCamera = Entity::MakeNew();
 	Entity::Ptr mainCamera = Entity::MakeNew();
-	Entity::Ptr rootNode = Entity::MakeNew();
+	Entity::Ptr rootNode = Entity::MakeNewRoot();
 	Entity::Ptr ground = Entity::MakeNew();
 	Entity::Ptr shack = Entity::MakeNew();
 

@@ -5,6 +5,7 @@
 
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Application/Event.h>
+#include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Material.h>
@@ -65,9 +66,9 @@ bool Game::Init()
 	fireEmitter.Warmup(1.5f);
 
 	/* Setup Scene */
-	rootEntity->AddChild(sparkle);
-	rootEntity->AddChild(smoke);
-	rootEntity->AddChild(fire);
+	rootEntity->Get<Hierarchy>().AddChild(sparkle);
+	rootEntity->Get<Hierarchy>().AddChild(smoke);
+	rootEntity->Get<Hierarchy>().AddChild(fire);
 
 	sparkle->position.x = 8.0f;
 	fire->position.x = -8.0f;

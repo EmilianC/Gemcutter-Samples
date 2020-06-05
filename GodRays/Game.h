@@ -1,8 +1,8 @@
 #pragma once
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Entity/Entity.h>
-#include <Jewel3D/Math/Vector.h>
 #include <Jewel3D/Input/Input.h>
+#include <Jewel3D/Math/Vector.h>
 #include <Jewel3D/Rendering/RenderPass.h>
 #include <Jewel3D/Rendering/RenderTarget.h>
 #include <Jewel3D/Resource/ConfigTable.h>
@@ -31,9 +31,9 @@ public:
 	Entity::Ptr orb1 = Entity::MakeNew();
 	Entity::Ptr orb2;
 	Entity::Ptr directionalLight = Entity::MakeNew();
-	Entity::Ptr cameraParent = Entity::MakeNew();
-	Entity::Ptr orbParent = Entity::MakeNew();
-	Entity::Ptr rootEntity = Entity::MakeNew();
+	Entity::Ptr cameraParent = Entity::MakeNewRoot();
+	Entity::Ptr orbParent = Entity::MakeNewRoot();
+	Entity::Ptr rootEntity = Entity::MakeNewRoot();
 	float angleY = -90.0f;
 	float angleX = 0.0f;
 
@@ -55,7 +55,7 @@ public:
 	Shader::Ptr godRaysComposite;
 	Shader::Ptr staticGeometryProgram;
 	Shader::Ptr flatColorProgram;
-	
+
 	/* Rendering */
 	RenderPass GBufferCall;
 	RenderPass godRaysCall1;
