@@ -3,8 +3,8 @@
 #include <Jewel3D/Application/Application.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
+#include <Jewel3D/Resource/Material.h>
 #include <Jewel3D/Resource/Model.h>
 
 Game::Game(ConfigTable& _config)
@@ -16,13 +16,10 @@ bool Game::Init()
 {
 	// Load all the assets we need.
 	auto model = Load<Model>("Models/Helicopter");
-	auto shader = Load<Shader>("Shaders/Simple");
-	auto texture = Load<Texture>("Textures/Helicopter");
+	auto material = Load<Material>("Materials/Helicopter");
 
-	// Add a Mesh component with our loaded model.
-	object->Add<Mesh>(model);
-	// A Material will allow our Mesh to be rendered to the screen with our shader and texture.
-	object->Add<Material>(shader, texture);
+	// Add a Mesh component with our loaded model and material.
+	object->Add<Mesh>(model, material);
 
 	// Create a perspective camera and point it downwards.
 	camera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 1000.0f);

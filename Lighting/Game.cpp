@@ -1,20 +1,18 @@
 #include "Game.h"
 
-#include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Application/Event.h>
 #include <Jewel3D/Application/FileSystem.h>
 #include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Light.h>
-#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
-#include <Jewel3D/Rendering/ParticleEmitter.h>
 #include <Jewel3D/Rendering/Rendering.h>
 #include <Jewel3D/Rendering/Sprite.h>
 #include <Jewel3D/Rendering/Text.h>
+#include <Jewel3D/Resource/Material.h>
 #include <Jewel3D/Resource/Model.h>
+#include <Jewel3D/Utilities/Random.h>
 #include <Jewel3D/Utilities/String.h>
 
 Game::Game(ConfigTable& _config)
@@ -83,21 +81,19 @@ Game::Game(ConfigTable& _config)
 
 void Game::UpdateSkybox()
 {
-	lightingShader->textures.Add(environmentMaps[currentSkybox], 0);
-	lightingShader->textures.Add(irradianceMaps[currentSkybox], 1);
+	mainRenderPass.textures.Add(environmentMaps[currentSkybox], 0);
+	mainRenderPass.textures.Add(irradianceMaps[currentSkybox], 1);
 	mainRenderPass.SetSkybox(environmentMaps[currentSkybox]);
 }
 
 void Game::UpdateSettings()
 {
-	for (Entity& ent : With<Material, Mesh>())
+	for (Mesh& mesh : All<Mesh>())
 	{
-		auto& mat = ent.Get<Material>();
-
-		mat.variantDefinitions.Switch("USE_NORMAL_MAP", useNormalMap);
-		mat.variantDefinitions.Switch("USE_HEIGHT_MAP", useHeightMap);
-		mat.variantDefinitions.Switch("USE_ENVIRONMENT_MAP", useEnvironmentMap);
-		mat.variantDefinitions.Switch("USE_ADVANCED_LIGHTING", useAdvancedLighting);
+		mesh.variants.Switch("USE_NORMAL_MAP", useNormalMap);
+		mesh.variants.Switch("USE_HEIGHT_MAP", useHeightMap);
+		mesh.variants.Switch("USE_ENVIRONMENT_MAP", useEnvironmentMap);
+		mesh.variants.Switch("USE_ADVANCED_LIGHTING", useAdvancedLighting);
 	}
 
 	text->Get<Text>().text = FormatString(
@@ -111,9 +107,7 @@ void Game::UpdateSettings()
 void Game::CreateGround()
 {
 	auto model = Load<Model>("Models/Ground");
-	auto albedo = Load<Texture>("Textures/Stone_Albedo");
-	auto details = Load<Texture>("Textures/Stone_Details");
-	auto normals = Load<Texture>("Textures/Stone_Normals");
+	auto material = Load<Material>("Materials/PBR/Stone");
 
 	for (int x = -2; x <= 2; ++x)
 	{
@@ -121,12 +115,7 @@ void Game::CreateGround()
 		{
 			auto ent = rootEntity->Get<Hierarchy>().CreateChild();
 
-			ent->Add<Mesh>(model);
-			auto& mat = ent->Add<Material>(lightingShader);
-			mat.textures.Add(albedo, 2);
-			mat.textures.Add(details, 3);
-			mat.textures.Add(normals, 4);
-
+			ent->Add<Mesh>(model, material);
 			ent->position.x = x * 4.0f;
 			ent->position.z = z * 4.0f;
 		}
@@ -138,10 +127,9 @@ bool Game::Init()
 	// Load game assets.
 	auto ballModel = Load<Model>("Models/Orb");
 	auto font = Load<Font>("Fonts/editundo");
-	auto bulbTexture = Load<Texture>("Textures/LightBulb");
-	auto spriteShader = Load<Shader>("Shaders/Default/Sprite");
-	auto textShader = Load<Shader>("Shaders/Default/Font");
-	lightingShader = Load<Shader>("Shaders/PhysicallyBased");
+	auto spriteMaterial = Load<Material>("Materials/Lightbulb");
+	auto textMaterial = Load<Material>("Materials/Text");
+	auto ironMaterial = Load<Material>("Materials/PBR/RustedIron");
 
 	// Load all skyboxes.
 	DirectoryData skyboxDir;
@@ -151,40 +139,25 @@ bool Game::Init()
 		if (!CompareLowercase(ExtractFileExtension(file), ".texture"))
 			continue;
 
-		auto enviornment = Load<Texture>("Textures/Skyboxes/" + file);
-		auto irradiance = Load<Texture>("Textures/Skyboxes/IrradianceMaps/" + file);
-
-		environmentMaps.push_back(enviornment);
-		irradianceMaps.push_back(irradiance);
+		environmentMaps.push_back(Load<Texture>("Textures/Skyboxes/" + file));
+		irradianceMaps. push_back(Load<Texture>("Textures/Skyboxes/IrradianceMaps/" + file));
 	}
 
 	// Setup the main object.
-	auto albedo = Load<Texture>("Textures/RustedIron_Albedo");
-	auto details = Load<Texture>("Textures/RustedIron_Details");
-	auto normals = Load<Texture>("Textures/RustedIron_Normals");
-	ball->Add<Mesh>(ballModel);
-	ball->Add<Material>(lightingShader);
-	ball->Get<Material>().textures.Add(albedo, 2);
-	ball->Get<Material>().textures.Add(details, 3);
-	ball->Get<Material>().textures.Add(normals, 4);
+	ball->Add<Mesh>(ballModel, ironMaterial);
 	ball->position.y += 2.75f;
 	ball->scale = vec3(14.0f);
 
 	// Create the UI text.
-	text->Add<Text>(font);
-	text->Add<Material>(textShader, nullptr, BlendFunc::Linear);
+	text->Add<Text>(font, "", textMaterial);
 	text->position.y = 180.0f;
 	text->scale = vec3(0.3f);
 
 	// Setup Lighting.
-	light->Add<Material>(spriteShader, bulbTexture, BlendFunc::Linear);
-	light->Add<Sprite>(Alignment::Center, true);
+	light->Add<Sprite>(Alignment::Center, true, spriteMaterial);
 	light->Add<Light>(vec3(25.0f, 23.0f, 21.0f));
 	light->position = vec3(-4.0f, 2.0f, -3.0f);
 	light->scale = vec3(0.5f);
-
-	// Attach the light data to the shader's binding point-0.
-	lightingShader->buffers.Add(light->Get<Light>().GetBuffer(), 0);
 
 	// Setup cameras.
 	camera->Add<Camera>(66.0f, Application.GetAspectRatio(), 0.1f, 100.0f);
@@ -211,6 +184,7 @@ bool Game::Init()
 
 	mainRenderPass.SetCamera(camera);
 	mainRenderPass.SetTarget(frameBuffer);
+	mainRenderPass.buffers.Add(light->Get<Light>().GetBuffer(), 0);
 
 	transparentRenderPass.SetCamera(camera);
 	transparentRenderPass.SetTarget(frameBuffer);

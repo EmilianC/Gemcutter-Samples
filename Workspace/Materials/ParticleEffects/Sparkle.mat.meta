@@ -1,0 +1,7 @@
+blend_mode=Additive
+cull_mode=clockwise
+depth_mode=TestOnly
+shader=Shaders/Default/ParticleBillBoard.shader
+texture_bind_points=0
+textures=textures/sparkle.png
+version=1

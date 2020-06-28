@@ -1,0 +1,7 @@
+blend_mode=none
+cull_mode=clockwise
+depth_mode=normal
+shader=shaders\default\flatcolor.shader
+texture_bind_points=
+textures=
+version=1

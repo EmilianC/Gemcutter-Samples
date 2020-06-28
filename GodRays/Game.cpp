@@ -4,9 +4,9 @@
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
 #include <Jewel3D/Rendering/Light.h>
-#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
 #include <Jewel3D/Rendering/Rendering.h>
+#include <Jewel3D/Resource/Material.h>
 #include <Jewel3D/Resource/Model.h>
 #include <Jewel3D/Resource/UniformBuffer.h>
 #include <Jewel3D/Utilities/Random.h>
@@ -25,8 +25,8 @@ Game::Game(ConfigTable& _config)
 
 			orb1ColorHandle = orb1Color;
 			orb2ColorHandle = orb2Color;
-			orb1->Get<Light>().color = orb1Color;
-			orb2->Get<Light>().color = orb2Color;
+			orb1->Get<Light>().color = orb1Color * 3.0f;
+			orb2->Get<Light>().color = orb2Color * 3.0f;
 			break;
 		}
 	};
@@ -70,42 +70,27 @@ bool Game::Init()
 
 	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->MakeHandle<vec2>("LightPositionOnScreen");
 
-	/* Load Models and Textures */
+	/* Load Resources */
 	auto skybox = Load<Texture>("Textures/Skyboxes/GrimmNight");
-	auto groundModel = Load<Model>("Models/ground");
-	auto groundTexture = Load<Texture>("Textures/ground");
-	auto shackModel = Load<Model>("Models/shack");
-	auto shackTexture = Load<Texture>("Textures/shack");
-	auto orbModel = Load<Model>("Models/Orb");
-	if (!skybox || !groundModel || !groundTexture || !shackModel || !shackTexture || !orbModel)
+	if (!skybox)
 		return false;
 
-	ground->Add<Mesh>(groundModel);
-	shack->Add<Mesh>(shackModel);
-	orb1->Add<Mesh>(orbModel);
-
-	ground->Add<Material>(staticGeometryProgram, groundTexture);
-	shack->Add<Material>(staticGeometryProgram, shackTexture);
-	orb1->Add<Material>(flatColorProgram);
-
+	ground->Add<Mesh>(Load<Model>("Models/ground"), Load<Material>("Materials/Ground"));
+	shack->Add<Mesh>(Load<Model>("Models/shack"), Load<Material>("Materials/Shack"));
+	orb1->Add<Mesh>(Load<Model>("Models/Orb"), Load<Material>("Materials/Orb"));
+	orb2->Add<Mesh>(Load<Model>("Models/Orb"), Load<Material>("Materials/Orb"));
 	orb1->Add<Light>();
-	orb2 = orb1->Duplicate();
+	orb2->Add<Light>();
 
 	directionalLight->Add<Light>(vec3(0.08f, 0.08f, 0.15f), Light::Type::Directional);
 	directionalLight->LookAt(vec3(10.0f, 10.0f, 3.5f), vec3(0.0f));
 
-	staticGeometryProgram->buffers.Add(orb1->Get<Light>().GetBuffer(), 0);
-	staticGeometryProgram->buffers.Add(orb2->Get<Light>().GetBuffer(), 1);
-	staticGeometryProgram->buffers.Add(directionalLight->Get<Light>().GetBuffer(), 2);
-
-	orb1->Get<Material>().CreateUniformBuffer(0);
-	orb2->Get<Material>().CreateUniformBuffer(0);
-	orb1ColorHandle = orb1->Get<Material>().buffers[0]->MakeHandle<vec3>("Color");
-	orb2ColorHandle = orb2->Get<Material>().buffers[0]->MakeHandle<vec3>("Color");
+	orb1ColorHandle = orb1->Get<Renderable>().buffers[0]->MakeHandle<vec3>("Color");
+	orb2ColorHandle = orb2->Get<Renderable>().buffers[0]->MakeHandle<vec3>("Color");
 	orb1ColorHandle = orb1Color;
 	orb2ColorHandle = orb2Color;
-	orb1->Get<Light>().color = orb1Color;
-	orb2->Get<Light>().color = orb2Color;
+	orb1->Get<Light>().color = orb1Color * 3.0f;
+	orb2->Get<Light>().color = orb2Color * 3.0f;
 
 	/* Allocate FrameBuffers */
 	MSAA_Level = config.GetInt("MSAA");
@@ -158,24 +143,35 @@ bool Game::Init()
 	shack->scale = vec3(0.33f);
 
 	/* Setup Render Passes */
+	// Main diffuse color pass.
 	GBufferCall.SetCamera(camera);
 	GBufferCall.SetSkybox(skybox);
 	GBufferCall.SetTarget(GBuffer);
+	GBufferCall.buffers.Add(orb1->Get<Light>().GetBuffer(), 0);
+	GBufferCall.buffers.Add(orb2->Get<Light>().GetBuffer(), 1);
+	GBufferCall.buffers.Add(directionalLight->Get<Light>().GetBuffer(), 2);
 
+	// Switch the geometry to a dark silhouettes to occlude the upcoming radial blurs of light for Orb1.
 	godRaysCall1.SetCamera(camera);
 	godRaysCall1.SetTarget(godRaysBuffer1);
+	godRaysCall1.SetShader(flatColorProgram);
 
+	// Switch the geometry to a dark silhouettes to occlude the upcoming radial blurs of light for Orb2-.
 	godRaysCall2.SetCamera(camera);
 	godRaysCall2.SetTarget(godRaysBuffer2);
+	godRaysCall2.SetShader(flatColorProgram);
 
+	// Create ray effect for Orb1.
 	godRaysRadial1.SetShader(godRaysRadialBlur);
 	godRaysRadial1.SetTarget(workBuffer1);
 	godRaysRadial1.textures.Add((MSAA_Level > 1) ? godRaysBuffer1Resolve->GetColorTexture(0) : godRaysBuffer1->GetColorTexture(0), 0);
 
+	// Create ray effect for Orb2.
 	godRaysRadial2.SetShader(godRaysRadialBlur);
 	godRaysRadial2.SetTarget(workBuffer2);
 	godRaysRadial2.textures.Add((MSAA_Level > 1) ? godRaysBuffer2Resolve->GetColorTexture(0) : godRaysBuffer2->GetColorTexture(0), 0);
 
+	// Composite the final image.
 	composite.SetShader(godRaysComposite);
 	composite.textures.Add((MSAA_Level > 1) ? GBufferResolve->GetColorTexture(0) : GBuffer->GetColorTexture(0), 0);
 	composite.textures.Add(workBuffer1->GetColorTexture(0), 1);
@@ -228,15 +224,9 @@ void Game::Draw()
 	Orb2ScreenPos /= Orb2ScreenPos.w;
 
 	// Render the base Scene.
-	ground->Get<Material>().shader = staticGeometryProgram;
-	shack->Get<Material>().shader = staticGeometryProgram;
 	orb1ColorHandle = orb1Color * 5.0f;
 	orb2ColorHandle = orb2Color * 5.0f;
 	GBufferCall.Render(*rootEntity);
-
-	// Switch the geometry to a dark silhouettes to occlude the upcoming radial blurs of light.
-	ground->Get<Material>().shader = flatColorProgram;
-	shack->Get<Material>().shader = flatColorProgram;
 
 	// Render the scene again with just orb1 as its true color.
 	orb1ColorHandle = orb1Color;

@@ -5,9 +5,9 @@
 #include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
 #include <Jewel3D/Rendering/Rendering.h>
+#include <Jewel3D/Resource/Material.h>
 #include <Jewel3D/Resource/Model.h>
 
 Game::Game(ConfigTable& _config)
@@ -19,15 +19,14 @@ bool Game::Init()
 {
 	// Load game assets.
 	auto model = Load<Model>("Models/Bird");
-	auto texture = Load<Texture>("Textures/Boid");
-	if (!model || !texture) return false;
+	auto material = Load<Material>("Materials/Boid");
+	if (!model || !material) return false;
 
 	// Create all the boids.
 	for (unsigned i = 0; i < NumBirds; i++)
 	{
 		auto boid = rootNode->Get<Hierarchy>().CreateChild();
-		boid->Add<Mesh>(model);
-		boid->Add<Material>(texture);
+		boid->Add<Mesh>(model, material);
 		boid->Add<Boid>();
 	}
 

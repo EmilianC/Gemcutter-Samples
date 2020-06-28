@@ -29,7 +29,7 @@ public:
 	Entity::Ptr ground = Entity::MakeNew();
 	Entity::Ptr shack = Entity::MakeNew();
 	Entity::Ptr orb1 = Entity::MakeNew();
-	Entity::Ptr orb2;
+	Entity::Ptr orb2 = Entity::MakeNew();
 	Entity::Ptr directionalLight = Entity::MakeNew();
 	Entity::Ptr cameraParent = Entity::MakeNewRoot();
 	Entity::Ptr orbParent = Entity::MakeNewRoot();

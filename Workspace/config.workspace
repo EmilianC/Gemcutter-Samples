@@ -27,5 +27,9 @@
       <extension>bmp</extension>
       <encoder>%JEWEL3D_PATH%\Tools\TextureEncoder\bin\Release_Win32\TextureEncoder.exe</encoder>
     </EncoderLink>
+    <EncoderLink>
+      <extension>mat</extension>
+      <encoder>%JEWEL3D_PATH%\Tools\MaterialEncoder\bin\Release_Win32\MaterialEncoder.exe</encoder>
+    </EncoderLink>
   </encoders>
 </WorkspaceConfig>

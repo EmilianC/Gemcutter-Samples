@@ -1,0 +1,7 @@
+blend_mode=none
+cull_mode=clockwise
+depth_mode=normal
+shader=Shaders/PhysicallyBased.shader
+texture_bind_points=2,3,4
+textures=Textures/RustedIron_Albedo.png,Textures/RustedIron_Details.png,Textures/RustedIron_Normals.png
+version=1

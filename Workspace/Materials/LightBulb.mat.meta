@@ -1,0 +1,7 @@
+blend_mode=linear
+cull_mode=clockwise
+depth_mode=normal
+shader=shaders\default\sprite.shader
+texture_bind_points=0
+textures=textures\lightbulb.png
+version=1

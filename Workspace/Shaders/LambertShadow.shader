@@ -11,12 +11,12 @@ Uniforms
 		uint Type;
 	}
 
-	template static Ambient : 1
+	static Ambient : 1
 	{
 		vec3 Color = (0.1, 0.1, 0.1);
 	}
 
-	template static ShadowParams : 2
+	static ShadowParams : 2
 	{
 		mat4 WorldToShadow;
 		float Intensity = 0.25;

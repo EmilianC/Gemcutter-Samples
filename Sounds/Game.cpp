@@ -5,9 +5,9 @@
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Math/Math.h>
 #include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Mesh.h>
 #include <Jewel3D/Rendering/Rendering.h>
+#include <Jewel3D/Resource/Material.h>
 #include <Jewel3D/Resource/Model.h>
 #include <Jewel3D/Resource/Shader.h>
 #include <Jewel3D/Resource/Sound.h>
@@ -24,20 +24,18 @@ bool Game::Init()
 {
 	// Load Orb.
 	auto model = Load<Model>("Models/Orb");
-	auto texture = Load<Texture>("Textures/Orb");
+	auto material = Load<Material>("Materials/Sphere");
 	auto sound = Load<Sound>("Sounds/Happy_Rock");
-	if (!model || !texture || !sound)
+	if (!model || !material || !sound)
 		return false;
 
-	orb->Add<Mesh>(model);
-	orb->Add<Material>(texture);
+	orb->Add<Mesh>(model, material);
 	orb->Add<SoundSource>(sound);
 
 	// Load Monkey.
 	model = Load<Model>("Models/Monkey");
-	texture = Load<Texture>("Textures/Monkey");
-	monkey->Add<Mesh>(model);
-	monkey->Add<Material>(texture);
+	material = Load<Material>("Materials/Monkey");
+	monkey->Add<Mesh>(model, material);
 
 	// Setup Camera.
 	camera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 1000.0f);

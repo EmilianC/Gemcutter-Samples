@@ -48,7 +48,6 @@ public:
 
 	/* Assets */
 	ConfigTable& config;
-	Shader::Ptr lightingShader;
 	std::vector<Texture::Ptr> environmentMaps;
 	std::vector<Texture::Ptr> irradianceMaps;
 

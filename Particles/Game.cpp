@@ -8,9 +8,9 @@
 #include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Input/Input.h>
 #include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/ParticleEmitter.h>
 #include <Jewel3D/Rendering/Rendering.h>
+#include <Jewel3D/Resource/Material.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)
@@ -30,25 +30,20 @@ Game::Game(ConfigTable& _config)
 bool Game::Init()
 {
 	/* Load Assets */
-	auto shader = Load<Shader>("Shaders/Default/ParticleBillBoard");
-	auto sparkleTexture = Load<Texture>("Textures/sparkle");
-	auto smokeTexture = Load<Texture>("Textures/smoke");
-	auto fireTexture = Load<Texture>("Textures/Block");
-	if (!shader || !sparkleTexture || !smokeTexture || !fireTexture)
+	auto sparkleMaterial = Load<Material>("Materials/ParticleEffects/Sparkle");
+	auto smokeMaterial = Load<Material>("Materials/ParticleEffects/Smoke");
+	auto fireMaterial = Load<Material>("Materials/ParticleEffects/Fire");
+	if (!sparkleMaterial || !smokeMaterial || !fireMaterial)
 		return false;
 
 	/* Initialize Effects */
-	sparkle->Add<Material>(shader, sparkleTexture, BlendFunc::Additive, DepthFunc::TestOnly);
-	smoke->Add<Material>(shader, smokeTexture, BlendFunc::Additive, DepthFunc::TestOnly);
-	fire->Add<Material>(shader, fireTexture, BlendFunc::Linear, DepthFunc::TestOnly);
-
-	auto& sparkleEmitter = sparkle->Add<ParticleEmitter>();
+	auto& sparkleEmitter = sparkle->Add<ParticleEmitter>(sparkleMaterial);
 	sparkleEmitter.radius.Set(0.0f, 5.0f);
 	sparkleEmitter.spawnPerSecond = 2.0f;
 	sparkleEmitter.SetLocalSpace(true);
 	sparkleEmitter.Warmup(1.5f);
 
-	auto& smokeEmitter = smoke->Add<ParticleEmitter>();
+	auto& smokeEmitter = smoke->Add<ParticleEmitter>(smokeMaterial);
 	smokeEmitter.radius.Set(0.0f, 2.0f);
 	smokeEmitter.velocity.Set(0.0f, 0.25f);
 	smokeEmitter.functors.Add(RotationFunc::MakeNew(0.0f));
@@ -56,7 +51,7 @@ bool Game::Init()
 	smokeEmitter.SetColorStartEnd(vec3(0.15f, 0.15f, 0.15f));
 	smokeEmitter.Warmup(1.5f);
 
-	auto& fireEmitter = fire->Add<ParticleEmitter>();
+	auto& fireEmitter = fire->Add<ParticleEmitter>(fireMaterial);
 	fireEmitter.functors.Add(VelocityFunc::MakeNew());
 	fireEmitter.functors.Add(WaveFunc::MakeNew());
 	fireEmitter.radius.Set(0.0f, 5.0f);

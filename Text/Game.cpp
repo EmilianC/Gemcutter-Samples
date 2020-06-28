@@ -5,9 +5,9 @@
 #include <Jewel3D/Application/Logging.h>
 #include <Jewel3D/Entity/Hierarchy.h>
 #include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Material.h>
 #include <Jewel3D/Rendering/Rendering.h>
 #include <Jewel3D/Rendering/Text.h>
+#include <Jewel3D/Resource/Material.h>
 #include <Jewel3D/Resource/Shader.h>
 #include <Jewel3D/Utilities/String.h>
 
@@ -72,16 +72,14 @@ bool Game::Init()
 		return false;
 	}
 
-	auto shader = Load<Shader>("Shaders/Default/Font");
-	if (!shader)
+	auto material = Load<Material>("Materials/Text");
+	if (!material)
 		return false;
 
-	helloWorldText->Add<Material>(shader).SetBlendMode(BlendFunc::Linear);
-	helloWorldText->Add<Text>("Hello World!\n-ABC-\n-123-").centeredX = true;
+	helloWorldText->Add<Text>(fonts[currentFont], "Hello World!\n-ABC-\n-123-", material).centeredX = true;
 	rootEntity->Get<Hierarchy>().AddChild(helloWorldText);
 
-	instructionText->Add<Material>(shader).SetBlendMode(BlendFunc::Linear);
-	instructionText->Add<Text>("Use the arrow keys to cycle\nthrough the different fonts.");
+	instructionText->Add<Text>(fonts[currentFont], "Use the arrow keys to cycle\nthrough different fonts.", material);
 	rootUiEntity->Get<Hierarchy>().AddChild(instructionText);
 	instructionText->position = vec3(20.0f, 55.0f, 0.0f);
 

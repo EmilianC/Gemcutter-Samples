@@ -1,0 +1,7 @@
+blend_mode=none
+cull_mode=clockwise
+depth_mode=normal
+shader=Shaders/MultipleLights.shader
+texture_bind_points=0
+textures=Textures/Ground.png
+version=1

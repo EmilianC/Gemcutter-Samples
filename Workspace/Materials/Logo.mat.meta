@@ -1,0 +1,7 @@
+blend_mode=none
+cull_mode=none
+depth_mode=normal
+shader=Shaders/Default/Sprite.shader
+texture_bind_points=0
+textures=Textures/Logo.png
+version=1
