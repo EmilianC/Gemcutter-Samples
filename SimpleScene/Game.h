@@ -1,9 +1,9 @@
 #pragma once
-#include <Jewel3D/Entity/Entity.h>
-#include <Jewel3D/Rendering/RenderPass.h>
-#include <Jewel3D/Resource/ConfigTable.h>
+#include <gemcutter/Entity/Entity.h>
+#include <gemcutter/Rendering/RenderPass.h>
+#include <gemcutter/Resource/ConfigTable.h>
 
-using namespace Jwl;
+using namespace gem;
 
 class Game
 {

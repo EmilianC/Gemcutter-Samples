@@ -1,7 +1,7 @@
 #pragma once
-#include <Jewel3D/Utilities/Random.h>
+#include <gemcutter/Utilities/Random.h>
 
-using namespace Jwl;
+using namespace gem;
 
 //- Simulates a flock of boids using the standard forces:
 //	Separation, Alignment, and Cohesion

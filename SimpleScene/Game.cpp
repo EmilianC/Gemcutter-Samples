@@ -1,11 +1,11 @@
 #include "Game.h"
 
-#include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Input/Input.h>
-#include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Mesh.h>
-#include <Jewel3D/Resource/Material.h>
-#include <Jewel3D/Resource/Model.h>
+#include <gemcutter/Application/Application.h>
+#include <gemcutter/Input/Input.h>
+#include <gemcutter/Rendering/Camera.h>
+#include <gemcutter/Rendering/Mesh.h>
+#include <gemcutter/Resource/Material.h>
+#include <gemcutter/Resource/Model.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)

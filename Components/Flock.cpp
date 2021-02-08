@@ -1,8 +1,8 @@
 #include "Flock.h"
 #include "Boid.h"
 
-#include <Jewel3D/Entity/Entity.h>
-#include <Jewel3D/Utilities/Random.h>
+#include <gemcutter/Entity/Entity.h>
+#include <gemcutter/Utilities/Random.h>
 
 void Flock::RandomlyPlaceBoids()
 {

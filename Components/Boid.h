@@ -1,8 +1,8 @@
 #pragma once
-#include <Jewel3D/Entity/Entity.h>
-#include <Jewel3D/Math/Vector.h>
+#include <gemcutter/Entity/Entity.h>
+#include <gemcutter/Math/Vector.h>
 
-using namespace Jwl;
+using namespace gem;
 
 class Boid : public Component<Boid>
 {

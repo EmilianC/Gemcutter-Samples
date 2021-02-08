@@ -1,7 +1,7 @@
 #pragma once
-#include <Jewel3D/Rendering/ParticleEmitter.h>
+#include <gemcutter/Rendering/ParticleEmitter.h>
 
-using namespace Jwl;
+using namespace gem;
 
 //- Custom particle functor to oscillate particles back and forth as they move upwards.
 class WaveFunc : public ParticleFunctor, public Shareable<WaveFunc>

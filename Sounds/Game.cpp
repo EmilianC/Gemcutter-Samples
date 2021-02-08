@@ -1,19 +1,19 @@
 #include "Game.h"
 
-#include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Entity/Hierarchy.h>
-#include <Jewel3D/Input/Input.h>
-#include <Jewel3D/Math/Math.h>
-#include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Mesh.h>
-#include <Jewel3D/Rendering/Rendering.h>
-#include <Jewel3D/Resource/Material.h>
-#include <Jewel3D/Resource/Model.h>
-#include <Jewel3D/Resource/Shader.h>
-#include <Jewel3D/Resource/Sound.h>
-#include <Jewel3D/Resource/Texture.h>
-#include <Jewel3D/Sound/SoundListener.h>
-#include <Jewel3D/Sound/SoundSource.h>
+#include <gemcutter/Application/Application.h>
+#include <gemcutter/Entity/Hierarchy.h>
+#include <gemcutter/Input/Input.h>
+#include <gemcutter/Math/Math.h>
+#include <gemcutter/Rendering/Camera.h>
+#include <gemcutter/Rendering/Mesh.h>
+#include <gemcutter/Rendering/Rendering.h>
+#include <gemcutter/Resource/Material.h>
+#include <gemcutter/Resource/Model.h>
+#include <gemcutter/Resource/Shader.h>
+#include <gemcutter/Resource/Sound.h>
+#include <gemcutter/Resource/Texture.h>
+#include <gemcutter/Sound/SoundListener.h>
+#include <gemcutter/Sound/SoundSource.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)

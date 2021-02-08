@@ -41,12 +41,12 @@ Vertex
 	void main()
 	{
 		texcoord = a_uv;
-		norm = Jwl_NormalToWorld * a_normal;
+		norm = Gem_NormalToWorld * a_normal;
 
-		pos = (Jwl_Model * a_vert).xyz;
+		pos = (Gem_Model * a_vert).xyz;
 
 		shadowCoord = ShadowParams.WorldToShadow * vec4(pos, 1.0f);
-		gl_Position = Jwl_ViewProj * vec4(pos, 1.0f);
+		gl_Position = Gem_ViewProj * vec4(pos, 1.0f);
 	}
 }
 

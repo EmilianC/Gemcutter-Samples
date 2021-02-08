@@ -1,14 +1,14 @@
 #pragma once
-#include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Entity/Entity.h>
-#include <Jewel3D/Input/Input.h>
-#include <Jewel3D/Math/Vector.h>
-#include <Jewel3D/Rendering/RenderPass.h>
-#include <Jewel3D/Rendering/RenderTarget.h>
-#include <Jewel3D/Resource/ConfigTable.h>
-#include <Jewel3D/Resource/Shader.h>
+#include <gemcutter/Application/Application.h>
+#include <gemcutter/Entity/Entity.h>
+#include <gemcutter/Input/Input.h>
+#include <gemcutter/Math/Vector.h>
+#include <gemcutter/Rendering/RenderPass.h>
+#include <gemcutter/Rendering/RenderTarget.h>
+#include <gemcutter/Resource/ConfigTable.h>
+#include <gemcutter/Resource/Shader.h>
 
-using namespace Jwl;
+using namespace gem;
 
 class Game
 {
