@@ -1,0 +1,13 @@
+set(CMAKE_FOLDER "${CMAKE_FOLDER}/samples")
+add_subdirectory(Components)
+add_subdirectory(GodRays)
+add_subdirectory(Input)
+add_subdirectory(Lighting)
+add_subdirectory(Particles)
+add_subdirectory(Shadows)
+add_subdirectory(SimpleScene)
+add_subdirectory(Sounds)
+add_subdirectory(Sprites)
+add_subdirectory(Text)
+
+gem_set_up_workspace("${CMAKE_CURRENT_LIST_DIR}/workspace")
