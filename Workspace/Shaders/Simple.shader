@@ -11,7 +11,7 @@ Vertex
 
 	void main()
 	{
-		gl_Position = Jwl_MVP * a_vert;
+		gl_Position = Gem_MVP * a_vert;
 		texcoord = a_uv;
 	}
 }

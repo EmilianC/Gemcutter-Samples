@@ -40,8 +40,8 @@ Vertex
 	{
 		texcoord = a_uv;
 
-		norm = Jwl_NormalToWorld * a_normal;
-		pos = (Jwl_Model * a_vert).xyz;
+		norm = Gem_NormalToWorld * a_normal;
+		pos = (Gem_Model * a_vert).xyz;
 
 #ifdef USE_NORMAL_MAP
 		TBN = make_TBN(a_normal, a_tangent.xyz, a_tangent.w);
@@ -52,7 +52,7 @@ Vertex
 		pos += norm * height * 0.2;
 #endif
 
-		gl_Position = Jwl_ViewProj * vec4(pos, 1.0);
+		gl_Position = Gem_ViewProj * vec4(pos, 1.0);
 	}
 }
 
@@ -111,7 +111,7 @@ Fragment
 		N = normalize(norm);
 #endif
 
-		vec3 V = normalize(Jwl_CameraPosition - pos);
+		vec3 V = normalize(Gem_CameraPosition - pos);
 		float NdotV = max(dot(N, V), 0.0);
 		float GeomV = GeometrySchlickGGX(NdotV, roughness);
 

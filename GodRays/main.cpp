@@ -1,17 +1,17 @@
-#include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Application/Logging.h>
-#include <Jewel3D/Rendering/Primitives.h>
-#include <Jewel3D/Rendering/Rendering.h>
-#include <Jewel3D/Resource/ConfigTable.h>
-#include <Jewel3D/Resource/Resource.h>
-#include <Jewel3D/Sound/SoundSystem.h>
-#include <Jewel3D/Utilities/Random.h>
+#include <gemcutter/Application/Application.h>
+#include <gemcutter/Application/Logging.h>
+#include <gemcutter/Rendering/Primitives.h>
+#include <gemcutter/Rendering/Rendering.h>
+#include <gemcutter/Resource/ConfigTable.h>
+#include <gemcutter/Resource/Resource.h>
+#include <gemcutter/Sound/SoundSystem.h>
+#include <gemcutter/Utilities/Random.h>
 
 #include "Game.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 {
-	using namespace Jwl;
+	using namespace gem;
 
 	OpenOutputLog();
 #ifdef _DEBUG
@@ -77,7 +77,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 	Application.SetUpdatesPerSecond(config.GetInt("updatesPerSecond"));
 	Application.SetFPSCap(config.GetInt("FPSCap"));
 
-	if (!Application.CreateGameWindow("Jewel3D Sample - GodRays", config.GetInt("openGL_Major"), config.GetInt("openGL_Minor")))
+	if (!Application.CreateGameWindow("Gemcutter Sample - GodRays", config.GetInt("openGL_Major"), config.GetInt("openGL_Minor")))
 	{
 		FocusConsoleWindow();
 		ErrorBox("Failed to create window. See \"Log_Output.txt\" for details.");

@@ -18,7 +18,7 @@ Vertex
 
 	void main()
 	{
-		gl_Position = Jwl_MVP * a_vert;
+		gl_Position = Gem_MVP * a_vert;
 		texcoord = a_uv;
 	}
 }
@@ -38,7 +38,7 @@ Fragment
 	{
 		outColor = vec4(Material.Color, texture(sTex, texcoord).r);
 
-		#if defined(JWL_CUTOUT)
+		#if defined(GEM_CUTOUT)
 			if (outColor.a < 1.0)
 			{
 				discard;

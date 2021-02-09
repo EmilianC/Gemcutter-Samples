@@ -20,41 +20,41 @@ Vertex
 	{
 		texcoord = a_uv;
 
-		#if defined(JWL_SPRITE_BILLBOARD)
+		#if defined(GEM_SPRITE_BILLBOARD)
 			// Get the position of the sprite.
-			vec4 vertex = Jwl_Model[3].xyzw;
+			vec4 vertex = Gem_Model[3].xyzw;
 
 			// Calculate vertex offset from the center.
 			vec2 offset = texcoord;
-			#if defined(JWL_SPRITE_CENTERED_X)
+			#if defined(GEM_SPRITE_CENTERED_X)
 			offset.x -= 0.5;
 			#endif
-			#if defined(JWL_SPRITE_CENTERED_Y)
+			#if defined(GEM_SPRITE_CENTERED_Y)
 			offset.y -= 0.5;
 			#endif
 
 			// Extract the scale from the basis vectors.
-			vec2 scale = vec2(length(Jwl_Model[0].xyz), length(Jwl_Model[1].xyz));
+			vec2 scale = vec2(length(Gem_Model[0].xyz), length(Gem_Model[1].xyz));
 
 			// Offset in view space to create perfect billboard.
-			vertex = Jwl_View * vertex;
+			vertex = Gem_View * vertex;
 			vertex.xy += offset * scale;
 
 			// Project to screen.
-			gl_Position = Jwl_Proj * vertex;
+			gl_Position = Gem_Proj * vertex;
 		#else
 			vec4 vertex = a_vert;
 
 			// Offset in local-space.
-			#if defined(JWL_SPRITE_CENTERED_X)
+			#if defined(GEM_SPRITE_CENTERED_X)
 			vertex.x -= 0.5;
 			#endif
-			#if defined(JWL_SPRITE_CENTERED_Y)
+			#if defined(GEM_SPRITE_CENTERED_Y)
 			vertex.y -= 0.5;
 			#endif
 
 			// Transform and project to screen.
-			gl_Position = Jwl_MVP * vertex;
+			gl_Position = Gem_MVP * vertex;
 		#endif
 	}
 }
@@ -74,7 +74,7 @@ Fragment
 	{
 		outColor = texture(sTex, texcoord).rgba;
 
-		#if defined(JWL_CUTOUT)
+		#if defined(GEM_CUTOUT)
 			if (outColor.a <= Material.AlphaCutOff)
 			{
 				discard;

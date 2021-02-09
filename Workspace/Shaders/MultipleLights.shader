@@ -59,12 +59,12 @@ Vertex
 
 	void main()
 	{
-		pos = (Jwl_Model * a_vert).xyz;
-		gl_Position = Jwl_ViewProj * vec4(pos, 1.0);
+		pos = (Gem_Model * a_vert).xyz;
+		gl_Position = Gem_ViewProj * vec4(pos, 1.0);
 
 		texcoord = a_uv;
 
-		norm = Jwl_NormalToWorld * a_normal;
+		norm = Gem_NormalToWorld * a_normal;
 	}
 }
 

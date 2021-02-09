@@ -3,14 +3,14 @@
 #include "VelocityFunc.h"
 #include "WaveFunc.h"
 
-#include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Application/Event.h>
-#include <Jewel3D/Entity/Hierarchy.h>
-#include <Jewel3D/Input/Input.h>
-#include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/ParticleEmitter.h>
-#include <Jewel3D/Rendering/Rendering.h>
-#include <Jewel3D/Resource/Material.h>
+#include <gemcutter/Application/Application.h>
+#include <gemcutter/Application/Event.h>
+#include <gemcutter/Entity/Hierarchy.h>
+#include <gemcutter/Input/Input.h>
+#include <gemcutter/Rendering/Camera.h>
+#include <gemcutter/Rendering/ParticleEmitter.h>
+#include <gemcutter/Rendering/Rendering.h>
+#include <gemcutter/Resource/Material.h>
 
 Game::Game(ConfigTable& _config)
 	: config(_config)

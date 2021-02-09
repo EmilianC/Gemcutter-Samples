@@ -23,43 +23,43 @@ Uniforms
 
 Vertex
 {
-	#if defined(JWL_PARTICLE_SIZE)
+	#if defined(GEM_PARTICLE_SIZE)
 		out vec2 size;
 	#endif
-	#if defined(JWL_PARTICLE_COLOR)
+	#if defined(GEM_PARTICLE_COLOR)
 		out vec3 color;
 	#endif
-	#if defined(JWL_PARTICLE_ALPHA)
+	#if defined(GEM_PARTICLE_ALPHA)
 		out float alpha;
 	#endif
-	#if defined(JWL_PARTICLE_ROTATION)
+	#if defined(GEM_PARTICLE_ROTATION)
 		out float rotation;
 	#endif
-	#if defined(JWL_PARTICLE_AGERATIO)
+	#if defined(GEM_PARTICLE_AGERATIO)
 		out float ageRatio;
 	#endif
 
 	void main()
 	{
-		#if defined(JWL_PARTICLE_LOCAL_SPACE)
-			gl_Position = Jwl_ModelView * a_vert;
+		#if defined(GEM_PARTICLE_LOCAL_SPACE)
+			gl_Position = Gem_ModelView * a_vert;
 		#else
-			gl_Position = Jwl_View * a_vert;
+			gl_Position = Gem_View * a_vert;
 		#endif
 
-		#if defined(JWL_PARTICLE_SIZE)
+		#if defined(GEM_PARTICLE_SIZE)
 			size = a_size;
 		#endif
-		#if defined(JWL_PARTICLE_COLOR)
+		#if defined(GEM_PARTICLE_COLOR)
 			color = a_color;
 		#endif
-		#if defined(JWL_PARTICLE_ALPHA)
+		#if defined(GEM_PARTICLE_ALPHA)
 			alpha = a_alpha;
 		#endif
-		#if defined(JWL_PARTICLE_ROTATION)
+		#if defined(GEM_PARTICLE_ROTATION)
 			rotation = a_rotation;
 		#endif
-		#if defined(JWL_PARTICLE_AGERATIO)
+		#if defined(GEM_PARTICLE_AGERATIO)
 			ageRatio = a_ageRatio;
 		#endif
 	}
@@ -73,19 +73,19 @@ Geometry
 	// Output type.
 	layout(triangle_strip, max_vertices = 4) out;
 
-	#if defined(JWL_PARTICLE_SIZE)
+	#if defined(GEM_PARTICLE_SIZE)
 		in vec2 size[];
 	#endif
-	#if defined(JWL_PARTICLE_COLOR)
+	#if defined(GEM_PARTICLE_COLOR)
 		in vec3 color[];
 	#endif
-	#if defined(JWL_PARTICLE_ALPHA)
+	#if defined(GEM_PARTICLE_ALPHA)
 		in float alpha[];
 	#endif
-	#if defined(JWL_PARTICLE_ROTATION)
+	#if defined(GEM_PARTICLE_ROTATION)
 		in float rotation[];
 	#endif
-	#if defined(JWL_PARTICLE_AGERATIO)
+	#if defined(GEM_PARTICLE_AGERATIO)
 		in float ageRatio[];
 	#endif
 
@@ -111,27 +111,27 @@ Geometry
 
 		/* Resolve Particle Parameters */
 		vec2 Size;
-		#if defined(JWL_PARTICLE_SIZE)
+		#if defined(GEM_PARTICLE_SIZE)
 			Size = size[0];
 		#else
 			Size = mix(Properties.StartSize, Properties.EndSize, ageRatio[0]);
 		#endif
 
 		vec4 Color;
-		#if defined(JWL_PARTICLE_COLOR)
+		#if defined(GEM_PARTICLE_COLOR)
 			Color.rgb = color[0];
 		#else
 			Color.rgb = mix(Properties.StartColor, Properties.EndColor, ageRatio[0]);
 		#endif
 
-		#if defined(JWL_PARTICLE_ALPHA)
+		#if defined(GEM_PARTICLE_ALPHA)
 			Color.a = alpha[0];
 		#else
 			Color.a = mix(Properties.StartAlpha, Properties.EndAlpha, ageRatio[0]);
 		#endif
 
 		// Create rotation matrix.
-		#if defined(JWL_PARTICLE_ROTATION)
+		#if defined(GEM_PARTICLE_ROTATION)
 			float cosR = cos(rotation[0]);
 			float sinR = sin(rotation[0]);
 			mat2 rot = mat2(cosR, -sinR, sinR, cosR);
@@ -141,11 +141,11 @@ Geometry
 		for (int i = 0; i < 4; ++i)
 		{
 			vec2 offset = OFFSETS[i] * Size;
-			#if defined(JWL_PARTICLE_ROTATION)
+			#if defined(GEM_PARTICLE_ROTATION)
 				offset = rot * offset;
 			#endif
 			outPosition.xy = position.xy + offset;
-			gl_Position = Jwl_Proj * outPosition;
+			gl_Position = Gem_Proj * outPosition;
 
 			frag_color = Color;
 			texcoord = TEXCOORDS[i];
@@ -172,7 +172,7 @@ Fragment
 	{
 		outColor = texture(sTex, texcoord).rgba;
 
-		#if defined(JWL_CUTOUT)
+		#if defined(GEM_CUTOUT)
 			if (outColor.a < 1.0)
 			{
 				discard;

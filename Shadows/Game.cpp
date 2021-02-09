@@ -1,14 +1,14 @@
 #include "Game.h"
 
-#include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Entity/Hierarchy.h>
-#include <Jewel3D/Input/Input.h>
-#include <Jewel3D/Math/Matrix.h>
-#include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Light.h>
-#include <Jewel3D/Rendering/Mesh.h>
-#include <Jewel3D/Resource/Material.h>
-#include <Jewel3D/Resource/Model.h>
+#include <gemcutter/Application/Application.h>
+#include <gemcutter/Entity/Hierarchy.h>
+#include <gemcutter/Input/Input.h>
+#include <gemcutter/Math/Matrix.h>
+#include <gemcutter/Rendering/Camera.h>
+#include <gemcutter/Rendering/Light.h>
+#include <gemcutter/Rendering/Mesh.h>
+#include <gemcutter/Resource/Material.h>
+#include <gemcutter/Resource/Model.h>
 
 Game::Game(ConfigTable &config)
 	: config(config)

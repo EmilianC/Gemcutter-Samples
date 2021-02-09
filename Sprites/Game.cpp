@@ -1,13 +1,13 @@
 #include "Game.h"
 
-#include <Jewel3D/Application/Application.h>
-#include <Jewel3D/Application/Logging.h>
-#include <Jewel3D/Entity/Hierarchy.h>
-#include <Jewel3D/Input/Input.h>
-#include <Jewel3D/Rendering/Camera.h>
-#include <Jewel3D/Rendering/Rendering.h>
-#include <Jewel3D/Rendering/Sprite.h>
-#include <Jewel3D/Resource/Material.h>
+#include <gemcutter/Application/Application.h>
+#include <gemcutter/Application/Logging.h>
+#include <gemcutter/Entity/Hierarchy.h>
+#include <gemcutter/Input/Input.h>
+#include <gemcutter/Rendering/Camera.h>
+#include <gemcutter/Rendering/Rendering.h>
+#include <gemcutter/Rendering/Sprite.h>
+#include <gemcutter/Resource/Material.h>
 
 class BillBoard : public Tag<BillBoard> {};
 
@@ -57,7 +57,7 @@ bool Game::Init()
 
 	for (auto& sprite : All<Sprite>())
 	{
-		sprite.variants.Define("JWL_CUTOUT");
+		sprite.variants.Define("GEM_CUTOUT");
 	}
 
 	// Setup Camera.
