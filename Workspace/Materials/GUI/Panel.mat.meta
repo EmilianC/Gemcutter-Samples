@@ -1,0 +1,7 @@
+blend_mode=none
+cull_mode=none
+depth_mode=none
+shader=Shaders/Default/Sprite.shader
+texture_bind_points=0
+textures=Textures/GUI/Panel.png
+version=1

@@ -96,7 +96,7 @@ void Game::UpdateSettings()
 		mesh.variants.Switch("USE_ADVANCED_LIGHTING", useAdvancedLighting);
 	}
 
-	text->Get<Text>().text = FormatString(
+	text->Get<Text>().string = FormatString(
 		"Normal Map (1)\n%s\nHeight Map (2)\n%s\nEnvironment Lighting (3)\n%s\nAdvanced Lighting (4)\n%s\nChange Skybox (S)",
 		useNormalMap		? "  off  [on]" : " [off]  on ",
 		useHeightMap		? "  off  [on]" : " [off]  on ",
