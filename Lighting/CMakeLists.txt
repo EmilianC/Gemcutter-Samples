@@ -8,6 +8,7 @@ list(APPEND lighting_files
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${lighting_files})
 
 add_executable(lighting WIN32 ${lighting_files})
+add_dependencies(lighting ASSETS)
 sf_target_compile_warnings(lighting)
 sf_target_compile_warnings_as_errors(lighting OPTIONAL)
 

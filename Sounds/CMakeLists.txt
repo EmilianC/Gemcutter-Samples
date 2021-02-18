@@ -8,6 +8,7 @@ list(APPEND sounds_files
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${sounds_files})
 
 add_executable(sounds WIN32 ${sounds_files})
+add_dependencies(sounds ASSETS)
 sf_target_compile_warnings(sounds)
 sf_target_compile_warnings_as_errors(sounds OPTIONAL)
 

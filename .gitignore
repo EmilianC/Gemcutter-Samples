@@ -3,6 +3,7 @@ Workspace/config.workspace
 Workspace/Files.cache
 Workspace/open_asset_manager.cmd
 Workspace/pack_assets.cmd
+Workspace/update_metadata.cmd
 Log_Output.txt
 *.opendb
 *.VC.db

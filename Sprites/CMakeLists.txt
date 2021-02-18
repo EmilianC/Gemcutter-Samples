@@ -8,6 +8,7 @@ list(APPEND sprites_files
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${sprites_files})
 
 add_executable(sprites WIN32 ${sprites_files})
+add_dependencies(sprites ASSETS)
 sf_target_compile_warnings(sprites)
 sf_target_compile_warnings_as_errors(sprites OPTIONAL)
 

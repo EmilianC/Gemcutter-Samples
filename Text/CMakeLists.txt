@@ -8,6 +8,7 @@ list(APPEND text_files
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${text_files})
 
 add_executable(text WIN32 ${text_files})
+add_dependencies(text ASSETS)
 sf_target_compile_warnings(text)
 sf_target_compile_warnings_as_errors(text OPTIONAL)
 

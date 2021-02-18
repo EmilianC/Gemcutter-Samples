@@ -12,6 +12,7 @@ list(APPEND components_files
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${components_files})
 
 add_executable(components WIN32 ${components_files})
+add_dependencies(components ASSETS)
 sf_target_compile_warnings(components)
 sf_target_compile_warnings_as_errors(components OPTIONAL)
 

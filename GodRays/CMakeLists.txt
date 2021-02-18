@@ -8,6 +8,7 @@ list(APPEND godrays_files
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${godrays_files})
 
 add_executable(godrays WIN32 ${godrays_files})
+add_dependencies(godrays ASSETS)
 sf_target_compile_warnings(godrays)
 sf_target_compile_warnings_as_errors(godrays OPTIONAL)
 

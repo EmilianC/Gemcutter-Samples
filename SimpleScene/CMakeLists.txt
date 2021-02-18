@@ -8,6 +8,7 @@ list(APPEND simple_scene_files
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${simple_scene_files})
 
 add_executable(simple_scene WIN32 ${simple_scene_files})
+add_dependencies(simple_scene ASSETS)
 sf_target_compile_warnings(simple_scene)
 sf_target_compile_warnings_as_errors(simple_scene OPTIONAL)
 

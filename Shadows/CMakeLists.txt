@@ -8,6 +8,7 @@ list(APPEND shadows_files
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${shadows_files})
 
 add_executable(shadows WIN32 ${shadows_files})
+add_dependencies(shadows ASSETS)
 sf_target_compile_warnings(shadows)
 sf_target_compile_warnings_as_errors(shadows OPTIONAL)
 
