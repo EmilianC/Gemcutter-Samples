@@ -1,5 +1,7 @@
 #pragma once
+#include <gemcutter/Application/Application.h>
 #include <gemcutter/Entity/Entity.h>
+#include <gemcutter/GUI/Widget.h>
 #include <gemcutter/Rendering/RenderPass.h>
 #include <gemcutter/Resource/ConfigTable.h>
 
@@ -11,6 +13,8 @@ public:
 	Game(ConfigTable& config);
 
 	bool Init();
+	void CreateLeftPanel();
+	void CreateRightPanel();
 
 	void Update();
 	void Draw();
@@ -18,15 +22,19 @@ public:
 	/* Rendering */
 	RenderPass mainRenderPass;
 
+	/* Events */
+	Listener<Resize> onResized;
+
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
-	Entity::Ptr rootEntity = Entity::MakeNewRoot();
+	Entity::Ptr screen = Entity::MakeNewRoot();
+	Widget* root = nullptr;
 
 	/* Assets */
 	ConfigTable& config;
 
-	bool canFullScreen		 = true;
-	bool canChangeBorder	 = true;
-	bool canResize			 = true;
-	bool canChangeResolution = true;
+	bool wiggleX = false;
+	bool wiggleY = false;
+	float elapsedX = 0.0f;
+	float elapsedY = 0.0f;
 };
