@@ -1,6 +1,5 @@
 #include "Game.h"
 
-#include <gemcutter/Application/Application.h>
 #include <gemcutter/Entity/Hierarchy.h>
 #include <gemcutter/Input/Input.h>
 #include <gemcutter/Math/Matrix.h>
@@ -13,6 +12,9 @@
 Game::Game(ConfigTable &config)
 	: config(config)
 {
+	onResized = [this](auto& e) {
+		mainCamera->Get<Camera>().SetAspectRatio(e.GetAspectRatio());
+	};
 }
 
 bool Game::Init()
@@ -41,11 +43,12 @@ bool Game::Init()
 
 	// Setup Camera.
 	mainCamera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 10000.0f);
-	mainCamera->position = vec3(0.0f, 15.0f, 40.0f);
+	mainCamera->position = vec3(0.0f, 10.0f, 25.0f);
 	mainCamera->RotateX(-20.0f);
 
 	// Setup up renderer.
-	shadowMap = RenderTarget::MakeNew(2048, 2048, 0, true);
+	shadowMap = RenderTarget::MakeNew(1024, 1024, 0, true);
+	shadowMap->GetDepthTexture()->SetPCF(true);
 	if (!shadowMap->Validate())
 		return false;
 

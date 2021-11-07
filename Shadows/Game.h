@@ -1,4 +1,5 @@
 #pragma once
+#include <gemcutter/Application/Application.h>
 #include <gemcutter/Entity/Entity.h>
 #include <gemcutter/Rendering/RenderPass.h>
 #include <gemcutter/Resource/ConfigTable.h>
@@ -19,6 +20,9 @@ public:
 	RenderTarget::Ptr shadowMap;
 	RenderPass shadowRenderPass;
 	RenderPass mainRenderPass;
+
+	/* Events */
+	Listener<Resize> onResized;
 
 	/* Shaders */
 	Shader::Ptr lambertShadow = Shader::MakeNew();

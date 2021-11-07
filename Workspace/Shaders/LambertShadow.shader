@@ -19,7 +19,6 @@ Uniforms
 	static ShadowParams : 2
 	{
 		mat4 WorldToShadow;
-		float Intensity = 0.25;
 		float Bias = 0.0005;
 	}
 }
@@ -46,14 +45,16 @@ Vertex
 		pos = (Gem_Model * a_vert).xyz;
 
 		shadowCoord = ShadowParams.WorldToShadow * vec4(pos, 1.0f);
+		shadowCoord.z -= ShadowParams.Bias;
+
 		gl_Position = Gem_ViewProj * vec4(pos, 1.0f);
 	}
 }
 
 Samplers
 {
-	sampler2D sTex       : 0;
-	sampler2D sShadowMap : 1;
+	sampler2D sTex : 0;
+	sampler2DShadow sShadowMap : 1;
 }
 
 Fragment
@@ -68,21 +69,15 @@ Fragment
 	void main()
 	{
 		vec3 normal = normalize(norm);
-
 		vec3 lighting = Ambient.Color;
-		lighting += compute_light(Light, normal, pos);
 
-		// If the normal is facing the light, we need to check for shadows.
+		float visibilityFactor = 0.0f;
 		float NdotL = dot(normal, -Light.Direction);
-		if (NdotL > 0.0 &&
-			shadowCoord.z < texture(sShadowMap, shadowCoord.xy).r + ShadowParams.Bias)
+		if (NdotL > 0.0f)
 		{
-			// Calculate the diffuse contribution.
-			lighting += Light.Color * NdotL;
-		}
-		else
-		{
-			lighting *= ShadowParams.Intensity;
+			// If the normal is facing the light, we need to check for shadows.
+			visibilityFactor = texture(sShadowMap, shadowCoord.xyz);
+			lighting += compute_light(Light, normal, pos) * visibilityFactor;
 		}
 
 		outColor = texture(sTex, texcoord).rgb * lighting;
