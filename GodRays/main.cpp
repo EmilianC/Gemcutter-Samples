@@ -6,6 +6,7 @@
 #include <gemcutter/Resource/Resource.h>
 #include <gemcutter/Sound/SoundSystem.h>
 #include <gemcutter/Utilities/Random.h>
+#include <Windows.h>
 
 #include "Game.h"
 
