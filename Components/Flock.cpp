@@ -114,6 +114,6 @@ void Flock::Update(float deltaTime)
 		vec3 right = Normalize(Cross(forward, up));
 		up = Cross(right, forward);
 
-		boid.owner.rotation = mat3(right, up, -forward);
+		boid.owner.rotation = quat(right, up, -forward);
 	}
 }
