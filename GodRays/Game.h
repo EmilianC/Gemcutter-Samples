@@ -26,6 +26,7 @@ public:
 
 	/* Scene */
 	Entity::Ptr camera = Entity::MakeNew();
+	Entity::Ptr skybox = Entity::MakeNew();
 	Entity::Ptr ground = Entity::MakeNew();
 	Entity::Ptr shack = Entity::MakeNew();
 	Entity::Ptr orb1 = Entity::MakeNew();

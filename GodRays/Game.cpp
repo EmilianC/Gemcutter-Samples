@@ -5,6 +5,7 @@
 #include <gemcutter/Rendering/Camera.h>
 #include <gemcutter/Rendering/Light.h>
 #include <gemcutter/Rendering/Mesh.h>
+#include <gemcutter/Rendering/Primitives.h>
 #include <gemcutter/Rendering/Rendering.h>
 #include <gemcutter/Resource/Material.h>
 #include <gemcutter/Resource/Model.h>
@@ -56,7 +57,7 @@ Game::Game(ConfigTable& _config)
 
 bool Game::Init()
 {
-	/* Setup Camera */
+	/* Set up Camera */
 	camera->Add<Camera>(60.0f, Application.GetAspectRatio(), 1.0f, 1000.0f);
 	camera->position = vec3(0.0f, 1.0f, 8.0f);
 
@@ -70,11 +71,8 @@ bool Game::Init()
 
 	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->MakeHandle<vec2>("LightPositionOnScreen");
 
-	/* Load Resources */
-	auto skybox = Load<Texture>("Textures/Skyboxes/GrimmNight");
-	if (!skybox)
-		return false;
-
+	/* Set up Renderables */
+	skybox->Add<Mesh>(Primitives.GetUnitCubeArray(), Load<Material>("Materials/Skyboxes/Night"));
 	ground->Add<Mesh>(Load<Model>("Models/ground"), Load<Material>("Materials/Ground"));
 	shack->Add<Mesh>(Load<Model>("Models/shack"), Load<Material>("Materials/Shack"));
 	orb1->Add<Mesh>(Load<Model>("Models/Orb"), Load<Material>("Materials/Orb"));
@@ -129,7 +127,7 @@ bool Game::Init()
 		godRaysBuffer2Resolve = godRaysBuffer2->MakeResolve();
 	}
 
-	/* Setup Scene Graph */
+	/* Set up Scene Graph */
 	rootEntity->Get<Hierarchy>().AddChild(ground);
 	rootEntity->Get<Hierarchy>().AddChild(shack);
 	rootEntity->Get<Hierarchy>().AddChild(orbParent);
@@ -142,10 +140,9 @@ bool Game::Init()
 	ground->scale = vec3(2.25f);
 	shack->scale = vec3(0.33f);
 
-	/* Setup Render Passes */
+	/* Set up Render Passes */
 	// Main diffuse color pass.
 	GBufferCall.SetCamera(camera);
-	GBufferCall.SetSkybox(skybox);
 	GBufferCall.SetTarget(GBuffer);
 	GBufferCall.buffers.Add(orb1->Get<Light>().GetBuffer(), 0);
 	GBufferCall.buffers.Add(orb2->Get<Light>().GetBuffer(), 1);
@@ -226,17 +223,21 @@ void Game::Draw()
 	// Render the base Scene.
 	orb1ColorHandle = orb1Color * 5.0f;
 	orb2ColorHandle = orb2Color * 5.0f;
-	GBufferCall.Render(*rootEntity);
+	GBufferCall.Bind();
+	GBufferCall.RenderRoot(*rootEntity);
+	GBufferCall.Render(*skybox);
 
 	// Render the scene again with just orb1 as its true color.
 	orb1ColorHandle = orb1Color;
 	orb2ColorHandle = vec3::Zero;
-	godRaysCall1.Render(*rootEntity);
+	godRaysCall1.Bind();
+	godRaysCall1.RenderRoot(*rootEntity);
 
 	// Render the scene again with just orb2 as its true color.
 	orb1ColorHandle = vec3::Zero;
 	orb2ColorHandle = orb2Color;
-	godRaysCall2.Render(*rootEntity);
+	godRaysCall2.Bind();
+	godRaysCall2.RenderRoot(*rootEntity);
 
 	// If we are using MSAA, we need to resolve away the extra pixel samples.
 	if (MSAA_Level > 1)
@@ -248,12 +249,15 @@ void Game::Draw()
 
 	// Blur out the light from orb1.
 	screenSpaceRadialPos.Set(vec2(Orb1ScreenPos.x * 0.5f + 0.5f, Orb1ScreenPos.y * 0.5f + 0.5f));
+	godRaysRadial1.Bind();
 	godRaysRadial1.PostProcess();
 
 	// Blur out the light from orb2.
 	screenSpaceRadialPos.Set(vec2(Orb2ScreenPos.x * 0.5f + 0.5f, Orb2ScreenPos.y * 0.5f + 0.5f));
+	godRaysRadial2.Bind();
 	godRaysRadial2.PostProcess();
 
 	// Construct the final image.
+	composite.Bind();
 	composite.PostProcess();
 }

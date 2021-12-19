@@ -237,5 +237,6 @@ void Game::Draw()
 {
 	ClearBackBuffer();
 
-	mainRenderPass.Render(*screen);
+	mainRenderPass.Bind();
+	mainRenderPass.RenderRoot(*screen);
 }

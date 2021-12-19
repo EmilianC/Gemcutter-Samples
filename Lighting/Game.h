@@ -31,7 +31,6 @@ public:
 
 	/* Rendering */
 	RenderPass mainRenderPass;
-	RenderPass transparentRenderPass;
 	RenderPass UIRenderPass;
 	RenderTarget::Ptr frameBuffer;
 	RenderTarget::Ptr frameBufferResolve;
@@ -42,6 +41,7 @@ public:
 	Entity::Ptr cameraUI = Entity::MakeNew();
 	Entity::Ptr rootEntity = Entity::MakeNewRoot();
 	Entity::Ptr rootLight = Entity::MakeNewRoot();
+	Entity::Ptr skybox = Entity::MakeNew();
 	Entity::Ptr ball = Entity::MakeNew();
 	Entity::Ptr light = Entity::MakeNew();
 	Entity::Ptr text = Entity::MakeNew();

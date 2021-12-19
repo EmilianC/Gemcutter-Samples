@@ -57,5 +57,6 @@ void Game::Draw()
 {
 	ClearBackBuffer();
 
+	mainRenderPass.Bind();
 	mainRenderPass.Render(*object);
 }

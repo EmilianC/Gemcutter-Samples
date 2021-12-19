@@ -127,8 +127,11 @@ void Game::Draw()
 {
 	ClearBackBuffer();
 
-	mainRenderPass.Render(*rootEntity);
-	UIRenderPass.Render(*rootUiEntity);
+	mainRenderPass.Bind();
+	mainRenderPass.RenderRoot(*rootEntity);
+
+	UIRenderPass.Bind();
+	UIRenderPass.RenderRoot(*rootUiEntity);
 }
 
 void Game::UpdateFonts()

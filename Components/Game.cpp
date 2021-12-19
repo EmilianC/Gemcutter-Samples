@@ -63,5 +63,6 @@ void Game::Draw()
 {
 	ClearBackBuffer();
 
-	mainRenderPass.Render(*rootNode);
+	mainRenderPass.Bind();
+	mainRenderPass.RenderRoot(*rootNode);
 }

@@ -7,6 +7,7 @@
 #include <gemcutter/Rendering/Camera.h>
 #include <gemcutter/Rendering/Light.h>
 #include <gemcutter/Rendering/Mesh.h>
+#include <gemcutter/Rendering/Primitives.h>
 #include <gemcutter/Rendering/Rendering.h>
 #include <gemcutter/Rendering/Sprite.h>
 #include <gemcutter/Rendering/Text.h>
@@ -81,9 +82,11 @@ Game::Game(ConfigTable& _config)
 
 void Game::UpdateSkybox()
 {
+	Material::Ptr& material = skybox->Get<Renderable>().GetMaterial();
+	material->textures.Add(environmentMaps[currentSkybox], 0);
+
 	mainRenderPass.textures.Add(environmentMaps[currentSkybox], 0);
 	mainRenderPass.textures.Add(irradianceMaps[currentSkybox], 1);
-	mainRenderPass.SetSkybox(environmentMaps[currentSkybox]);
 }
 
 void Game::UpdateSettings()
@@ -143,6 +146,9 @@ bool Game::Init()
 		irradianceMaps. push_back(Load<Texture>("Textures/Skyboxes/IrradianceMaps/" + file));
 	}
 
+	// Preapre skybox Renderable.
+	skybox->Add<Mesh>(Primitives.GetUnitCubeArray(), Load<Material>("Materials/Skyboxes/Night"));
+
 	// Setup the main object.
 	ball->Add<Mesh>(ballModel, ironMaterial);
 	ball->position.y += 2.75f;
@@ -186,9 +192,6 @@ bool Game::Init()
 	mainRenderPass.SetTarget(frameBuffer);
 	mainRenderPass.buffers.Add(light->Get<Light>().GetBuffer(), 0);
 
-	transparentRenderPass.SetCamera(camera);
-	transparentRenderPass.SetTarget(frameBuffer);
-
 	UIRenderPass.SetCamera(cameraUI);
 	UIRenderPass.SetTarget(frameBuffer);
 
@@ -227,8 +230,12 @@ void Game::Draw()
 	ClearBackBufferDepth();
 	frameBuffer->Clear();
 
-	mainRenderPass.Render(*rootEntity);
-	transparentRenderPass.Render(*rootLight);
+	mainRenderPass.Bind();
+	mainRenderPass.RenderRoot(*rootEntity);
+	mainRenderPass.Render(*skybox);
+	mainRenderPass.RenderRoot(*rootLight);
+
+	UIRenderPass.Bind();
 	UIRenderPass.Render(*text);
 
 	if (MSAA_Level > 1)

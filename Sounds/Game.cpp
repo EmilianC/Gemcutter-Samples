@@ -96,5 +96,6 @@ void Game::Draw()
 {
 	ClearBackBuffer();
 
-	mainRenderPass.Render(*rootEntity);
+	mainRenderPass.Bind();
+	mainRenderPass.RenderRoot(*rootEntity);
 }

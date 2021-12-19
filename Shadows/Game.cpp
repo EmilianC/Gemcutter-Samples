@@ -77,10 +77,10 @@ void Game::Update()
 
 	// Keep shadow direction and world-space to shadowMap matrix up to date.
 	worldToShadow =
-		mat4(0.5, 0.0, 0.0, 0.5,
-			0.0, 0.5, 0.0, 0.5,
-			0.0, 0.0, 0.5, 0.5,
-			0.0, 0.0, 0.0, 1.0) * shadowCamera->Get<Camera>().GetViewProjMatrix();
+		mat4(0.5f, 0.0f, 0.0f, 0.5f,
+			0.0f, 0.5f, 0.0f, 0.5f,
+			0.0f, 0.0f, 0.5f, 0.5f,
+			0.0f, 0.0f, 0.0f, 1.0f) * shadowCamera->Get<Camera>().GetViewProjMatrix();
 
 	// Engine systems and components are updated here.
 	Application.UpdateEngine();
@@ -91,6 +91,10 @@ void Game::Draw()
 	ClearBackBuffer();
 	shadowMap->Clear();
 
-	shadowRenderPass.Render(*rootNode);
-	mainRenderPass.Render(*rootNode);
+	shadowRenderPass.Bind();
+	shadowRenderPass.RenderRoot(*rootNode);
+
+	mainRenderPass.Bind();
+	mainRenderPass.RenderRoot(*rootNode);
+
 }
