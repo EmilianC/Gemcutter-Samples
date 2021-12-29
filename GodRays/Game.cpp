@@ -69,7 +69,7 @@ bool Game::Init()
 	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite)
 		return false;
 
-	screenSpaceRadialPos = godRaysRadialBlur->buffers[0]->MakeHandle<vec2>("LightPositionOnScreen");
+	screenSpaceRadialPos = godRaysRadialBlur->buffers[0].MakeHandle<vec2>("LightPositionOnScreen");
 
 	/* Set up Renderables */
 	skybox->Add<Mesh>(Primitives.GetUnitCubeArray(), Load<Material>("Materials/Skyboxes/Night"));
@@ -83,8 +83,8 @@ bool Game::Init()
 	directionalLight->Add<Light>(vec3(0.08f, 0.08f, 0.15f), Light::Type::Directional);
 	directionalLight->LookAt(vec3(10.0f, 10.0f, 3.5f), vec3(0.0f));
 
-	orb1ColorHandle = orb1->Get<Renderable>().buffers[0]->MakeHandle<vec3>("Color");
-	orb2ColorHandle = orb2->Get<Renderable>().buffers[0]->MakeHandle<vec3>("Color");
+	orb1ColorHandle = orb1->Get<Renderable>().buffers[0].MakeHandle<vec3>("Color");
+	orb2ColorHandle = orb2->Get<Renderable>().buffers[0].MakeHandle<vec3>("Color");
 	orb1ColorHandle = orb1Color;
 	orb2ColorHandle = orb2Color;
 	orb1->Get<Light>().color = orb1Color * 3.0f;

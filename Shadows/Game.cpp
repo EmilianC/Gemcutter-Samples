@@ -33,9 +33,9 @@ bool Game::Init()
 	shack->scale = vec3(1.33f);
 
 	// Link light data.
-	auto shader = shack->Get<Renderable>().GetMaterial()->shader;
+	auto shader = shack->Get<Renderable>().GetMaterial().shader;
 	shader->buffers.Add(shadowCamera->Get<Light>().GetBuffer(), 0);
-	worldToShadow = shader->buffers[2]->MakeHandle<mat4>("WorldToShadow");
+	worldToShadow = shader->buffers[2].MakeHandle<mat4>("WorldToShadow");
 
 	// Setup Scene.
 	rootNode->Get<Hierarchy>().AddChild(ground);

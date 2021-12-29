@@ -80,7 +80,7 @@ void Game::CreateLeftPanel()
 	label.bottom.anchor = 0.90f;
 	label.left.offset   = -180.0f;
 	label.right.offset  = -180.0f;
-	label.owner.Get<Renderable>().buffers[0]->SetUniform<vec3>("Color", vec3(0));
+	label.owner.Get<Renderable>().buffers[0].SetUniform<vec3>("Color", vec3(0));
 
 	/// Buttons ///
 	{
@@ -173,7 +173,7 @@ void Game::CreateRightPanel()
 	label.bottom.anchor = 0.90f;
 	label.left.offset   = -180.0f;
 	label.right.offset  = -180.0f;
-	label.owner.Get<Renderable>().buffers[0]->SetUniform<vec3>("Color", vec3(0));
+	label.owner.Get<Renderable>().buffers[0].SetUniform<vec3>("Color", vec3(0));
 
 	/// Buttons ///
 	{

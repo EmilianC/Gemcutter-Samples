@@ -82,8 +82,8 @@ Game::Game(ConfigTable& _config)
 
 void Game::UpdateSkybox()
 {
-	Material::Ptr& material = skybox->Get<Renderable>().GetMaterial();
-	material->textures.Add(environmentMaps[currentSkybox], 0);
+	Material& material = skybox->Get<Renderable>().GetMaterial();
+	material.textures.Add(environmentMaps[currentSkybox], 0);
 
 	mainRenderPass.textures.Add(environmentMaps[currentSkybox], 0);
 	mainRenderPass.textures.Add(irradianceMaps[currentSkybox], 1);
