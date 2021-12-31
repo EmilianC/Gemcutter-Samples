@@ -136,7 +136,7 @@ bool Game::Init()
 
 	// Load all skyboxes.
 	DirectoryData skyboxDir;
-	ParseDirectory(skyboxDir, RootAssetDirectory + "/Textures/Skyboxes");
+	ParseDirectory(skyboxDir, "Textures/Skyboxes");
 	for (auto& file : skyboxDir.files)
 	{
 		if (!CompareLowercase(ExtractFileExtension(file), ".texture"))
@@ -146,7 +146,7 @@ bool Game::Init()
 		irradianceMaps. push_back(Load<Texture>("Textures/Skyboxes/IrradianceMaps/" + file));
 	}
 
-	// Preapre skybox Renderable.
+	// Prepare skybox Renderable.
 	skybox->Add<Mesh>(Primitives.GetUnitCubeArray(), Load<Material>("Materials/Skyboxes/Night"));
 
 	// Setup the main object.

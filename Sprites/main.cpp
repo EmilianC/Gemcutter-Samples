@@ -7,6 +7,7 @@
 #include <gemcutter/Sound/SoundSystem.h>
 #include <gemcutter/Utilities/Random.h>
 #include <Windows.h>
+#undef SetCurrentDirectory
 
 #include "Game.h"
 
@@ -34,7 +35,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 	config.SetDefaultValue("FPSCap", 120);
 	config.SetDefaultValue("MSAA", 1);
 	config.SetDefaultValue("vsync", "adaptive");
-	config.SetDefaultValue("asset_directory", "./");
 
 	if (!config.Load("./Settings.cfg"))
 	{
@@ -45,9 +45,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 			Warning("Failed to Generate a new Settings.cfg file.");
 		}
 	}
-
-	/* Set Asset Directory */
-	RootAssetDirectory = config.GetString("asset_directory");
+	/* Move to Asset Directory */
+	if (config.HasSetting("asset_directory"))
+	{
+		SetCurrentDirectory(config.GetString("asset_directory"));
+	}
 
 	/* Resolve 'auto' settings */
 	RECT desktop;

@@ -52,7 +52,7 @@ bool Game::Init()
 {
 	// Find all the font assets.
 	DirectoryData dir;
-	ParseDirectory(dir, RootAssetDirectory + "Fonts/");
+	ParseDirectory(dir, "Fonts/");
 	for (auto& file : dir.files)
 	{
 		// Filter for fonts.
