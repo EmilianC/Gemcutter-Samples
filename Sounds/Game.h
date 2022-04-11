@@ -1,4 +1,5 @@
 #pragma once
+#include <gemcutter/Application/Application.h>
 #include <gemcutter/Entity/Entity.h>
 #include <gemcutter/Rendering/RenderPass.h>
 #include <gemcutter/Resource/ConfigTable.h>
@@ -14,6 +15,9 @@ public:
 
 	void Update();
 	void Draw();
+
+	/* Events */
+	Listener<Resize> onResized;
 
 	/* Rendering */
 	RenderPass mainRenderPass;

@@ -1,6 +1,5 @@
 #include "Game.h"
 
-#include <gemcutter/Application/Application.h>
 #include <gemcutter/Application/Logging.h>
 #include <gemcutter/Entity/Hierarchy.h>
 #include <gemcutter/Input/Input.h>
@@ -14,6 +13,11 @@ class BillBoard : public Tag<BillBoard> {};
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
+	onResized = [this](auto& e)
+	{
+		camera->Get<Camera>().SetAspectRatio(e.GetAspectRatio());
+	};
+
 	onKeyPressed = [](auto& e)
 	{
 		if (e.key == Key::Space)

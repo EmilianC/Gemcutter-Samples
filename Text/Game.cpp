@@ -1,6 +1,5 @@
 #include "Game.h"
 
-#include <gemcutter/Application/Application.h>
 #include <gemcutter/Application/FileSystem.h>
 #include <gemcutter/Application/Logging.h>
 #include <gemcutter/Entity/Hierarchy.h>
@@ -14,6 +13,12 @@
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
+	onResized = [this](auto& e)
+	{
+		camera->Get<Camera>().SetAspectRatio(e.GetAspectRatio());
+		cameraUI->Get<Camera>().SetOrthographic(Application.GetScreenViewport(), -1.0f, 1.0f);
+	};
+
 	onKeyPressed = [this](auto& e)
 	{
 		switch (e.key)

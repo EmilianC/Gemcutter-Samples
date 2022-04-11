@@ -1,6 +1,5 @@
 #include "Game.h"
 
-#include <gemcutter/Application/Application.h>
 #include <gemcutter/Input/Input.h>
 #include <gemcutter/Rendering/Camera.h>
 #include <gemcutter/Rendering/Mesh.h>
@@ -10,6 +9,10 @@
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
+	onResized = [this](auto& e)
+	{
+		camera->Get<Camera>().SetAspectRatio(e.GetAspectRatio());
+	};
 }
 
 bool Game::Init()

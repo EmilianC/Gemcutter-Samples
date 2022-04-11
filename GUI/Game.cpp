@@ -1,6 +1,5 @@
 #include "Game.h"
 
-#include <gemcutter/Application/Application.h>
 #include <gemcutter/Entity/Hierarchy.h>
 #include <gemcutter/GUI/Button.h>
 #include <gemcutter/GUI/Image.h>

@@ -1,4 +1,5 @@
 #pragma once
+#include <gemcutter/Application/Application.h>
 #include <gemcutter/Application/Event.h>
 #include <gemcutter/Entity/Entity.h>
 #include <gemcutter/Input/Input.h>
@@ -18,6 +19,7 @@ public:
 	void Draw();
 
 	/* Events */
+	Listener<Resize> onResized;
 	Listener<KeyPressed> onKeyPressed;
 
 	/* Rendering */

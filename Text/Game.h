@@ -1,4 +1,5 @@
 #pragma once
+#include <gemcutter/Application/Application.h>
 #include <gemcutter/Entity/Entity.h>
 #include <gemcutter/Input/Input.h>
 #include <gemcutter/Rendering/RenderPass.h>
@@ -21,6 +22,7 @@ public:
 	void UpdateFonts();
 
 	/* Events */
+	Listener<Resize> onResized;
 	Listener<KeyPressed> onKeyPressed;
 
 	/* Rendering */
