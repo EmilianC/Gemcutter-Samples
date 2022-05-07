@@ -24,17 +24,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 
 	/* Register default configuration values */
 	ConfigTable config;
-	config.SetDefaultValue("bordered", true);
-	config.SetDefaultValue("resizable", false);
-	config.SetDefaultValue("fullscreen", false);
-	config.SetDefaultValue("resolution_x", 1280);
-	config.SetDefaultValue("resolution_y", 720);
-	config.SetDefaultValue("openGL_Major", 3);
-	config.SetDefaultValue("openGL_Minor", 3);
-	config.SetDefaultValue("updatesPerSecond", 120);
-	config.SetDefaultValue("FPSCap", 120);
-	config.SetDefaultValue("MSAA", 2);
-	config.SetDefaultValue("vsync", "adaptive");
+	config.SetDefaultBool("bordered", true);
+	config.SetDefaultBool("resizable", false);
+	config.SetDefaultBool("fullscreen", false);
+	config.SetDefaultInt("resolution_x", 1280);
+	config.SetDefaultInt("resolution_y", 720);
+	config.SetDefaultInt("openGL_Major", 3);
+	config.SetDefaultInt("openGL_Minor", 3);
+	config.SetDefaultInt("updatesPerSecond", 120);
+	config.SetDefaultInt("FPSCap", 120);
+	config.SetDefaultInt("MSAA", 2);
+	config.SetDefaultString("vsync", "adaptive");
 
 	if (!config.Load("./Settings.cfg"))
 	{
@@ -58,12 +58,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 
 	if (config.GetInt("resolution_x") == 0)
 	{
-		config.SetValue("resolution_x", desktopResolutionOkay ? static_cast<int>(desktop.right) : 1280);
+		config.SetInt("resolution_x", desktopResolutionOkay ? static_cast<int>(desktop.right) : 1280);
 	}
 
 	if (config.GetInt("resolution_y") == 0)
 	{
-		config.SetValue("resolution_y", desktopResolutionOkay ? static_cast<int>(desktop.bottom) : 720);
+		config.SetInt("resolution_y", desktopResolutionOkay ? static_cast<int>(desktop.bottom) : 720);
 	}
 
 	/* Seed RNG */
