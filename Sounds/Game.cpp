@@ -59,9 +59,8 @@ bool Game::Init()
 	orb->scale *= 5.0f;
 	monkey->RotateX(90.0f);
 
-	// Prepare sounds.
+	// Start music.
 	monkey->Add<SoundListener>();
-	orb->Get<SoundSource>().SetLooping(true);
 	orb->Get<SoundSource>().Play();
 
 	return true;

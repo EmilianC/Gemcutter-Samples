@@ -1,0 +1,9 @@
+3d=off
+3d_attenuation=none
+3d_attenuation_rolloff=1.000000
+3d_max_distance=100.000000
+3d_min_distance=1.000000
+loop=off
+unique_instance=off
+version=1
+volume=1.000000
