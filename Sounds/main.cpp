@@ -16,7 +16,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 	using namespace gem;
 
 	OpenOutputLog();
-#ifdef _DEBUG
+#ifdef GEM_DEBUG
 	CreateConsoleWindow();
 #endif
 
@@ -142,7 +142,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
 
 	Log("-Execution Finished-");
 
-#ifdef _DEBUG
+#ifdef GEM_DEBUG
 	DestroyConsoleWindow();
 #endif
 	CloseOutputLog();
