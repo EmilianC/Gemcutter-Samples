@@ -1,7 +1,7 @@
 anisotropic_level=16.000000
 cubemap=false
-filter=trilinear
+filter=Trilinear
 s_rgb=true
-version=2
-wrap_x=repeat
-wrap_y=repeat
+version=3
+wrap_x=Repeat
+wrap_y=Repeat

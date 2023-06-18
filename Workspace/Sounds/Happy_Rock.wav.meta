@@ -1,9 +1,9 @@
 3d=true
-3d_attenuation=exponential
+3d_attenuation=Exponential
 3d_attenuation_rolloff=1.00000
 3d_max_distance=15.000000
 3d_min_distance=2.000000
 loop=on
 unique_instance=true
-version=1
+version=2
 volume=1.000000

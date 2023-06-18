@@ -1,4 +1,4 @@
 height=64
-texture_filter=point
-version=2
+texture_filter=Point
+version=3
 width=64

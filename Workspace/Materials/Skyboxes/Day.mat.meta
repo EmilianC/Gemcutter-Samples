@@ -1,7 +1,7 @@
-blend_mode=none
-cull_mode=none
-depth_mode=testOnly
+blend_mode=None
+cull_mode=None
+depth_mode=TestOnly
 shader=shaders/default/Skybox.shader
 texture_bind_points=0
 textures=textures/SkyBoxes/StormyDays.png
-version=1
+version=2

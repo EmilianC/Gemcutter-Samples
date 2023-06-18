@@ -1,7 +1,7 @@
-blend_mode=none
-cull_mode=clockwise
-depth_mode=normal
+blend_mode=None
+cull_mode=Clockwise
+depth_mode=Normal
 shader=Shaders/PhysicallyBased.shader
 texture_bind_points=2,3,4
 textures=Textures/Stone_Albedo.png,Textures/Stone_Details.png,Textures/Stone_Normals.png
-version=1
+version=2

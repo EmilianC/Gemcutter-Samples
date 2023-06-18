@@ -1,7 +1,7 @@
 anisotropic_level=2.000000
 cubemap=false
-filter=bilinear
+filter=Bilinear
 s_rgb=false
-version=2
-wrap_x=clamp
-wrap_y=clamp
+version=3
+wrap_x=Clamp
+wrap_y=Clamp
