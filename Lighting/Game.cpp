@@ -178,14 +178,20 @@ bool Game::Init()
 
 	// Set up renderer.
 	MSAA_Level = config.GetInt("MSAA");
-	frameBuffer = RenderTarget::MakeNew(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
+	frameBuffer->Init(Application.GetScreenWidth(), Application.GetScreenHeight(), 1, true, MSAA_Level);
 	frameBuffer->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Point);
 	if (!frameBuffer->Validate())
+	{
 		return false;
+	}
 
 	if (MSAA_Level > 1)
 	{
 		frameBufferResolve = frameBuffer->MakeResolve();
+		if (!frameBufferResolve->Validate())
+		{
+			return false;
+		}
 	}
 
 	mainRenderPass.SetCamera(camera);

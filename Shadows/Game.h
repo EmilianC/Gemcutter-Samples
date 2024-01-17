@@ -17,7 +17,7 @@ public:
 	void Draw();
 
 	/* Rendering */
-	RenderTarget::Ptr shadowMap;
+	RenderTarget::Ptr shadowMap = RenderTarget::MakeNew();
 	RenderPass shadowRenderPass;
 	RenderPass mainRenderPass;
 

@@ -47,7 +47,7 @@ bool Game::Init()
 	mainCamera->RotateX(-20.0f);
 
 	// Setup up renderer.
-	shadowMap = RenderTarget::MakeNew(1024, 1024, 0, true);
+	shadowMap->Init(1024, 1024, 0, true);
 	shadowMap->GetDepthTexture()->SetPCF(true);
 	if (!shadowMap->Validate())
 		return false;

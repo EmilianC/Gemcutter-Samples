@@ -98,11 +98,11 @@ bool Game::Init()
 	const int halfWidth  = width / 2;
 	const int halfHeight = height / 2;
 
-	GBuffer        = RenderTarget::MakeNew(width,     height,     1, true, MSAA_Level);
-	godRaysBuffer1 = RenderTarget::MakeNew(halfWidth, halfHeight, 1, true, MSAA_Level);
-	godRaysBuffer2 = RenderTarget::MakeNew(halfWidth, halfHeight, 1, true, MSAA_Level);
-	workBuffer1    = RenderTarget::MakeNew(halfWidth, halfHeight, 1, false);
-	workBuffer2    = RenderTarget::MakeNew(halfWidth, halfHeight, 1, false);
+	GBuffer->       Init(width,     height,     1, true, MSAA_Level);
+	godRaysBuffer1->Init(halfWidth, halfHeight, 1, true, MSAA_Level);
+	godRaysBuffer2->Init(halfWidth, halfHeight, 1, true, MSAA_Level);
+	workBuffer1->   Init(halfWidth, halfHeight, 1, false);
+	workBuffer2->   Init(halfWidth, halfHeight, 1, false);
 
 	GBuffer->       InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Point);
 	godRaysBuffer1->InitTexture(0, TextureFormat::sRGB_8, TextureFilter::Linear);
@@ -125,6 +125,11 @@ bool Game::Init()
 		GBufferResolve = GBuffer->MakeResolve();
 		godRaysBuffer1Resolve = godRaysBuffer1->MakeResolve();
 		godRaysBuffer2Resolve = godRaysBuffer2->MakeResolve();
+
+		if (!GBufferResolve || !godRaysBuffer1Resolve || !godRaysBuffer2Resolve)
+		{
+			return false;
+		}
 	}
 
 	/* Set up Scene Graph */

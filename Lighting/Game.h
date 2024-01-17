@@ -32,7 +32,7 @@ public:
 	/* Rendering */
 	RenderPass mainRenderPass;
 	RenderPass UIRenderPass;
-	RenderTarget::Ptr frameBuffer;
+	RenderTarget::Ptr frameBuffer = RenderTarget::MakeNew();
 	RenderTarget::Ptr frameBufferResolve;
 
 	/* Scene */
