@@ -5,4 +5,4 @@ Boid::Boid(Entity &owner)
 {
 }
 
-REFLECT_COMPONENT_SIMPLE(Boid);
+REFLECT_COMPONENT(Boid, gem::ComponentBase) REF_END;
