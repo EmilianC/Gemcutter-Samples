@@ -1,5 +1,6 @@
-Assets/
+assets/
 Workspace/config.workspace
+Workspace/Engine
 Workspace/Files.cache
 Workspace/open_asset_manager.cmd
 Workspace/pack_assets.cmd

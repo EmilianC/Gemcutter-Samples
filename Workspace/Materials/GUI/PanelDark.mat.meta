@@ -1,7 +1,7 @@
 blend_mode=None
 cull_mode=None
 depth_mode=None
-shader=Shaders/Default/Sprite.shader
+shader=Engine/Shaders/Sprite.shader
 texture_bind_points=0
 textures=Textures/GUI/PanelDark.png
 version=2

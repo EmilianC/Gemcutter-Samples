@@ -77,7 +77,7 @@ bool Game::Init()
 		return false;
 	}
 
-	auto material = Load<Material>("Materials/Text");
+	auto material = Load<Material>("Engine/Materials/Text");
 	if (!material)
 		return false;
 

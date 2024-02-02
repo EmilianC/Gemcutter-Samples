@@ -131,7 +131,7 @@ bool Game::Init()
 	auto ballModel = Load<Model>("Models/Orb");
 	auto font = Load<Font>("Fonts/editundo");
 	auto spriteMaterial = Load<Material>("Materials/Lightbulb");
-	auto textMaterial = Load<Material>("Materials/Text");
+	auto textMaterial = Load<Material>("Engine/Materials/Text");
 	auto ironMaterial = Load<Material>("Materials/PBR/RustedIron");
 
 	// Load all skyboxes.

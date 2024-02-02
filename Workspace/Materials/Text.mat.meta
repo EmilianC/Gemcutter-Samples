@@ -1,7 +1,0 @@
-blend_mode=Linear
-cull_mode=Clockwise
-depth_mode=Normal
-shader=shaders\default\font.shader
-texture_bind_points=
-textures=
-version=2

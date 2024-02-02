@@ -62,8 +62,8 @@ bool Game::Init()
 	camera->position = vec3(0.0f, 1.0f, 8.0f);
 
 	/* Load Shaders */
-	staticGeometryProgram = Load<Shader>("Shaders/Default/Lambert");
-	flatColorProgram = Load<Shader>("Shaders/Default/FlatColor");
+	staticGeometryProgram = Load<Shader>("Engine/Shaders/Lambert");
+	flatColorProgram = Load<Shader>("Engine/Shaders/FlatColor");
 	godRaysRadialBlur = Load<Shader>("Shaders/Radial");
 	godRaysComposite = Load<Shader>("Shaders/Composite");
 	if (!staticGeometryProgram || !flatColorProgram || !godRaysRadialBlur || !godRaysComposite)

@@ -72,7 +72,7 @@ void Game::CreateLeftPanel()
 	/// Title ///
 	auto& label = panelLeft.CreateChild<Label>(
 		Load<Font>("Fonts/editundo"), "Window Controls",
-		Load<Material>("Materials/GUI/Label")
+		Load<Material>("Engine/Materials/GUI/Label")
 	);
 	label.left.anchor   = 0.50f;
 	label.right.anchor  = 0.50f;
@@ -165,7 +165,7 @@ void Game::CreateRightPanel()
 	/// Title ///
 	auto& label = panelRight.CreateChild<Label>(
 		Load<Font>("Fonts/editundo"), "Wiggle Controls",
-		Load<Material>("Materials/GUI/Label")
+		Load<Material>("Engine/Materials/GUI/Label")
 	);
 	label.left.anchor   = 0.50f;
 	label.right.anchor  = 0.50f;
