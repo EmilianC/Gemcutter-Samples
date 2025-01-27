@@ -57,10 +57,10 @@ bool Game::Init()
 	orbParent->Get<Hierarchy>().AddChild(orb);
 	orb->position.x = 5.0f;
 	orb->scale *= 5.0f;
-	monkey->RotateX(90.0f);
+	monkey->LookAt(*camera);
 
 	// Start music.
-	monkey->Add<SoundListener>();
+	rootEntity->Add<SoundListener>();
 	orb->Get<SoundSource>().Play();
 
 	return true;

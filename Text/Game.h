@@ -42,7 +42,7 @@ public:
 	ConfigTable& config;
 
 	std::vector<Font::Ptr> fonts;
-	unsigned currentFont = 0;
+	size_t currentFont = 0;
 	bool direction = false;
 	float angle = 0.0f;
 };
