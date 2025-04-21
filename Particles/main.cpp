@@ -1,7 +1,9 @@
 #include <gemcutter/Application/Application.h>
 #include <gemcutter/Application/Logging.h>
 #include <gemcutter/Resource/ConfigTable.h>
-#include <Windows.h>
+#ifdef GEM_WINDOWS
+#include <windows.h>
+#endif
 
 #include "Game.h"
 
@@ -10,7 +12,11 @@ namespace
 	Game* game = nullptr;
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
+#ifdef GEM_WINDOWS
+int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
+#else
+int main()
+#endif
 {
 	using namespace gem;
 
