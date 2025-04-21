@@ -35,7 +35,7 @@ namespace
 Game::Game(ConfigTable& _config)
 	: config(_config)
 {
-	onResized = [this](const Resize& event) {
+	onResized = [this](const Resize&) {
 		camera->Get<Camera>().SetOrthographic(Application.GetScreenViewport(), -1.0f, 1.0f);
 	};
 }
