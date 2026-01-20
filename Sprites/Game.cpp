@@ -9,6 +9,7 @@
 #include <gemcutter/Resource/Material.h>
 
 class BillBoard : public Tag<BillBoard> {};
+REFLECT_TAG(BillBoard);
 
 Game::Game(ConfigTable& _config)
 	: config(_config)
